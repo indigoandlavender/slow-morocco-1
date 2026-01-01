@@ -354,35 +354,22 @@ export default function GentleLandingPage() {
         </div>
       </section>
 
-      {/* Founder's Note */}
+      {/* Founder's Note - Quote */}
       <section className="py-24 bg-[#F5F0E8]">
         <div className="container mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-16 items-stretch max-w-6xl mx-auto">
-            <div className="relative">
-              <div className="aspect-[3/4] bg-[#1a1a1a]/10 flex items-center justify-center">
-                {/* Placeholder for founder image */}
-                <span className="text-6xl text-[#1a1a1a]/20 font-serif">J</span>
-              </div>
-            </div>
-            <div className="flex flex-col justify-center lg:aspect-[3/4] lg:overflow-hidden">
-              <p className="text-xs tracking-[0.3em] uppercase text-[#1a1a1a]/40 mb-4">
-                A Note from the Founder
-              </p>
-              <h2 className="text-2xl md:text-3xl font-serif mb-6 leading-tight">
-                {settings.founderNoteTitle}
-              </h2>
-              <div className="space-y-3 text-[#1a1a1a]/60 leading-relaxed text-sm lg:text-base">
-                {settings.founderNoteBody.split("\n\n").map((paragraph, i) => (
-                  <p key={i}>{paragraph}</p>
-                ))}
-              </div>
-              <p className="mt-6 font-serif text-lg">
-                — Jacqueline
-              </p>
-              <p className="text-sm text-[#1a1a1a]/40">
-                Founder, Slow Morocco · Marrakech
-              </p>
-            </div>
+          <div className="max-w-3xl mx-auto text-center">
+            <p className="text-xs tracking-[0.3em] uppercase text-[#1a1a1a]/40 mb-8">
+              A Note from the Founder
+            </p>
+            <blockquote className="text-2xl md:text-3xl lg:text-4xl font-serif italic text-[#1a1a1a]/80 leading-relaxed mb-8">
+              "I built this because I was tired of watching people be treated as an afterthought. You're the primary guest here — not the exception."
+            </blockquote>
+            <p className="font-serif text-lg text-[#1a1a1a]/60">
+              — Jacqueline
+            </p>
+            <p className="text-sm text-[#1a1a1a]/40">
+              Founder, Slow Morocco
+            </p>
           </div>
         </div>
       </section>
