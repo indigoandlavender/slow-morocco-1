@@ -50,7 +50,7 @@ const fallbackExperiences: Journey[] = [
     duration: 7,
     tagline: "Gardens, galleries, and the Atlantic breeze",
     description: "Gardens at golden hour. Long lunches with ocean views. Two beautiful bases, one unhurried drive between them.",
-    heroImage: "https://images.unsplash.com/photo-1539020140153-e479b8c22e70?w=800",
+    heroImage: "https://res.cloudinary.com/drstfu5yr/image/upload/v1767309989/marrakech-and-the-sea_i5aacd.png",
     price: 2400,
     cities: "Marrakech, Essaouira",
     highlights: [],
@@ -63,7 +63,7 @@ const fallbackExperiences: Journey[] = [
     duration: 8,
     tagline: "Casablanca to Essaouira by the sea",
     description: "Follow the coastline from Casablanca to Essaouira. Art deco cities, Portuguese forts, fishing harbours at sunset.",
-    heroImage: "https://images.unsplash.com/photo-1569383746724-6f1b882b8f46?w=800",
+    heroImage: "https://res.cloudinary.com/drstfu5yr/image/upload/v1767310155/essaouira_meymce.png",
     price: 2900,
     cities: "Casablanca, Rabat, El Jadida, Essaouira",
     highlights: [],
@@ -74,11 +74,11 @@ const fallbackExperiences: Journey[] = [
     title: "Imperial Cities",
     slug: "imperial-ease",
     duration: 9,
-    tagline: "Three cities, no mountain passes",
-    description: "Marrakech, Fes, and the blue town — connected by a short flight so you see more and sit in cars less.",
-    heroImage: "https://images.unsplash.com/photo-1548017062-669f3c7af7cc?w=800",
+    tagline: "Four imperial cities, all accessible",
+    description: "Marrakech, Rabat, Meknes, and Fes — Morocco's royal cities connected by comfortable drives on modern highways.",
+    heroImage: "https://res.cloudinary.com/drstfu5yr/image/upload/v1767310357/rabat_ofyxwj.png",
     price: 3200,
-    cities: "Marrakech, Fes, Chefchaouen",
+    cities: "Marrakech, Rabat, Meknes, Fes",
     highlights: [],
     accessibilityNotes: [],
   },
@@ -89,7 +89,7 @@ const fallbackExperiences: Journey[] = [
     duration: 7,
     tagline: "Kasbahs without the dunes",
     description: "Rose-gold kasbahs and palm groves at the edge of the Sahara. The drama of the desert, without the discomfort.",
-    heroImage: "https://images.unsplash.com/photo-1489749798305-4fea3ae63d43?w=800",
+    heroImage: "https://res.cloudinary.com/drstfu5yr/image/upload/v1767310439/kasbah_bfd8t4.png",
     price: 2200,
     cities: "Marrakech, Skoura, Ouarzazate",
     highlights: [],
@@ -100,27 +100,27 @@ const fallbackExperiences: Journey[] = [
 const fallbackTeam: TeamMember[] = [
   {
     id: "team-1",
+    name: "Mohammed",
+    role: "Co-Founder",
+    quote: "The mountains taught me patience. I'll share that with you.",
+    bio: "Born in the Atlas. Built Slow Morocco from the ground up.",
+    image: "/team/Mohammed.jpg",
+  },
+  {
+    id: "team-2",
     name: "Hassan",
-    role: "Lead Guide",
+    role: "Guide",
     quote: "The best part of my job is watching someone fall in love with my country.",
     bio: "Born in the Sahara, trained in hospitality. Patient, attentive, speaks four languages.",
     image: "/team/Hassan.jpg",
   },
   {
-    id: "team-2",
+    id: "team-3",
     name: "Youssef",
-    role: "Driver-Guide",
+    role: "Guide",
     quote: "Every road tells a story. I know them all.",
     bio: "Knows every route, every shortcut, every safe stopping point. Your comfort is his priority.",
     image: "/team/Youssef.jpg",
-  },
-  {
-    id: "team-3",
-    name: "Mohammed",
-    role: "Mountain Guide",
-    quote: "The mountains taught me patience. I'll share that with you.",
-    bio: "Atlas native. Expert on accessible viewpoints and gentle trails.",
-    image: "/team/Mohammed.jpg",
   },
 ];
 
@@ -129,7 +129,7 @@ const fallbackSettings: Settings = {
   heroSubtitle: "Other companies retrofit their tours when you ask. We started with a blank page and designed these journeys around how you actually travel.",
   heroTagline: "A Slow Morocco Collection",
   founderNoteTitle: "Why I built this",
-  founderNoteBody: "I've been running tours in Morocco for fifteen years. I've watched countless travellers be told \"yes, we can accommodate you\" — and then be treated as an afterthought. Squeezed into standard itineraries. Given the room no one else wanted. Made to feel like a problem to be solved.\n\nThat's not accommodation. That's tolerance.\n\nSo I built something different. These journeys weren't adapted from our regular tours — they were designed from scratch for travellers who need a different pace. Every hotel, every route, every timing decision was made with you as the primary guest, not the exception.\n\nYou've earned the right to travel beautifully. Let us show you what that looks like.",
+  founderNoteBody: "I've run tours in Morocco for fifteen years. I've watched travellers be told \"yes, we can accommodate you\" — then be treated as an afterthought. Squeezed into standard itineraries. Made to feel like a problem to be solved.\n\nThat's not accommodation. That's tolerance.\n\nSo I built something different. These journeys were designed from scratch for travellers who need a different pace. You're the primary guest here, not the exception.",
   whatsappUrl: "https://wa.me/212618070450?text=Hello%2C%20I%27d%20like%20to%20talk%20about%20travelling%20to%20Morocco",
   whatsappNumber: "+212 6 18 07 04 50",
   contactEmail: "hello@slowmorocco.com",
@@ -187,17 +187,16 @@ export default function GentleLandingPage() {
       <header className="fixed top-0 left-0 right-0 z-50 bg-[#FAF7F2]/95 backdrop-blur-sm border-b border-[#1a1a1a]/5">
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
-            <span className="font-serif text-sm tracking-[0.12em] text-[#1a1a1a]">
+            <Link href="/" className="font-serif text-sm tracking-[0.12em] text-[#1a1a1a] hover:opacity-60 transition-opacity">
               S L O W &nbsp; M O R O C C O
-            </span>
+            </Link>
             <a
               href={settings.whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 text-xs tracking-[0.1em] uppercase bg-[#1a1a1a] text-white px-5 py-2.5 hover:bg-[#333] transition-colors"
+              className="text-xs tracking-[0.15em] uppercase bg-[#1a1a1a] text-white px-6 py-2.5 hover:bg-[#333] transition-colors"
             >
-              <MessageCircle className="w-4 h-4" />
-              <span className="hidden sm:inline">Let's Talk</span>
+              Let's Talk
             </a>
           </div>
         </div>
@@ -208,7 +207,7 @@ export default function GentleLandingPage() {
         <div className="container mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             <div className="order-2 lg:order-1">
-              <p className="text-xs tracking-[0.4em] uppercase text-[#1a1a1a]/40 mb-6">
+              <p className="text-xs tracking-[0.4em] uppercase text-[#1a1a1a]/40 mb-2">
                 {settings.heroTagline}
               </p>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif leading-[1.1] mb-8">
@@ -227,14 +226,13 @@ export default function GentleLandingPage() {
                   href={settings.whatsappUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 bg-[#1a1a1a] text-white px-8 py-4 text-sm tracking-[0.1em] uppercase hover:bg-[#333] transition-colors"
+                  className="inline-flex items-center justify-center bg-[#1a1a1a] text-white px-10 py-4 text-xs tracking-[0.15em] uppercase hover:bg-[#333] transition-colors"
                 >
-                  <MessageCircle className="w-5 h-5" />
-                  Start a Conversation
+                  Begin the Conversation
                 </a>
                 <button
                   onClick={() => scrollToSection("experiences")}
-                  className="inline-flex items-center justify-center gap-2 border border-[#1a1a1a]/20 px-8 py-4 text-sm tracking-[0.1em] uppercase hover:bg-[#1a1a1a]/5 transition-colors"
+                  className="inline-flex items-center justify-center border border-[#1a1a1a]/30 px-10 py-4 text-xs tracking-[0.15em] uppercase hover:bg-[#1a1a1a]/5 transition-colors"
                 >
                   See the Journeys
                 </button>
@@ -334,18 +332,23 @@ export default function GentleLandingPage() {
             ))}
           </div>
 
-          <div className="mt-16 text-center">
-            <p className="text-[#1a1a1a]/50 mb-6">
-              Each journey can be adjusted to your needs. Let's talk about what works for you.
+          <div className="mt-20 py-20 bg-[#1a1a1a] -mx-6 px-6 text-center">
+            <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-4">
+              Not seeing what you want?
+            </p>
+            <h3 className="text-3xl md:text-4xl lg:text-5xl font-serif italic text-white mb-6">
+              Every journey bends.
+            </h3>
+            <p className="text-white/50 max-w-xl mx-auto mb-10 leading-relaxed">
+              These itineraries are starting points, not scripts. Add a day here, skip a city there. Tell us what matters — we'll shape it around you.
             </p>
             <a
               href={settings.whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-[#1a1a1a]/70 hover:text-[#1a1a1a] transition-colors border-b border-[#1a1a1a]/20 pb-1"
+              className="inline-flex items-center justify-center bg-white text-[#1a1a1a] px-10 py-4 text-xs tracking-[0.15em] uppercase hover:bg-white/90 transition-colors"
             >
-              <MessageCircle className="w-4 h-4" />
-              <span>Tell us what you're looking for</span>
+              Begin the Conversation
             </a>
           </div>
         </div>
@@ -354,50 +357,42 @@ export default function GentleLandingPage() {
       {/* Founder's Note */}
       <section className="py-24 bg-[#F5F0E8]">
         <div className="container mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-16 items-center max-w-6xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-16 items-stretch max-w-6xl mx-auto">
             <div className="relative">
               <div className="aspect-[3/4] bg-[#1a1a1a]/10 flex items-center justify-center">
-                {team[0]?.image ? (
-                  <Image
-                    src={team[0].image}
-                    alt={team[0].name}
-                    fill
-                    className="object-cover"
-                  />
-                ) : (
-                  <span className="text-6xl text-[#1a1a1a]/20 font-serif">J</span>
-                )}
+                {/* Placeholder for founder image */}
+                <span className="text-6xl text-[#1a1a1a]/20 font-serif">J</span>
               </div>
             </div>
-            <div>
-              <p className="text-xs tracking-[0.3em] uppercase text-[#1a1a1a]/40 mb-6">
+            <div className="flex flex-col justify-center lg:aspect-[3/4] lg:overflow-hidden">
+              <p className="text-xs tracking-[0.3em] uppercase text-[#1a1a1a]/40 mb-4">
                 A Note from the Founder
               </p>
-              <h2 className="text-3xl md:text-4xl font-serif mb-8 leading-tight">
+              <h2 className="text-2xl md:text-3xl font-serif mb-6 leading-tight">
                 {settings.founderNoteTitle}
               </h2>
-              <div className="space-y-4 text-[#1a1a1a]/60 leading-relaxed">
+              <div className="space-y-3 text-[#1a1a1a]/60 leading-relaxed text-sm lg:text-base">
                 {settings.founderNoteBody.split("\n\n").map((paragraph, i) => (
                   <p key={i}>{paragraph}</p>
                 ))}
               </div>
-              <p className="mt-8 font-serif text-lg">
-                — {team[0]?.name || "Jacqueline"}
+              <p className="mt-6 font-serif text-lg">
+                — Jacqueline
               </p>
               <p className="text-sm text-[#1a1a1a]/40">
-                {team[0]?.role || "Founder"}, Slow Morocco · Marrakech
+                Founder, Slow Morocco · Marrakech
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Team */}
+      {/* Guides */}
       <section className="py-24">
         <div className="container mx-auto px-6">
           <div className="max-w-2xl mx-auto text-center mb-16">
             <p className="text-xs tracking-[0.3em] uppercase text-[#1a1a1a]/40 mb-4">
-              Your Team
+              Your Guides
             </p>
             <h2 className="text-3xl md:text-4xl font-serif mb-6">
               The people who'll be with you
@@ -510,54 +505,56 @@ export default function GentleLandingPage() {
       </section>
 
       {/* Final CTA */}
-      <section className="py-24">
+      <section className="py-24 bg-[#1a1a1a]">
         <div className="container mx-auto px-6">
           <div className="max-w-2xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-serif mb-6">
-              Let's talk about your trip
+            <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-4">
+              Ready when you are
+            </p>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif italic text-white mb-6">
+              Let's talk about your trip.
             </h2>
-            <p className="text-[#1a1a1a]/60 mb-10 leading-relaxed">
+            <p className="text-white/50 mb-10 leading-relaxed">
               No forms. No automated responses. Just a conversation with someone who can actually help you.
             </p>
             <a
               href={settings.whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-3 bg-[#1a1a1a] text-white px-10 py-5 text-sm tracking-[0.1em] uppercase hover:bg-[#333] transition-colors"
+              className="inline-flex items-center justify-center bg-white text-[#1a1a1a] px-10 py-4 text-xs tracking-[0.15em] uppercase hover:bg-white/90 transition-colors"
             >
-              <MessageCircle className="w-5 h-5" />
-              Start a Conversation
+              Begin the Conversation
             </a>
-            <p className="mt-6 text-sm text-[#1a1a1a]/40">
-              Or email <a href={`mailto:${settings.contactEmail}`} className="underline hover:text-[#1a1a1a]/60">{settings.contactEmail}</a> if you prefer
+            <p className="mt-8 text-sm text-white/30">
+              Or email <a href={`mailto:${settings.contactEmail}`} className="underline hover:text-white/50">{settings.contactEmail}</a> if you prefer
             </p>
           </div>
         </div>
       </section>
 
       {/* Minimal Footer */}
-      <footer className="py-8 border-t border-[#1a1a1a]/10">
+      <footer className="py-8 bg-[#1a1a1a] border-t border-white/10">
         <div className="container mx-auto px-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="flex items-center gap-6">
-              <span className="font-serif text-sm tracking-[0.12em] text-[#1a1a1a]/60">
+              <Link href="/" className="font-serif text-sm tracking-[0.12em] text-white/60 hover:text-white transition-colors">
                 S L O W &nbsp; M O R O C C O
-              </span>
-              <span className="text-[#1a1a1a]/20">|</span>
-              <span className="text-sm text-[#1a1a1a]/40">Marrakech</span>
+              </Link>
+              <span className="text-white/20">|</span>
+              <span className="text-sm text-white/40">Marrakech</span>
             </div>
             
             <div className="flex items-center gap-6">
               <a
                 href={`https://wa.me/${settings.whatsappNumber.replace(/\D/g, "")}`}
-                className="flex items-center gap-2 text-sm text-[#1a1a1a]/50 hover:text-[#1a1a1a] transition-colors"
+                className="flex items-center gap-2 text-sm text-white/50 hover:text-white transition-colors"
               >
                 <Phone className="w-4 h-4" />
                 {formatPhoneNumber(settings.whatsappNumber)}
               </a>
               <a
                 href={`mailto:${settings.contactEmail}`}
-                className="flex items-center gap-2 text-sm text-[#1a1a1a]/50 hover:text-[#1a1a1a] transition-colors"
+                className="flex items-center gap-2 text-sm text-white/50 hover:text-white transition-colors"
               >
                 <Mail className="w-4 h-4" />
                 Email
@@ -565,15 +562,15 @@ export default function GentleLandingPage() {
             </div>
           </div>
           
-          <div className="mt-6 pt-6 border-t border-[#1a1a1a]/10 flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-xs text-[#1a1a1a]/30">
+          <div className="mt-6 pt-6 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
+            <p className="text-xs text-white/30">
               © {new Date().getFullYear()} Slow Morocco. All rights reserved.
             </p>
-            <div className="flex items-center gap-4 text-xs text-[#1a1a1a]/30">
-              <Link href="/privacy" className="hover:text-[#1a1a1a]/50 transition-colors">
+            <div className="flex items-center gap-4 text-xs text-white/30">
+              <Link href="/privacy" className="hover:text-white/50 transition-colors">
                 Privacy
               </Link>
-              <Link href="/terms" className="hover:text-[#1a1a1a]/50 transition-colors">
+              <Link href="/terms" className="hover:text-white/50 transition-colors">
                 Terms
               </Link>
             </div>
