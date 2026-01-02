@@ -129,9 +129,9 @@ function JourneysCarousel({ currentSlug }: { currentSlug: string }) {
               <p className="text-xs text-muted-foreground tracking-wide">
                 {journey.durationDays} Days
               </p>
-              {(journey as any).price > 0 && (
+              {Number((journey as any).price) > 0 && (
                 <p className="text-xs text-muted-foreground">
-                  From €{(journey as any).price.toLocaleString()}
+                  From €{Number((journey as any).price).toLocaleString()}
                 </p>
               )}
             </div>
@@ -447,9 +447,9 @@ export default function JourneyDetailPage() {
             <p className="text-xs tracking-[0.2em] uppercase text-muted-foreground">
               {journey.durationDays} Days
             </p>
-            {journey.price && journey.price > 0 && (
+            {Number(journey.price) > 0 && (
               <p className="text-sm text-muted-foreground">
-                From <span className="text-foreground">€{journey.price.toLocaleString()}</span> per person
+                From <span className="text-foreground">€{Number(journey.price).toLocaleString()}</span> per person
               </p>
             )}
           </div>

@@ -282,18 +282,18 @@ export default async function AboutPage() {
       )}
 
       {/* Founder Quote */}
-      <section className="py-24 md:py-32 bg-[#0d0d0d]">
+      <section className="py-24 md:py-32 bg-[#f5f0e8]">
         <div className="container mx-auto px-6 lg:px-16 max-w-3xl text-center">
-          <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-8">
+          <p className="text-xs tracking-[0.3em] uppercase text-[#1a1a1a]/40 mb-8">
             From the Founder
           </p>
-          <blockquote className="text-2xl md:text-3xl lg:text-4xl font-serif italic text-white/80 leading-relaxed mb-8">
+          <blockquote className="text-2xl md:text-3xl lg:text-4xl font-serif italic text-[#1a1a1a]/80 leading-relaxed mb-8">
             "{settings.founder_quote}"
           </blockquote>
-          <p className="font-serif text-lg text-white/60">
+          <p className="font-serif text-lg text-[#1a1a1a]/60">
             — Jacqueline
           </p>
-          <p className="text-sm text-white/40">
+          <p className="text-sm text-[#1a1a1a]/40">
             Founder, Slow Morocco
           </p>
         </div>
@@ -301,14 +301,14 @@ export default async function AboutPage() {
 
       {/* Your Guides */}
       {team.length > 0 && (
-        <section className="py-24 md:py-32 border-t border-white/10">
+        <section className="py-24 md:py-32 bg-[#f5f0e8]">
           <div className="container mx-auto px-6 lg:px-16">
             <div className="max-w-4xl mx-auto">
               <div className="text-center mb-16">
-                <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-4">
+                <p className="text-xs tracking-[0.3em] uppercase text-[#1a1a1a]/40 mb-4">
                   Your Guides
                 </p>
-                <h2 className="font-serif text-3xl md:text-4xl text-white/90">
+                <h2 className="font-serif text-3xl md:text-4xl text-[#1a1a1a]/90">
                   The people who'll be with you
                 </h2>
               </div>
@@ -316,7 +316,7 @@ export default async function AboutPage() {
               <div className="grid md:grid-cols-3 gap-12">
                 {team.map((member) => (
                   <div key={member.id} className="text-center">
-                    <div className="w-32 h-32 mx-auto mb-6 rounded-full bg-white/5 flex items-center justify-center overflow-hidden">
+                    <div className="w-32 h-32 mx-auto mb-6 rounded-full bg-[#1a1a1a]/5 flex items-center justify-center overflow-hidden">
                       {member.image ? (
                         <Image
                           src={member.image}
@@ -326,12 +326,12 @@ export default async function AboutPage() {
                           className="object-cover w-full h-full"
                         />
                       ) : (
-                        <span className="text-3xl text-white/20 font-serif">{member.name[0]}</span>
+                        <span className="text-3xl text-[#1a1a1a]/20 font-serif">{member.name[0]}</span>
                       )}
                     </div>
-                    <h3 className="font-serif text-xl text-white/90 mb-1">{member.name}</h3>
-                    <p className="text-xs tracking-[0.15em] uppercase text-white/40 mb-4">{member.role}</p>
-                    <p className="text-sm text-white/50 italic">"{member.quote}"</p>
+                    <h3 className="font-serif text-xl text-[#1a1a1a]/90 mb-1">{member.name}</h3>
+                    <p className="text-xs tracking-[0.15em] uppercase text-[#1a1a1a]/40 mb-4">{member.role}</p>
+                    <p className="text-sm text-[#1a1a1a]/50 italic">"{member.quote}"</p>
                   </div>
                 ))}
               </div>

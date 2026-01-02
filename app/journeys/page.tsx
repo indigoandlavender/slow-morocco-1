@@ -249,9 +249,9 @@ export default function JourneysPage() {
                     <p className="text-xs tracking-[0.15em] uppercase text-white/40">
                       {journey.durationDays} Days
                     </p>
-                    {journey.price > 0 && (
+                    {Number(journey.price) > 0 && (
                       <p className="text-xs text-white/40">
-                        From <span className="text-white/70">€{journey.price.toLocaleString()}</span>
+                        From <span className="text-white/70">€{Number(journey.price).toLocaleString()}</span>
                       </p>
                     )}
                   </div>

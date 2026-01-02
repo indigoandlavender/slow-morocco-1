@@ -43,7 +43,7 @@ export async function GET(
       description: journeyData.Short_Description || "",
       arcDescription: journeyData.Arc_Description || "",
       heroImage: convertDriveUrl(journeyData.Hero_Image_URL || ""),
-      price: parseInt(journeyData.Price_USD) || 0,
+      price: parseInt(journeyData.Price_EUR) || 0,
       startCity: journeyData.Start_City || "",
       focus: journeyData.Focus_Type || "",
       journeyId: journeyData.Journey_ID || "",
