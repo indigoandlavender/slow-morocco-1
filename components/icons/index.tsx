@@ -99,14 +99,16 @@ export const IconRoom: React.FC<IconProps> = (props) => (
 
 export const IconCamel: React.FC<IconProps> = (props) => (
   <Icon {...props}>
-    {/* Stylized camel profile */}
-    <path d="M4 17c0-2 1-3 3-3h2c1 0 2-1 2-2V9c0-1 1-2 2-2h1c1 0 2 .5 2 1.5V10c0 1 1 2 2 2h1c1 0 2 1 2 2v3" />
-    <path d="M4 17h16" />
-    <path d="M6 17v3" />
-    <path d="M10 17v3" />
-    <path d="M14 17v3" />
-    <path d="M18 17v3" />
-    <circle cx="18" cy="7" r="1" />
+    {/* Camel with hump, neck, head, legs */}
+    <path d="M4 19v-4c0-1 1-2 2-2h1l1-2c.5-1.5 2-2.5 3-2l1 2h3c1 0 2 1 2 2v2" />
+    <path d="M9 9c0-1.5.5-3 2-3" />
+    <path d="M17 15v4" />
+    <path d="M14 15v4" />
+    <path d="M7 15v4" />
+    <path d="M4 15v4" />
+    <ellipse cx="10" cy="11" rx="2" ry="1.5" />
+    <path d="M18 13l2-3v-1" />
+    <circle cx="20" cy="8" r="1" />
   </Icon>
 );
 
