@@ -29,6 +29,7 @@ interface Journey {
   journeyId: string;
   journeyType?: string;
   epicPrice?: number;
+  price?: number;
 }
 
 interface ItineraryDay {
@@ -124,9 +125,16 @@ function JourneysCarousel({ currentSlug }: { currentSlug: string }) {
               )}
             </div>
             <h3 className="font-serif text-lg mb-1">{journey.title}</h3>
-            <p className="text-xs text-muted-foreground tracking-wide">
-              {journey.durationDays} Days
-            </p>
+            <div className="flex items-baseline justify-between">
+              <p className="text-xs text-muted-foreground tracking-wide">
+                {journey.durationDays} Days
+              </p>
+              {(journey as any).price > 0 && (
+                <p className="text-xs text-muted-foreground">
+                  From €{(journey as any).price.toLocaleString()}
+                </p>
+              )}
+            </div>
           </Link>
         ))}
       </div>
@@ -434,10 +442,17 @@ export default function JourneyDetailPage() {
             Back to All Journeys
           </Link>
 
-          {/* Duration */}
-          <p className="text-xs tracking-[0.2em] uppercase text-muted-foreground mb-4">
-            {journey.durationDays} Days
-          </p>
+          {/* Duration & Price */}
+          <div className="flex items-baseline gap-6 mb-4">
+            <p className="text-xs tracking-[0.2em] uppercase text-muted-foreground">
+              {journey.durationDays} Days
+            </p>
+            {journey.price && journey.price > 0 && (
+              <p className="text-sm text-muted-foreground">
+                From <span className="text-foreground">€{journey.price.toLocaleString()}</span> per person
+              </p>
+            )}
+          </div>
 
           {/* Title */}
           <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl leading-tight mb-8">

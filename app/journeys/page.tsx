@@ -105,8 +105,11 @@ export default function JourneysPage() {
             <h1 className="text-5xl md:text-6xl lg:text-7xl tracking-[0.15em] font-light mb-6">
               J O U R N E Y S
             </h1>
-            <p className="text-lg md:text-xl text-white/50 max-w-2xl">
+            <p className="text-lg md:text-xl text-white/50 max-w-2xl mb-4">
               Itineraries that bend. Routes that breathe. Starting points, not scripts.
+            </p>
+            <p className="text-sm text-white/30">
+              Prices are per person, based on 2 travelers sharing. Final cost depends on dates and accommodation choices.
             </p>
           </div>
         </div>
@@ -242,9 +245,16 @@ export default function JourneysPage() {
                       </div>
                     )}
                   </div>
-                  <p className="text-xs tracking-[0.15em] uppercase text-white/40 mb-1">
-                    {journey.durationDays} Days
-                  </p>
+                  <div className="flex items-baseline justify-between mb-1">
+                    <p className="text-xs tracking-[0.15em] uppercase text-white/40">
+                      {journey.durationDays} Days
+                    </p>
+                    {journey.price > 0 && (
+                      <p className="text-xs text-white/40">
+                        From <span className="text-white/70">€{journey.price.toLocaleString()}</span>
+                      </p>
+                    )}
+                  </div>
                   <h3 className="font-serif text-xl text-white/90 mb-2 group-hover:text-white transition-colors">
                     {journey.title}
                   </h3>

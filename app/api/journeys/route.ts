@@ -23,7 +23,7 @@ export async function GET() {
         shortDescription: j.Short_Description || "",
         arcDescription: j.Arc_Description || "",
         heroImage: convertDriveUrl(j.Hero_Image_URL || ""),
-        price: j.Price_USD || "",
+        price: parseInt(j.Price_USD) || 0,
         startCity: j.Start_City || "",
         focus: j.Focus_Type || "",
         category: j.Category || "",
