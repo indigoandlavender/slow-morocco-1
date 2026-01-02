@@ -53,12 +53,13 @@ export default function PlaceDetailPage() {
         if (placeData.success && placeData.place) {
           setPlace(placeData.place);
           
-          // Filter journeys that include this destination
+          // Filter journeys that include this destination, excluding epic journeys
           const destination = placeData.place.destination?.toLowerCase();
           if (destination && journeysData.journeys) {
             const related = journeysData.journeys.filter((j: any) => {
               const destinations = j.destinations?.toLowerCase() || "";
-              return destinations.includes(destination);
+              const isEpic = j.journeyType === 'epic';
+              return destinations.includes(destination) && !isEpic;
             });
             setRelatedJourneys(related);
           }
