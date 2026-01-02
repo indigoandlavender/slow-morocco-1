@@ -26,19 +26,19 @@ import {
 // Map activity keywords to icons
 const getActivityIcon = (activity: string) => {
   const lower = activity.toLowerCase();
-  if (lower.includes("camel")) return <IconCamel size={16} />;
-  if (lower.includes("hik") || lower.includes("trek")) return <IconHiking size={16} />;
-  if (lower.includes("surf")) return <IconSurfing size={16} />;
-  if (lower.includes("cook") || lower.includes("tagine")) return <IconCooking size={16} />;
-  if (lower.includes("hammam") || lower.includes("spa")) return <IconSpa size={16} />;
-  if (lower.includes("souk") || lower.includes("shop")) return <IconShopping size={16} />;
-  if (lower.includes("photo")) return <IconCamera size={16} />;
-  if (lower.includes("mountain") || lower.includes("atlas")) return <IconMountains size={16} />;
-  if (lower.includes("desert") || lower.includes("dune") || lower.includes("sahara")) return <IconDesert size={16} />;
-  if (lower.includes("medina") || lower.includes("old town")) return <IconMedina size={16} />;
-  if (lower.includes("4x4") || lower.includes("off-road")) return <Icon4x4 size={16} />;
+  if (lower.includes("camel")) return <IconCamel size={20} />;
+  if (lower.includes("hik") || lower.includes("trek")) return <IconHiking size={20} />;
+  if (lower.includes("surf")) return <IconSurfing size={20} />;
+  if (lower.includes("cook") || lower.includes("tagine")) return <IconCooking size={20} />;
+  if (lower.includes("hammam") || lower.includes("spa")) return <IconSpa size={20} />;
+  if (lower.includes("souk") || lower.includes("shop")) return <IconShopping size={20} />;
+  if (lower.includes("photo")) return <IconCamera size={20} />;
+  if (lower.includes("mountain") || lower.includes("atlas")) return <IconMountains size={20} />;
+  if (lower.includes("desert") || lower.includes("dune") || lower.includes("sahara")) return <IconDesert size={20} />;
+  if (lower.includes("medina") || lower.includes("old town")) return <IconMedina size={20} />;
+  if (lower.includes("4x4") || lower.includes("off-road")) return <Icon4x4 size={20} />;
   // Default star for unmatched activities
-  return <IconStar size={16} />;
+  return <IconStar size={20} />;
 };
 
 const ItineraryMap = dynamic(() => import("@/components/ItineraryMap"), {
@@ -543,15 +543,15 @@ export default function JourneyDetailPage() {
                   <div className="flex flex-wrap gap-x-5 gap-y-2 mb-6 text-sm text-muted-foreground">
                     {/* Travel Time */}
                     {day.travelTime && (
-                      <div className="flex items-center gap-1.5">
-                        <IconClock size={16} />
+                      <div className="flex items-center gap-2">
+                        <IconClock size={20} />
                         <span>{day.travelTime}h drive</span>
                       </div>
                     )}
                     
                     {/* Activities */}
                     {day.activities && (
-                      <div className="flex items-center gap-1.5">
+                      <div className="flex items-center gap-2">
                         {getActivityIcon(day.activities)}
                         <span>{day.activities.replace(/_/g, " ").toLowerCase()}</span>
                       </div>
@@ -559,8 +559,8 @@ export default function JourneyDetailPage() {
                     
                     {/* Meals */}
                     {day.meals && (
-                      <div className="flex items-center gap-1.5">
-                        <IconMeals size={16} />
+                      <div className="flex items-center gap-2">
+                        <IconMeals size={20} />
                         <span>{day.meals}</span>
                       </div>
                     )}
