@@ -6,6 +6,40 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowLeft, ChevronLeft, ChevronRight } from "lucide-react";
 import dynamic from "next/dynamic";
+import {
+  IconClock,
+  IconCamel,
+  IconHiking,
+  IconSurfing,
+  IconCooking,
+  IconSpa,
+  IconShopping,
+  IconCamera,
+  IconMeals,
+  IconMountains,
+  IconDesert,
+  IconMedina,
+  Icon4x4,
+  IconStar,
+} from "@/components/icons";
+
+// Map activity keywords to icons
+const getActivityIcon = (activity: string) => {
+  const lower = activity.toLowerCase();
+  if (lower.includes("camel")) return <IconCamel size={16} />;
+  if (lower.includes("hik") || lower.includes("trek")) return <IconHiking size={16} />;
+  if (lower.includes("surf")) return <IconSurfing size={16} />;
+  if (lower.includes("cook") || lower.includes("tagine")) return <IconCooking size={16} />;
+  if (lower.includes("hammam") || lower.includes("spa")) return <IconSpa size={16} />;
+  if (lower.includes("souk") || lower.includes("shop")) return <IconShopping size={16} />;
+  if (lower.includes("photo")) return <IconCamera size={16} />;
+  if (lower.includes("mountain") || lower.includes("atlas")) return <IconMountains size={16} />;
+  if (lower.includes("desert") || lower.includes("dune") || lower.includes("sahara")) return <IconDesert size={16} />;
+  if (lower.includes("medina") || lower.includes("old town")) return <IconMedina size={16} />;
+  if (lower.includes("4x4") || lower.includes("off-road")) return <Icon4x4 size={16} />;
+  // Default star for unmatched activities
+  return <IconStar size={16} />;
+};
 
 const ItineraryMap = dynamic(() => import("@/components/ItineraryMap"), {
   ssr: false,
@@ -510,10 +544,7 @@ export default function JourneyDetailPage() {
                     {/* Travel Time */}
                     {day.travelTime && (
                       <div className="flex items-center gap-1.5">
-                        <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                          <circle cx="12" cy="12" r="9" />
-                          <path d="M12 7V12L15 14" />
-                        </svg>
+                        <IconClock size={16} />
                         <span>{day.travelTime}h drive</span>
                       </div>
                     )}
@@ -521,9 +552,7 @@ export default function JourneyDetailPage() {
                     {/* Activities */}
                     {day.activities && (
                       <div className="flex items-center gap-1.5">
-                        <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                          <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
-                        </svg>
+                        {getActivityIcon(day.activities)}
                         <span>{day.activities.replace(/_/g, " ").toLowerCase()}</span>
                       </div>
                     )}
@@ -531,12 +560,7 @@ export default function JourneyDetailPage() {
                     {/* Meals */}
                     {day.meals && (
                       <div className="flex items-center gap-1.5">
-                        <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                          <path d="M18 8h1a4 4 0 010 8h-1M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z" />
-                          <line x1="6" y1="1" x2="6" y2="4" />
-                          <line x1="10" y1="1" x2="10" y2="4" />
-                          <line x1="14" y1="1" x2="14" y2="4" />
-                        </svg>
+                        <IconMeals size={16} />
                         <span>{day.meals}</span>
                       </div>
                     )}
