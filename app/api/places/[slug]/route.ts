@@ -20,22 +20,6 @@ export async function GET(
       );
     }
 
-    // Get place images if available
-    let images: any[] = [];
-    try {
-      const imagesData = await getSheetData("place_images");
-      images = imagesData
-        .filter((img: any) => img.place_slug === slug)
-        .map((img: any) => ({
-          url: img.image_url || img.url || "",
-          caption: img.caption || "",
-          order: parseInt(img.order) || 0,
-        }))
-        .sort((a: any, b: any) => a.order - b.order);
-    } catch (e) {
-      console.warn("Could not fetch place_images");
-    }
-
     return NextResponse.json({
       success: true,
       place: {
@@ -53,7 +37,6 @@ export async function GET(
         body: place.body || "",
         sources: place.sources || "",
         tags: place.tags || "",
-        images,
       },
     });
   } catch (error: any) {

@@ -22,7 +22,6 @@ interface Place {
   body: string;
   sources: string;
   tags: string;
-  images: { url: string; caption: string }[];
 }
 
 interface Journey {
@@ -172,29 +171,6 @@ export default function PlaceDetailPage() {
                       .replace(/$/, '</p>')
                   }}
                 />
-              )}
-
-              {/* Additional images */}
-              {place.images && place.images.length > 0 && (
-                <div className="mt-12 space-y-8">
-                  {place.images.map((img, index) => (
-                    <figure key={index}>
-                      <div className="relative aspect-[16/9] overflow-hidden bg-muted">
-                        <Image
-                          src={img.url}
-                          alt={img.caption || place.title}
-                          fill
-                          className="object-cover"
-                        />
-                      </div>
-                      {img.caption && (
-                        <figcaption className="text-sm text-muted-foreground mt-2 italic">
-                          {img.caption}
-                        </figcaption>
-                      )}
-                    </figure>
-                  ))}
-                </div>
               )}
             </div>
 
