@@ -1,6 +1,7 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Metadata } from "next";
-import { getSheetData } from "@/lib/sheets";
+import { getSheetData, convertDriveUrl } from "@/lib/sheets";
 
 export const metadata: Metadata = {
   title: "About Us",
@@ -28,11 +29,21 @@ interface PageSection {
   section_type: string;
 }
 
+interface TeamMember {
+  id: string;
+  name: string;
+  role: string;
+  quote: string;
+  bio: string;
+  image: string;
+}
+
 interface AboutSettings {
   hero_title: string;
   hero_subtitle: string;
   quote: string;
   quote_subtext: string;
+  founder_quote: string;
 }
 
 async function getAboutContent() {
@@ -48,31 +59,52 @@ async function getAboutContent() {
       if (row.Key) settings[row.Key] = row.Value || "";
     });
 
+    // Fetch team members
+    const teamData = await getSheetData("Website_Team");
+    const team = teamData
+      .filter((t: any) => {
+        const pub = String(t.Published || "").toLowerCase().trim();
+        return pub === "true" || pub === "yes" || pub === "1";
+      })
+      .sort((a: any, b: any) => (parseInt(a.Order) || 99) - (parseInt(b.Order) || 99))
+      .map((t: any) => ({
+        id: t.Team_ID || "",
+        name: t.Name || "",
+        role: t.Role || "",
+        quote: t.Quote || "",
+        bio: t.Bio || "",
+        image: t.Image_URL ? (t.Image_URL.startsWith('/') ? t.Image_URL : convertDriveUrl(t.Image_URL)) : "",
+      }));
+
     return {
       sections: aboutSections as PageSection[],
+      team: team as TeamMember[],
       settings: {
         hero_title: settings.about_hero_title || "A B O U T",
         hero_subtitle: settings.about_hero_subtitle || "Travel doesn't expand your mind. Access does.",
         quote: settings.about_quote || "We'd rather lose a booking than send you somewhere we wouldn't go ourselves.",
         quote_subtext: settings.about_quote_subtext || "",
+        founder_quote: settings.founder_quote || "I built this because I was tired of cookie cutter itineraries. Morocco is even more stunning if you know what to look for.",
       },
     };
   } catch (error) {
     console.error("Error fetching about content:", error);
     return {
       sections: [],
+      team: [],
       settings: {
         hero_title: "A B O U T",
         hero_subtitle: "Travel doesn't expand your mind. Access does.",
         quote: "We'd rather lose a booking than send you somewhere we wouldn't go ourselves.",
         quote_subtext: "",
+        founder_quote: "I built this because I was tired of cookie cutter itineraries. Morocco is even more stunning if you know what to look for.",
       },
     };
   }
 }
 
 export default async function AboutPage() {
-  const { sections, settings } = await getAboutContent();
+  const { sections, team, settings } = await getAboutContent();
 
   const introSection = sections.find(s => s.section_type === "intro");
   const peopleSection = sections.find(s => s.section_type === "people");
@@ -244,6 +276,65 @@ export default async function AboutPage() {
                   </ul>
                 </div>
               )}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Founder Quote */}
+      <section className="py-24 md:py-32 bg-[#0d0d0d]">
+        <div className="container mx-auto px-6 lg:px-16 max-w-3xl text-center">
+          <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-8">
+            From the Founder
+          </p>
+          <blockquote className="text-2xl md:text-3xl lg:text-4xl font-serif italic text-white/80 leading-relaxed mb-8">
+            "{settings.founder_quote}"
+          </blockquote>
+          <p className="font-serif text-lg text-white/60">
+            — Jacqueline
+          </p>
+          <p className="text-sm text-white/40">
+            Founder, Slow Morocco
+          </p>
+        </div>
+      </section>
+
+      {/* Your Guides */}
+      {team.length > 0 && (
+        <section className="py-24 md:py-32 border-t border-white/10">
+          <div className="container mx-auto px-6 lg:px-16">
+            <div className="max-w-4xl mx-auto">
+              <div className="text-center mb-16">
+                <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-4">
+                  Your Guides
+                </p>
+                <h2 className="font-serif text-3xl md:text-4xl text-white/90">
+                  The people who'll be with you
+                </h2>
+              </div>
+
+              <div className="grid md:grid-cols-3 gap-12">
+                {team.map((member) => (
+                  <div key={member.id} className="text-center">
+                    <div className="w-32 h-32 mx-auto mb-6 rounded-full bg-white/5 flex items-center justify-center overflow-hidden">
+                      {member.image ? (
+                        <Image
+                          src={member.image}
+                          alt={member.name}
+                          width={128}
+                          height={128}
+                          className="object-cover w-full h-full"
+                        />
+                      ) : (
+                        <span className="text-3xl text-white/20 font-serif">{member.name[0]}</span>
+                      )}
+                    </div>
+                    <h3 className="font-serif text-xl text-white/90 mb-1">{member.name}</h3>
+                    <p className="text-xs tracking-[0.15em] uppercase text-white/40 mb-4">{member.role}</p>
+                    <p className="text-sm text-white/50 italic">"{member.quote}"</p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </section>
