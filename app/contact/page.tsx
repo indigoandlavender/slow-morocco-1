@@ -39,9 +39,6 @@ export default function ContactPage() {
                 <br />
                 a note.
               </h1>
-              <p className="text-white/50 mt-8 text-lg leading-relaxed max-w-md">
-                We respond within 24 hours, usually sooner. No obligation, no pressure—just a conversation.
-              </p>
             </div>
 
             {/* Right - Form */}
