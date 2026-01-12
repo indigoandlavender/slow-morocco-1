@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     description: "Thoughtful private journeys across Morocco — designed for travellers who prefer depth over speed.",
     images: [
       {
-        url: "https://res.cloudinary.com/drstfu5yr/image/upload/v1735000000/slow-morocco-og.jpg",
+        url: "/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "Slow Morocco - Private journeys through Morocco",
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Slow Morocco | Private Journeys Through Morocco",
     description: "Thoughtful private journeys across Morocco — designed for travellers who prefer depth over speed.",
-    images: ["https://res.cloudinary.com/drstfu5yr/image/upload/v1735000000/slow-morocco-og.jpg"],
+    images: ["/og-image.jpg"],
   },
   robots: {
     index: true,
@@ -61,7 +61,7 @@ export const metadata: Metadata = {
     icon: [
       { url: "/favicon.svg", type: "image/svg+xml" },
     ],
-    apple: "/favicon.svg",
+    apple: "/apple-touch-icon.png",
   },
   viewport: {
     width: "device-width",
