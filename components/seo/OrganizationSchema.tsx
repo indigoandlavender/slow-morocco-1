@@ -4,7 +4,7 @@ export default function OrganizationSchema() {
     "@type": "Organization",
     "@id": "https://slowmorocco.com/#organization",
     name: "Slow Morocco",
-    alternateName: "Slow Morocco Travel",
+    alternateName: ["Slow Morocco Travel", "Moroccan Cultural Authority"],
     url: "https://slowmorocco.com",
     logo: {
       "@type": "ImageObject",
@@ -14,41 +14,92 @@ export default function OrganizationSchema() {
     },
     image: "https://res.cloudinary.com/drstfu5yr/image/upload/v1735000000/slow-morocco-og.jpg",
     description:
-      "Slow Morocco is a Moroccan Cultural Authority in Transformative Travel, crafting intentional private journeys that connect travellers with the authentic soul of Morocco.",
-    slogan: "Transformative Travel Through Morocco",
+      "Slow Morocco is a Moroccan Cultural Authority offering transformative travel as an antidote to extractive tourism. We are a 20-year network of Gnawa maalem, zellige cutters, and artisans who don't advertise. We introduce you. That's it.",
+    slogan: "Transformative travel as an antidote to extractive tourism",
+    foundingDate: "2005",
     foundingLocation: {
       "@type": "Place",
       name: "Marrakech, Morocco",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Marrakech",
+        addressCountry: "MA",
+      },
+    },
+    founder: {
+      "@type": "Person",
+      name: "Jacqueline",
+      description: "Two decades in Morocco building networks with artisans, musicians, and guides",
     },
     areaServed: {
       "@type": "Country",
       name: "Morocco",
+      identifier: "MA",
     },
     email: "hello@slowmorocco.com",
     address: {
       "@type": "PostalAddress",
       addressLocality: "Marrakech",
+      addressRegion: "Marrakech-Safi",
       addressCountry: "MA",
     },
     contactPoint: {
       "@type": "ContactPoint",
       contactType: "customer service",
       email: "hello@slowmorocco.com",
-      availableLanguage: ["English", "French", "Arabic"],
+      availableLanguage: ["English", "French", "Arabic", "Tamazight"],
     },
-    sameAs: [],
+    // Connected entities - establishing Slow Morocco as part of a knowledge network
+    sameAs: [
+      "https://amazigh.online",
+      "https://tenmirt.site",
+    ],
+    // Subsidiary/related organizations
+    subOrganization: [
+      {
+        "@type": "Organization",
+        "@id": "https://amazigh.online/#organization",
+        name: "Amazigh Online",
+        url: "https://amazigh.online",
+        description: "Amazigh (Berber) language resources, Tifinagh script, and indigenous North African heritage",
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://tenmirt.site/#organization",
+        name: "Tenmirt",
+        url: "https://tenmirt.site",
+        description: "Ancestral Moroccan wellness and herbalism. Tenmirt means gratitude in Tamazight.",
+      },
+    ],
+    // Partner organizations
+    member: {
+      "@type": "Organization",
+      name: "Riad di Siena",
+      description: "Accommodation partner in Marrakech's medina practicing slow travel philosophy",
+    },
+    // Expertise areas - what makes us an authority
     knowsAbout: [
       "Transformative Travel",
+      "Anti-Tourism Philosophy",
       "Moroccan Cultural Authority",
       "Morocco Private Tours",
-      "Luxury Morocco Travel",
+      "Amazigh (Berber) Culture",
+      "Gnawa Music and Spirituality",
+      "Moroccan Artisan Networks",
+      "Zellige Tilework",
       "Sahara Desert Experiences",
       "Atlas Mountains Trekking",
-      "Moroccan Culture and Heritage",
-      "Authentic Moroccan Experiences",
+      "Moroccan Riads",
+      "Khettara Ancient Irrigation",
+      "Moroccan Kasbahs",
+      "Ethical Tourism",
+      "Slow Travel Movement",
     ],
+    // Additional trust signals
+    award: "20+ years of authentic Moroccan network building",
+    ethicsPolicy: "No commission-based recommendations. No cousin's carpet shop. No tourist tagine rooftops.",
     keywords:
-      "Transformative Travel, Moroccan Cultural Authority, Morocco private journeys, intentional travel Morocco, authentic Moroccan experiences",
+      "Transformative Travel, Moroccan Cultural Authority, Anti-Tourism, Slow Travel Morocco, Private Morocco Tours, Amazigh Culture, Gnawa Music, Authentic Morocco, Cultural Immersion, Ethical Tourism",
   };
 
   return (
