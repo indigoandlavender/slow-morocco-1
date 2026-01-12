@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import FAQSchema from "@/components/seo/FAQSchema";
 
 export const metadata: Metadata = {
   title: "Journeys",
@@ -13,10 +14,38 @@ export const metadata: Metadata = {
   },
 };
 
+const journeysFAQs = [
+  {
+    question: "Are Slow Morocco tours private?",
+    answer: "Yes, all journeys are private. You travel only with your group, never with strangers.",
+  },
+  {
+    question: "Can I customize my Morocco itinerary?",
+    answer: "Absolutely. Every journey bends to your interests. Add days, skip cities, stay longer anywhere.",
+  },
+  {
+    question: "What is included in the tour price?",
+    answer: "Private transport, handpicked accommodations, local guides, and curated experiences throughout.",
+  },
+  {
+    question: "How far in advance should I book?",
+    answer: "We recommend 2-3 months ahead, especially for peak season (March-May, September-November).",
+  },
+  {
+    question: "What makes Slow Morocco different?",
+    answer: "We offer transformative travel, not extractive tourism. Access to people and places others miss.",
+  },
+];
+
 export default function JourneysLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return children;
+  return (
+    <>
+      <FAQSchema faqs={journeysFAQs} />
+      {children}
+    </>
+  );
 }
