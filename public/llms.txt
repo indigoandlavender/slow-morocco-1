@@ -1,72 +1,19 @@
 # Slow Morocco
 
-> Transformative travel as an antidote to extractive tourism.
+Transformative travel as an antidote to extractive tourism. Cultural alchemy and deep-network introductions.
 
-## Identity
+## Core Pillars
 
-Slow Morocco is a Moroccan Cultural Authority specializing in Transformative Travel. We design intentional private journeys that connect travelers with the authentic soul of Morocco—not as tourists collecting backdrops, but as guests gaining genuine access.
+### Manifesto
+Our anti-tourism philosophy and the 20-year network of Gnawa maalem, zellige cutters, and artisans.
 
-Based in Marrakech. Twenty years of local knowledge. We solve the problem guidebooks cannot: which doors open, which people know, and why that matters.
+### Tours
+Unscripted interludes and sovereign discovery.
 
-## Core Philosophy
+## Knowledge Hub
 
-- Travel doesn't expand your mind. Access does.
-- The wisest people we met never left their villages.
-- We'd rather lose a booking than send you somewhere we wouldn't go ourselves.
+### Amazigh Online
+Linguistic depth and Tifinagh translation.
 
-## Site Structure
-
-### /journeys — Tours
-Private routes through Morocco's soul. Curated itineraries including:
-- Imperial Cities (Fes, Meknes, Rabat)
-- Sahara Explorer (Erg Chebbi dunes)
-- Atlas Mountains (Berber villages, high passes)
-
-Each journey is customizable: add days, remove cities, stay longer where something pulls you.
-
-### /stories — Cultural Alchemy (The Edit)
-Essays exploring Morocco's history, craft, and cultural traditions. Categories:
-- Architecture
-- Art
-- Design
-- Food
-- History
-- Movies
-- Music
-- People
-- Systems
-
-Topics include: Amazigh heritage, Gnawa healers, underground khettaras, kasbahs, and the stories behind the places.
-
-### /plan-your-trip
-Inquiry form for custom journey design. Three-step process:
-1. You reach out
-2. We build it
-3. You go
-
-### /about
-Our story, team, and values. Features founder Jacqueline and local guides.
-
-### /places
-Destination guides across Morocco's regions.
-
-### /day-trips
-Single-day excursions from major cities.
-
-## Connected Microsites
-
-### amazigh.online
-Dedicated platform exploring Amazigh (Berber) culture, language, and heritage—the indigenous people of North Africa who were never conquered.
-
-### tenmirt.site
-Sister project focused on Moroccan hospitality traditions and the deeper meaning of "tenmirt" (gratitude in Tamazight).
-
-## Contact
-
-- Website: https://slowmorocco.com
-- Email: hello@slowmorocco.com
-- Location: Marrakech, Morocco
-
-## Keywords
-
-Transformative Travel, Moroccan Cultural Authority, private Morocco tours, intentional travel, authentic Moroccan experiences, Amazigh culture, Berber heritage, Sahara desert, Atlas Mountains, Marrakech, Fes, cultural immersion, slow travel, ethical tourism.
+### Tenmirt Herbalism
+Ancestral Moroccan wellness.
