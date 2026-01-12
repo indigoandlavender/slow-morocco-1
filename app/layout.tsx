@@ -3,6 +3,7 @@ import Script from "next/script";
 import "./globals.css";
 import LayoutWrapper from "@/components/LayoutWrapper";
 import StructuredData from "@/components/StructuredData";
+import OrganizationSchema from "@/components/seo/OrganizationSchema";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://slowmorocco.com"),
@@ -93,6 +94,7 @@ export default function RootLayout({
       </head>
       <body>
         <StructuredData />
+        <OrganizationSchema />
         <LayoutWrapper>{children}</LayoutWrapper>
       </body>
     </html>
