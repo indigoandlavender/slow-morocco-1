@@ -109,7 +109,10 @@ export default function HomePage() {
       <section className="py-20 bg-background">
         <div className="container mx-auto px-6 lg:px-16">
           <div className="text-center mb-16">
-            <h2 className="font-serif text-4xl md:text-5xl mb-4">Journeys</h2>
+            <h2 className="font-serif text-4xl md:text-5xl mb-4">What kind of Morocco journeys can I book?</h2>
+            <p className="text-muted-foreground leading-relaxed max-w-2xl mx-auto mb-4">
+              Every journey is private and fully customizable. You travel only with your group, on routes shaped around what matters to you.
+            </p>
             <p className="text-muted-foreground italic font-display text-lg">
               Private routes through Morocco's soul
             </p>
@@ -192,7 +195,10 @@ export default function HomePage() {
       {/* Testimonials Section */}
       <section className="py-20 bg-sand">
         <div className="container mx-auto px-6 lg:px-16 max-w-4xl">
-          <h2 className="font-serif text-4xl md:text-5xl text-center mb-16">What Travelers Say</h2>
+          <h2 className="font-serif text-4xl md:text-5xl text-center mb-6">What do travelers say about Slow Morocco?</h2>
+          <p className="text-muted-foreground leading-relaxed max-w-2xl mx-auto text-center mb-16">
+            Our guests return with stories, not just photos. Here's what they experienced when they traded the tourist trail for genuine connection.
+          </p>
 
           {loading ? (
             <div className="flex justify-center py-12">
@@ -254,11 +260,14 @@ export default function HomePage() {
         <div className="container mx-auto px-6 lg:px-16">
           <div className="text-center mb-16">
             <p className="text-xs tracking-[0.3em] text-white/40 mb-4">THE EDIT</p>
-            <h2 className="font-serif text-3xl md:text-4xl mb-4 italic">
-              Stories behind the places
+            <h2 className="font-serif text-3xl md:text-4xl mb-4">
+              What stories make Morocco make sense?
             </h2>
-            <p className="text-white/60 max-w-2xl mx-auto">
-              The Amazigh who were never conquered. The underground rivers built 2,000 years ago. 
+            <p className="text-white/70 max-w-2xl mx-auto mb-4">
+              Morocco isn't a destination—it's a civilization. Understanding its layers transforms a trip into a revelation.
+            </p>
+            <p className="text-white/50 max-w-2xl mx-auto italic">
+              The Amazigh who were never conquered. The underground rivers built 2,000 years ago.
               The Gnawa healers who crossed the Sahara.
             </p>
           </div>
@@ -345,7 +354,10 @@ export default function HomePage() {
       {/* How It Works Section */}
       <section className="py-20 bg-background">
         <div className="container mx-auto px-6 lg:px-16 max-w-5xl">
-          <h2 className="font-serif text-4xl md:text-5xl text-center mb-20">How It Works</h2>
+          <h2 className="font-serif text-4xl md:text-5xl text-center mb-6">How does booking a Slow Morocco journey work?</h2>
+          <p className="text-muted-foreground leading-relaxed max-w-2xl mx-auto text-center mb-20">
+            No forms, no algorithms, no packages. Just a conversation about what you're hoping to find, then a custom route built around it.
+          </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16">
             <div className="text-center">

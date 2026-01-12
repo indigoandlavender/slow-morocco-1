@@ -105,7 +105,10 @@ export default function JourneysPage() {
             <h1 className="text-5xl md:text-6xl lg:text-7xl tracking-[0.15em] font-light mb-6">
               J O U R N E Y S
             </h1>
-            <p className="text-lg md:text-xl text-white/50 max-w-2xl mb-4">
+            <p className="text-lg md:text-xl text-white/70 max-w-2xl mb-4">
+              All journeys are private and fully customizable. Choose a starting point below, then we'll shape it around what matters to you.
+            </p>
+            <p className="text-lg text-white/50 max-w-2xl mb-4 italic">
               Itineraries that bend. Routes that breathe. Starting points, not scripts.
             </p>
             <p className="text-sm text-white/30">
@@ -271,14 +274,14 @@ export default function JourneysPage() {
       {/* CTA Section */}
       <section className="py-24 md:py-32 border-t border-white/10 bg-[#0d0d0d]">
         <div className="container mx-auto px-6 lg:px-16 max-w-3xl text-center">
-          <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-8">
-            Not seeing what you want?
-          </p>
           <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl mb-6 text-white/90">
-            Every journey bends.
+            Can I customize my Morocco itinerary?
           </h2>
+          <p className="text-white/70 leading-relaxed mb-4 text-lg">
+            Yes—every journey bends to your interests. These are starting points, not scripts.
+          </p>
           <p className="text-white/50 leading-relaxed mb-12 text-lg">
-            These itineraries are starting points, not scripts. Add a day in the desert. Skip the city. Stay longer where something pulls you. Tell us what matters — we'll shape it around you.
+            Add a day in the desert. Skip the city. Stay longer where something pulls you. Tell us what matters—we'll shape it around you.
           </p>
           <Link
             href="/plan-your-trip"

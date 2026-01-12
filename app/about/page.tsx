@@ -146,8 +146,11 @@ export default async function AboutPage() {
                   The Problem
                 </p>
                 <h2 className="font-serif text-3xl md:text-4xl leading-tight text-white/90">
-                  Tourists don't gain wisdom — they collect backdrops.
+                  How does slow travel differ from standard tours?
                 </h2>
+                <p className="text-white/60 mt-4 leading-relaxed">
+                  Standard tours extract. Slow travel connects. We believe the difference lies in access—not to places, but to people.
+                </p>
               </div>
               <div className="lg:col-span-8 space-y-6 text-white/60 leading-relaxed text-lg">
                 {introSection.section_content.split('\n\n').map((para, i) => (
@@ -172,8 +175,11 @@ export default async function AboutPage() {
       {peopleSection && (
         <section className="py-24 md:py-32 border-t border-white/10">
           <div className="container mx-auto px-6 lg:px-16 max-w-5xl">
-            <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-16 text-center">
-              {peopleSection.section_title}
+            <h2 className="font-serif text-3xl md:text-4xl leading-tight text-white/90 text-center mb-4">
+              Who are your local guides and partners?
+            </h2>
+            <p className="text-white/60 leading-relaxed text-center max-w-2xl mx-auto mb-16">
+              Twenty years of networks. The people we introduce you to don't advertise—they don't need to.
             </p>
             
             <div className="space-y-16">
@@ -199,12 +205,12 @@ export default async function AboutPage() {
             <div className="max-w-4xl mx-auto">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16">
                 <div>
-                  <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-6">
-                    {accessSection.section_title}
-                  </p>
-                  <h2 className="font-serif text-3xl md:text-4xl leading-tight text-white/90">
-                    Some doors don't open for tourists.
+                  <h2 className="font-serif text-3xl md:text-4xl leading-tight text-white/90 mb-4">
+                    What access do you provide that others don't?
                   </h2>
+                  <p className="text-white/60 leading-relaxed">
+                    Some doors don't open for tourists. Our network unlocks experiences that aren't for sale elsewhere.
+                  </p>
                 </div>
                 <div className="space-y-6 text-white/60 leading-relaxed">
                   {accessSection.section_content.split('\n\n').slice(1).map((para, i) => (

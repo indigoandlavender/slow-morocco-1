@@ -37,10 +37,13 @@ export default function PlanYourTripPage() {
             Begin The Conversation
           </p>
           <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl tracking-wide mb-6">
-            Plan Your Journey
+            How do I start planning my Morocco trip?
           </h1>
+          <p className="text-white/70 text-lg mb-4">
+            Fill out the form below and we'll respond within 24 hours. No obligation, no sales pitch—just a conversation about what you're hoping to find.
+          </p>
           <p className="text-white/50 text-lg italic">
-            We respond within 24 hours, usually sooner. No obligation, no sales pitch—just a conversation about what you're hoping to find.
+            Every journey begins with a question. What's yours?
           </p>
         </div>
       </section>
