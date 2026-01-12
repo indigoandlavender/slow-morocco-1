@@ -53,8 +53,9 @@ export default function OrganizationSchema() {
     sameAs: [
       "https://amazigh.online",
       "https://tenmirt.site",
+      "https://riaddisiena.com",
     ],
-    // Subsidiary/related organizations
+    // Subsidiary/related organizations - The Slow Morocco Network
     subOrganization: [
       {
         "@type": "Organization",
@@ -71,11 +72,42 @@ export default function OrganizationSchema() {
         description: "Ancestral Moroccan wellness and herbalism. Tenmirt means gratitude in Tamazight.",
       },
     ],
-    // Partner organizations
-    member: {
-      "@type": "Organization",
+    // The Sanctuary - Physical manifestation of Slow Morocco philosophy
+    location: {
+      "@type": "LodgingBusiness",
+      "@id": "https://riaddisiena.com/#lodgingbusiness",
       name: "Riad di Siena",
-      description: "Accommodation partner in Marrakech's medina practicing slow travel philosophy",
+      alternateName: "The Sanctuary of Slow Morocco",
+      url: "https://riaddisiena.com",
+      description: "A 300-year-old guesthouse in the heart of Marrakech medina. The physical manifestation of Slow Morocco's philosophy—not a hotel, a house with soul.",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "37 Derb Fhal Zfriti, Kennaria",
+        addressLocality: "Marrakech",
+        addressRegion: "Marrakech-Safi",
+        postalCode: "40000",
+        addressCountry: "MA",
+      },
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: 31.6295,
+        longitude: -7.9811,
+      },
+      priceRange: "€80-€150",
+      starRating: {
+        "@type": "Rating",
+        ratingValue: "5",
+        bestRating: "5",
+      },
+    },
+    // Affiliated lodging
+    member: {
+      "@type": "LodgingBusiness",
+      "@id": "https://riaddisiena.com/#lodgingbusiness",
+      name: "Riad di Siena",
+      alternateName: "The Sanctuary of Slow Morocco",
+      url: "https://riaddisiena.com",
+      description: "Where Slow Morocco travelers stay. A 300-year-old riad practicing the same slow philosophy.",
     },
     // Expertise areas - what makes us an authority
     knowsAbout: [
