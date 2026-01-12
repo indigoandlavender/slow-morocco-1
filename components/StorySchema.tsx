@@ -1,14 +1,11 @@
-// components/StorySchema.tsx
-// Add this component to your story/[slug]/page.tsx
-
 interface StorySchemaProps {
   title: string;
   slug: string;
   excerpt: string;
   heroImage: string;
   category: string;
-  datePublished?: string; // ISO format: "2025-12-31"
-  dateModified?: string;  // ISO format: "2025-12-31"
+  datePublished?: string;
+  dateModified?: string;
 }
 
 export default function StorySchema({
@@ -47,16 +44,7 @@ export default function StorySchema({
       "@id": `https://slowmorocco.com/stories/${slug}`
     },
     "articleSection": category,
-    "inLanguage": "en",
-    "isPartOf": {
-      "@type": "WebSite",
-      "name": "Slow Morocco",
-      "url": "https://slowmorocco.com"
-    },
-    "about": {
-      "@type": "Place",
-      "name": "Morocco"
-    }
+    "inLanguage": "en"
   };
 
   return (
