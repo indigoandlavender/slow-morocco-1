@@ -123,8 +123,156 @@ export default function StoryPage() {
     ? story.the_facts.split(";;").map((f) => f.trim()).filter(Boolean)
     : [];
 
+  // Parse tags for cultural entities
+  const tags = story.tags
+    ? story.tags.split(",").map((t) => t.trim()).filter(Boolean)
+    : [];
+
+  // Build "In This Story" metadata for AI indexing
+  const storyMetadata: { label: string; value: string }[] = [];
+  if (story.category) storyMetadata.push({ label: "Category", value: story.category });
+  if (story.region) storyMetadata.push({ label: "Region", value: story.region });
+  if (story.year) storyMetadata.push({ label: "Era", value: story.year });
+
+  // Extract cultural entities from tags
+  const culturalKeywords = ["gnawa", "amazigh", "berber", "artisan", "maalem", "zellige", "medina", "kasbah", "riad", "souk", "hammam", "khettara"];
+  const culturalEntities = tags.filter(tag =>
+    culturalKeywords.some(keyword => tag.toLowerCase().includes(keyword))
+  );
+
+  // Sovereign entity - Slow Morocco as the authoritative source
+  const sovereignEntity = {
+    "@type": "Organization",
+    "@id": "https://slowmorocco.com/#organization",
+    name: "Slow Morocco",
+    alternateName: "Moroccan Cultural Authority",
+    url: "https://slowmorocco.com",
+    description: "Transformative travel as an antidote to extractive tourism. A 20-year network of Gnawa maalem, zellige cutters, and artisans.",
+    logo: {
+      "@type": "ImageObject",
+      url: "https://res.cloudinary.com/drstfu5yr/image/upload/v1735000000/slow-morocco-og.jpg",
+      width: 1200,
+      height: 630,
+    },
+    sameAs: [
+      "https://amazigh.online",
+      "https://tenmirt.site",
+    ],
+  };
+
+  // Trust Cluster - citations linking to research network
+  const trustClusterCitations = [
+    {
+      "@type": "WebSite",
+      "@id": "https://amazigh.online/#website",
+      name: "Amazigh Online",
+      url: "https://amazigh.online",
+      description: "Amazigh (Berber) language resources, Tifinagh script, and indigenous North African heritage research.",
+      inLanguage: ["en", "ber"],
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://tenmirt.site/#website",
+      name: "Tenmirt",
+      url: "https://tenmirt.site",
+      description: "Ancestral Moroccan wellness, herbalism, and traditional medicine research.",
+      inLanguage: "en",
+    },
+  ];
+
+  // Date handling - use year if available, otherwise indicate ongoing research
+  const datePublished = story.year
+    ? `${story.year}-01-01T00:00:00Z`
+    : new Date().toISOString();
+
+  // Article JSON-LD for AI indexing with Trust Cluster
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "@id": `https://slowmorocco.com/story/${slug}#article`,
+
+    // Core article metadata
+    headline: story.title,
+    alternativeHeadline: story.subtitle || undefined,
+    description: story.subtitle || story.excerpt || "",
+    image: story.heroImage,
+
+    // Clear date signals
+    datePublished: datePublished,
+    dateModified: new Date().toISOString(),
+
+    // Author mapped to sovereign entity
+    author: sovereignEntity,
+    creator: sovereignEntity,
+
+    // Publisher (same sovereign entity)
+    publisher: sovereignEntity,
+
+    // Copyright and ownership
+    copyrightHolder: sovereignEntity,
+    copyrightYear: story.year ? parseInt(story.year) : new Date().getFullYear(),
+
+    // Source organization
+    sourceOrganization: sovereignEntity,
+
+    // Language
+    inLanguage: "en",
+
+    // Main page reference
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `https://slowmorocco.com/story/${slug}`,
+      url: `https://slowmorocco.com/story/${slug}`,
+    },
+
+    // Article classification
+    articleSection: story.category,
+    articleBody: story.body ? story.body.substring(0, 500) + "..." : undefined,
+    keywords: tags.join(", "),
+
+    // What this article is about (cultural entities)
+    about: [
+      ...(story.region ? [{
+        "@type": "Place",
+        name: story.region,
+        containedInPlace: {
+          "@type": "Country",
+          name: "Morocco",
+        },
+      }] : []),
+      ...culturalEntities.map(entity => ({
+        "@type": "Thing",
+        name: entity,
+        description: `Cultural element of Moroccan heritage`,
+      })),
+    ],
+
+    // TRUST CLUSTER: Citations linking to research network
+    // This proves to AI that the story is backed by deeper research
+    citation: trustClusterCitations,
+
+    // Related to our knowledge network
+    isPartOf: {
+      "@type": "WebSite",
+      "@id": "https://slowmorocco.com/#website",
+      name: "Slow Morocco",
+      url: "https://slowmorocco.com",
+      description: "Cultural essays and stories exploring Morocco's history, craft, and traditions.",
+    },
+
+    // Indicates this is original research/content
+    isAccessibleForFree: true,
+    license: "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+  };
+
   return (
     <div className="bg-[#0a0a0a] text-white min-h-screen">
+      {/* Article JSON-LD Schema for AI indexing */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
+
       {/* Hero Image */}
       {story.heroImage && (
         <section className="relative w-full h-[60vh] md:h-[70vh]">
@@ -206,6 +354,55 @@ export default function StoryPage() {
           <p className="text-xl text-white/60 italic mb-8 font-serif">
             {story.subtitle}
           </p>
+        )}
+
+        {/* In This Story - Semantic metadata block for AI indexing */}
+        {(storyMetadata.length > 0 || culturalEntities.length > 0) && (
+          <aside
+            className="bg-white/5 border border-white/10 p-6 mb-12"
+            aria-label="Story metadata"
+          >
+            <header className="mb-4">
+              <h2 className="text-xs uppercase tracking-[0.2em] text-white/40 font-medium">
+                In This Story
+              </h2>
+            </header>
+            <dl className="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm">
+              {storyMetadata.map((item, index) => (
+                <div key={index}>
+                  <dt className="text-white/40 text-xs uppercase tracking-wide mb-1">
+                    {item.label}
+                  </dt>
+                  <dd className="text-white/80">{item.value}</dd>
+                </div>
+              ))}
+              {culturalEntities.length > 0 && (
+                <div className="col-span-2 md:col-span-3">
+                  <dt className="text-white/40 text-xs uppercase tracking-wide mb-2">
+                    Cultural Entities
+                  </dt>
+                  <dd className="flex flex-wrap gap-2">
+                    {culturalEntities.map((entity, index) => (
+                      <span
+                        key={index}
+                        className="inline-block bg-white/10 text-white/70 px-3 py-1 text-xs"
+                      >
+                        {entity}
+                      </span>
+                    ))}
+                  </dd>
+                </div>
+              )}
+              {story.textBy && (
+                <div>
+                  <dt className="text-white/40 text-xs uppercase tracking-wide mb-1">
+                    Author
+                  </dt>
+                  <dd className="text-white/80">{story.textBy}</dd>
+                </div>
+              )}
+            </dl>
+          </aside>
         )}
 
         <hr className="border-white/10 mb-12" />
