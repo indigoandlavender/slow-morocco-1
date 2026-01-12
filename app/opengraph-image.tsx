@@ -78,21 +78,6 @@ export default async function Image() {
           Slow Morocco
         </div>
 
-        {/* Tagline */}
-        <div
-          style={{
-            display: 'flex',
-            fontSize: 24,
-            fontStyle: 'italic',
-            color: 'rgba(255,255,255,0.5)',
-            maxWidth: 600,
-            textAlign: 'center',
-            lineHeight: 1.5,
-          }}
-        >
-          Transformative travel as an antidote to extractive tourism
-        </div>
-
         {/* Bottom accent */}
         <div
           style={{

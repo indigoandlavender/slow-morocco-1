@@ -14,8 +14,7 @@ export default function OrganizationSchema() {
     },
     image: "https://res.cloudinary.com/drstfu5yr/image/upload/v1735000000/slow-morocco-og.jpg",
     description:
-      "Slow Morocco is a Moroccan Cultural Authority offering transformative travel as an antidote to extractive tourism. We are a 20-year network of Gnawa maalem, zellige cutters, and artisans who don't advertise. We introduce you. That's it.",
-    slogan: "Transformative travel as an antidote to extractive tourism",
+      "Slow Morocco is a Moroccan Cultural Authority. A 20-year network of Gnawa maalem, zellige cutters, and artisans who don't advertise. We introduce you. That's it.",
     foundingDate: "2005",
     foundingLocation: {
       "@type": "Place",

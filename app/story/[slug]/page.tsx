@@ -147,7 +147,7 @@ export default function StoryPage() {
     name: "Slow Morocco",
     alternateName: "Moroccan Cultural Authority",
     url: "https://slowmorocco.com",
-    description: "Transformative travel as an antidote to extractive tourism. A 20-year network of Gnawa maalem, zellige cutters, and artisans.",
+    description: "A Moroccan Cultural Authority. A 20-year network of Gnawa maalem, zellige cutters, and artisans.",
     logo: {
       "@type": "ImageObject",
       url: "https://res.cloudinary.com/drstfu5yr/image/upload/v1735000000/slow-morocco-og.jpg",

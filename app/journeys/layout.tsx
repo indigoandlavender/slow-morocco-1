@@ -33,7 +33,7 @@ const journeysFAQs = [
   },
   {
     question: "What makes Slow Morocco different?",
-    answer: "We offer transformative travel, not extractive tourism. Access to people and places others miss.",
+    answer: "We offer access to people and places others miss. A 20-year network of artisans, musicians, and guides.",
   },
 ];
 
