@@ -24,7 +24,8 @@ const STORY_HEADERS = [
   'region',
   'published',
   'order',
-  'featured'
+  'featured',
+  'midjourney_prompt'
 ];
 
 interface StoryData {
@@ -48,6 +49,7 @@ interface StoryData {
   published?: string;
   order?: string;
   featured?: string;
+  midjourney_prompt?: string;
 }
 
 export async function POST(request: Request) {

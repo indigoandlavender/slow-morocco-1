@@ -1,9 +1,10 @@
-/**
- * 5 new stories for Slow Morocco
- * Immersive, cinematic tone - drops reader into the action
- */
+import { NextResponse } from 'next/server';
+import { appendSheetData, getSheetData } from '@/lib/sheets';
 
-const newStories = [
+export const dynamic = 'force-dynamic';
+
+// The 5 new immersive stories
+const STORIES_TO_SEED = [
   {
     slug: "the-blue-city-chefchaouen",
     title: "The Blue City",
@@ -121,4 +122,55 @@ const newStories = [
   }
 ];
 
-export { newStories };
+// Story fields in order for the sheet
+const STORY_HEADERS = [
+  'slug', 'title', 'subtitle', 'category', 'sourceType', 'heroImage', 'heroCaption',
+  'excerpt', 'body', 'readTime', 'year', 'textBy', 'imagesBy', 'sources',
+  'the_facts', 'tags', 'region', 'published', 'order', 'featured', 'midjourney_prompt'
+];
+
+export async function GET() {
+  try {
+    // Get existing stories to check for duplicate slugs
+    const existingStories = await getSheetData('Stories');
+    const existingSlugs = new Set(existingStories.map((s: any) => s.slug));
+
+    // Filter out stories with duplicate slugs
+    const newStories = STORIES_TO_SEED.filter(story => {
+      if (existingSlugs.has(story.slug)) {
+        console.log(`Skipping duplicate slug: ${story.slug}`);
+        return false;
+      }
+      return true;
+    });
+
+    if (newStories.length === 0) {
+      return NextResponse.json({
+        success: false,
+        message: 'All stories already exist in the database',
+        existingSlugs: STORIES_TO_SEED.map(s => s.slug)
+      });
+    }
+
+    // Convert stories to row format
+    const rows = newStories.map(story => {
+      return STORY_HEADERS.map(header => (story as any)[header] || '');
+    });
+
+    // Append to sheet
+    await appendSheetData('Stories', rows);
+
+    return NextResponse.json({
+      success: true,
+      message: `Added ${newStories.length} stories to the database`,
+      addedSlugs: newStories.map(s => s.slug),
+      skippedSlugs: STORIES_TO_SEED.filter(s => existingSlugs.has(s.slug)).map(s => s.slug)
+    });
+  } catch (error) {
+    console.error('Error seeding stories:', error);
+    return NextResponse.json(
+      { error: 'Failed to seed stories', details: String(error) },
+      { status: 500 }
+    );
+  }
+}
