@@ -223,7 +223,7 @@ export default function PlacesContent() {
               <p className="text-sm text-white/40 mb-8">
                 {filteredPlaces.length} {filteredPlaces.length === 1 ? "place" : "places"}
               </p>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
                 {filteredPlaces.map((place) => {
                   const dest = destinations.find((d) => d.slug === place.destination);
                   return (
@@ -232,7 +232,7 @@ export default function PlacesContent() {
                       href={`/places/${place.slug}`}
                       className="group"
                     >
-                      <div className="relative aspect-[4/3] mb-4 overflow-hidden bg-white/5">
+                      <div className="relative aspect-[3/4] mb-3 overflow-hidden bg-white/5">
                         {place.heroImage && (
                           <Image
                             src={place.heroImage}
@@ -242,15 +242,12 @@ export default function PlacesContent() {
                           />
                         )}
                       </div>
-                      <p className="text-xs tracking-[0.15em] uppercase text-white/40 mb-1">
+                      <p className="text-[10px] tracking-[0.15em] uppercase text-white/40 mb-1">
                         {dest?.title || place.destination}
                       </p>
-                      <h2 className="font-serif text-xl text-white/90 mb-2 group-hover:text-white transition-colors">
+                      <h2 className="font-serif text-base md:text-lg text-white/90 group-hover:text-white transition-colors">
                         {place.title}
                       </h2>
-                      <p className="text-sm text-white/50 line-clamp-2">
-                        {place.excerpt}
-                      </p>
                     </Link>
                   );
                 })}
