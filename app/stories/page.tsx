@@ -4,6 +4,7 @@ import { useEffect, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
+import PageBanner from "@/components/PageBanner";
 
 interface Story {
   slug: string;
@@ -50,23 +51,15 @@ function StoriesContent() {
 
   return (
     <div className="bg-background min-h-screen">
-      {/* Hero Header */}
-      <section className="pt-32 pb-16 md:pt-40 md:pb-20 border-b border-border">
-        <div className="container mx-auto px-8 md:px-16 lg:px-20">
-          <div className="max-w-3xl">
-            <p className="text-[10px] tracking-[0.3em] uppercase text-foreground/40 mb-6">
-              The Edit
-            </p>
-            <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl leading-[1.1] mb-6">
-              Stories worth knowing
-            </h1>
-            <p className="text-foreground/60 leading-relaxed text-sm max-w-xl">
-              The history, craft, and culture that make Morocco make sense.
-              Understanding its layers transforms a trip into a revelation.
-            </p>
-          </div>
-        </div>
-      </section>
+      {/* Immersive Hero Banner */}
+      <PageBanner
+        slug="stories"
+        fallback={{
+          title: "Stories worth knowing",
+          subtitle: "The history, craft, and culture that make Morocco make sense. Understanding its layers transforms a trip into a revelation.",
+          label: "The Edit",
+        }}
+      />
 
       {/* Filters */}
       <section className="py-6 border-b border-border sticky top-20 md:top-24 bg-background z-40">

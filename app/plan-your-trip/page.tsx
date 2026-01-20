@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import PlanYourTripForm from "@/components/PlanYourTripForm";
+import PageBanner from "@/components/PageBanner";
 
 interface Journey {
   slug: string;
@@ -30,30 +31,22 @@ export default function PlanYourTripPage() {
 
   return (
     <div className="bg-background text-foreground min-h-screen">
-      {/* Hero */}
-      <section className="pt-32 pb-16 md:pt-40 md:pb-20">
-        <div className="container mx-auto px-6 lg:px-16 max-w-2xl text-center">
-          <p className="text-xs tracking-[0.4em] uppercase text-foreground/40 mb-6">
-            Begin The Conversation
-          </p>
-          <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl tracking-wide mb-6">
-            How do I start planning my Morocco trip?
-          </h1>
-          <p className="text-foreground/70 text-lg mb-4">
-            Fill out the form below and we'll respond within 24 hours. No obligation, no sales pitch—just a conversation about what you're hoping to find.
-          </p>
-          <p className="text-foreground/50 text-lg italic">
-            Every journey begins with a question. What's yours?
-          </p>
-        </div>
-      </section>
+      {/* Immersive Hero Banner */}
+      <PageBanner
+        slug="plan-your-trip"
+        fallback={{
+          title: "Plan your journey",
+          subtitle: "No obligation, no sales pitch—just a conversation about what you're hoping to find. Every journey begins with a question.",
+          label: "Begin the Conversation",
+        }}
+      />
 
       {/* Form Section */}
-      <section className="pb-24 md:pb-32">
+      <section className="py-16 md:py-24">
         <div className="container mx-auto px-6 lg:px-16 max-w-2xl">
           {loading ? (
             <div className="flex justify-center py-16">
-              <div className="w-8 h-8 border-2 border-foreground/20 border-t-white rounded-full animate-spin" />
+              <div className="w-8 h-8 border-2 border-foreground/20 border-t-foreground rounded-full animate-spin" />
             </div>
           ) : (
             <PlanYourTripForm 
