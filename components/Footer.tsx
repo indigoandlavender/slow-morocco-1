@@ -34,6 +34,7 @@ interface FooterData {
   brandId: string;
   newsletter: {
     show: boolean;
+    backgroundImage: string;
     title: string;
     description: string;
     brandName: string;
@@ -112,6 +113,7 @@ export default function Footer() {
   // Fallback values
   const newsletter = footerData?.newsletter || {
     show: true,
+    backgroundImage: "",
     title: "Stay curious",
     description: "Stories, routes, and cultural insights from Morocco.",
     brandName: "Slow Morocco",
@@ -134,8 +136,20 @@ export default function Footer() {
           LEVEL 1: Newsletter
           ═══════════════════════════════════════════════════════════════ */}
       {newsletter.show && (
-        <section className="py-20 md:py-24 bg-[#1f1f1f]">
-          <div className="container mx-auto px-8 md:px-16 lg:px-20">
+        <section 
+          className="py-20 md:py-24 bg-[#1f1f1f] relative"
+          style={newsletter.backgroundImage ? {
+            backgroundImage: `url(${newsletter.backgroundImage})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          } : undefined}
+        >
+          {/* Dark overlay when background image is present */}
+          {newsletter.backgroundImage && (
+            <div className="absolute inset-0 bg-black/60" />
+          )}
+          
+          <div className="container mx-auto px-8 md:px-16 lg:px-20 relative z-10">
             <div className="max-w-2xl mx-auto text-center">
               <h3 className="font-serif text-2xl md:text-3xl text-white mb-4">
                 {newsletter.title}
@@ -176,7 +190,7 @@ export default function Footer() {
           ═══════════════════════════════════════════════════════════════ */}
       <section className="py-16 bg-[#161616]">
         <div className="container mx-auto px-8 md:px-16 lg:px-20">
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-10 md:gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-10 md:gap-8">
             {/* Brand Column */}
             <div className="col-span-2 md:col-span-1">
               <Link href="/" className="inline-block mb-6">
@@ -250,45 +264,6 @@ export default function Footer() {
                 </div>
               </>
             )}
-
-            {/* Language & Currency Column */}
-            <div>
-              <h4 className="text-[10px] tracking-[0.2em] uppercase text-white/30 mb-5">
-                Settings
-              </h4>
-              
-              {/* Language */}
-              <div className="mb-6">
-                <p className="text-[10px] tracking-[0.15em] uppercase text-white/20 mb-2">Language</p>
-                <select
-                  value={currentLang}
-                  onChange={(e) => handleLangChange(e.target.value)}
-                  className="w-full bg-white/5 border border-white/10 text-white/70 text-sm px-3 py-2 focus:outline-none focus:border-white/30 transition-colors appearance-none cursor-pointer"
-                >
-                  {languages.map((lang) => (
-                    <option key={lang.code} value={lang.code} className="bg-[#161616]">
-                      {lang.label}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              
-              {/* Currency */}
-              <div>
-                <p className="text-[10px] tracking-[0.15em] uppercase text-white/20 mb-2">Currency</p>
-                <select
-                  value={currentCurrency}
-                  onChange={(e) => handleCurrencyChange(e.target.value)}
-                  className="w-full bg-white/5 border border-white/10 text-white/70 text-sm px-3 py-2 focus:outline-none focus:border-white/30 transition-colors appearance-none cursor-pointer"
-                >
-                  {currencies.map((currency) => (
-                    <option key={currency.code} value={currency.code} className="bg-[#161616]">
-                      {currency.symbol} {currency.code}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </div>
           </div>
         </div>
       </section>
@@ -299,6 +274,7 @@ export default function Footer() {
       <section className="py-6 bg-[#0e0e0e]">
         <div className="container mx-auto px-8 md:px-16 lg:px-20">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+            {/* Legal links */}
             <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
               {legal.map((link, idx) => (
                 <Link
@@ -310,9 +286,42 @@ export default function Footer() {
                 </Link>
               ))}
             </div>
-            <p className="text-[10px] tracking-[0.1em] text-white/20">
-              © {copyright.year} {copyright.name}. All rights reserved.
-            </p>
+            
+            {/* Right side: Language, Currency, Copyright */}
+            <div className="flex items-center gap-4 md:gap-6">
+              {/* Language selector */}
+              <select
+                value={currentLang}
+                onChange={(e) => handleLangChange(e.target.value)}
+                className="bg-transparent text-[10px] tracking-[0.1em] uppercase text-white/30 hover:text-white/50 focus:outline-none cursor-pointer appearance-none pr-3"
+                style={{ backgroundImage: 'none' }}
+              >
+                {languages.map((lang) => (
+                  <option key={lang.code} value={lang.code} className="bg-[#0e0e0e] text-white/50">
+                    {lang.label}
+                  </option>
+                ))}
+              </select>
+              
+              {/* Currency selector */}
+              <select
+                value={currentCurrency}
+                onChange={(e) => handleCurrencyChange(e.target.value)}
+                className="bg-transparent text-[10px] tracking-[0.1em] uppercase text-white/30 hover:text-white/50 focus:outline-none cursor-pointer appearance-none pr-3"
+                style={{ backgroundImage: 'none' }}
+              >
+                {currencies.map((currency) => (
+                  <option key={currency.code} value={currency.code} className="bg-[#0e0e0e] text-white/50">
+                    {currency.symbol} {currency.code}
+                  </option>
+                ))}
+              </select>
+              
+              {/* Copyright */}
+              <p className="text-[10px] tracking-[0.1em] text-white/20">
+                © {copyright.year} {copyright.name}
+              </p>
+            </div>
           </div>
         </div>
       </section>

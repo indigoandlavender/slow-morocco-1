@@ -19,7 +19,7 @@ export default function StoryBody({ content }: StoryBodyProps) {
           return (
             <blockquote
               key={index}
-              className="border-l-2 border-white/20 pl-6 my-8 text-xl italic text-white/70"
+              className="border-l-2 border-foreground/20 pl-6 my-8 text-xl italic text-foreground/70"
             >
               {quoteText}
             </blockquote>
@@ -32,7 +32,7 @@ export default function StoryBody({ content }: StoryBodyProps) {
           return (
             <h2
               key={index}
-              className="font-serif text-2xl text-white mt-12 mb-6"
+              className="font-serif text-2xl text-foreground mt-12 mb-6"
             >
               {headingText}
             </h2>
@@ -43,7 +43,7 @@ export default function StoryBody({ content }: StoryBodyProps) {
         return (
           <p
             key={index}
-            className="text-white/70 leading-relaxed mb-6"
+            className="text-foreground/70 leading-relaxed mb-6"
           >
             {paragraph}
           </p>
