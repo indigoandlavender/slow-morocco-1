@@ -20,6 +20,9 @@ interface Journey {
   heroImage?: string;
   duration?: string;
   destinations?: string;
+  journeyType?: string;
+  price?: number;
+  epicPrice?: number;
 }
 
 interface Story {
@@ -33,6 +36,7 @@ interface Story {
 
 export default function HomePage() {
   const [journeys, setJourneys] = useState<Journey[]>([]);
+  const [epicJourneys, setEpicJourneys] = useState<Journey[]>([]);
   const [stories, setStories] = useState<Story[]>([]);
   const [settings, setSettings] = useState<Settings>({});
   const [loading, setLoading] = useState(true);
@@ -44,7 +48,10 @@ export default function HomePage() {
       fetch("/api/stories").then((r) => r.json()),
     ])
       .then(([journeysData, settingsData, storiesData]) => {
-        setJourneys(journeysData.journeys?.slice(0, 4) || []);
+        const allJourneys = journeysData.journeys || [];
+        // Separate regular and epic journeys
+        setJourneys(allJourneys.filter((j: any) => j.journeyType !== "epic").slice(0, 4));
+        setEpicJourneys(allJourneys.filter((j: any) => j.journeyType === "epic").slice(0, 5));
         setSettings(settingsData.settings || {});
         const allStories = storiesData.stories || [];
         setStories(allStories.filter((s: Story) => s.heroImage).slice(0, 3));
@@ -222,6 +229,110 @@ export default function HomePage() {
           </p>
         </div>
       </section>
+
+      {/* ═══════════════════════════════════════════════════════════════
+          EPIC JOURNEYS: Showcase 5 epic journeys
+          ═══════════════════════════════════════════════════════════════ */}
+      {epicJourneys.length > 0 && (
+        <section className="py-20 md:py-28 bg-[#1a1916] text-white">
+          <div className="container mx-auto px-8 md:px-16 lg:px-20">
+            <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-16">
+              <div>
+                <p className="text-[10px] tracking-[0.3em] uppercase text-white/40 mb-4">
+                  Epic Journeys
+                </p>
+                <h2 className="font-serif text-3xl md:text-4xl">
+                  For those who want it all
+                </h2>
+                <p className="text-white/50 mt-4 max-w-lg text-sm leading-relaxed">
+                  Extended itineraries spanning 10-21 days. These are the journeys that 
+                  let Morocco truly unfold—across mountain passes, through hidden valleys, 
+                  into the deep Sahara.
+                </p>
+              </div>
+              <Link
+                href="/epic"
+                className="mt-6 md:mt-0 text-xs tracking-[0.15em] uppercase text-white/60 hover:text-white transition-colors"
+              >
+                View all epic journeys →
+              </Link>
+            </div>
+
+            {/* Epic Journeys Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+              {epicJourneys.slice(0, 3).map((journey) => (
+                <Link
+                  key={journey.slug}
+                  href={`/journeys/${journey.slug}`}
+                  className="group"
+                >
+                  <div className="aspect-[4/5] relative overflow-hidden mb-5">
+                    {journey.heroImage ? (
+                      <Image
+                        src={journey.heroImage}
+                        alt={journey.title}
+                        fill
+                        className="object-cover group-hover:scale-[1.02] transition-transform duration-700"
+                      />
+                    ) : (
+                      <div className="absolute inset-0 bg-white/10" />
+                    )}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                    <div className="absolute bottom-0 left-0 right-0 p-6">
+                      <p className="text-[10px] tracking-[0.3em] uppercase text-white/60 mb-2">
+                        {journey.duration}
+                      </p>
+                      <h3 className="font-serif text-xl text-white group-hover:text-white/80 transition-colors">
+                        {journey.title}
+                      </h3>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+
+            {/* Bottom row - 2 larger cards if more than 3 epic journeys */}
+            {epicJourneys.length > 3 && (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mt-6 md:mt-8">
+                {epicJourneys.slice(3, 5).map((journey) => (
+                  <Link
+                    key={journey.slug}
+                    href={`/journeys/${journey.slug}`}
+                    className="group"
+                  >
+                    <div className="aspect-[16/9] relative overflow-hidden">
+                      {journey.heroImage ? (
+                        <Image
+                          src={journey.heroImage}
+                          alt={journey.title}
+                          fill
+                          className="object-cover group-hover:scale-[1.02] transition-transform duration-700"
+                        />
+                      ) : (
+                        <div className="absolute inset-0 bg-white/10" />
+                      )}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                      <div className="absolute bottom-0 left-0 right-0 p-6">
+                        <p className="text-[10px] tracking-[0.3em] uppercase text-white/60 mb-2">
+                          {journey.duration}
+                        </p>
+                        <h3 className="font-serif text-2xl text-white group-hover:text-white/80 transition-colors">
+                          {journey.title}
+                        </h3>
+                        {journey.description && (
+                          <p className="text-sm text-white/60 mt-2 line-clamp-2">
+                            {journey.description}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+        </section>
+      )}
 
       {/* ═══════════════════════════════════════════════════════════════
           STORIES: Magazine grid layout
