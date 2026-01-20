@@ -3,33 +3,21 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Search } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import { useCurrency } from "@/lib/currency";
 
 export default function JourneysPage() {
   const [journeys, setJourneys] = useState<any[]>([]);
-  const [filteredJourneys, setFilteredJourneys] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-  
-  // Search and filter states
-  const [searchQuery, setSearchQuery] = useState("");
-  const [selectedDuration, setSelectedDuration] = useState("all");
-  const [selectedFocus, setSelectedFocus] = useState("all");
+  const [activeFilter, setActiveFilter] = useState("all");
+  const { format } = useCurrency();
 
-  // Get unique values for filters
-  const durations = [
-    { slug: "all", label: "All" },
-    { slug: "short", label: "1-5 Days" },
-    { slug: "medium", label: "6-10 Days" },
-    { slug: "long", label: "11+ Days" },
-  ];
-
-  const focuses = [
-    { slug: "all", label: "All" },
-    { slug: "desert", label: "Desert" },
-    { slug: "mountains", label: "Mountains" },
-    { slug: "culture", label: "Culture" },
-    { slug: "coast", label: "Coast" },
-    { slug: "food", label: "Food" },
+  const filters = [
+    { id: "all", label: "All Journeys" },
+    { id: "desert", label: "Desert" },
+    { id: "mountains", label: "Mountains" },
+    { id: "culture", label: "Culture" },
+    { id: "coast", label: "Coast" },
   ];
 
   useEffect(() => {
@@ -37,10 +25,8 @@ export default function JourneysPage() {
       .then((r) => r.json())
       .then((data) => {
         const all = data.journeys || [];
-        // Filter out epic journeys - they have their own page now
-        const regular = all.filter((j: any) => j.journeyType !== 'epic');
+        const regular = all.filter((j: any) => j.journeyType !== "epic");
         setJourneys(regular);
-        setFilteredJourneys(regular);
         setLoading(false);
       })
       .catch((err) => {
@@ -49,221 +35,150 @@ export default function JourneysPage() {
       });
   }, []);
 
-  // Apply search and filters
-  useEffect(() => {
-    let filtered = [...journeys];
-
-    // Search filter
-    if (searchQuery.trim()) {
-      const query = searchQuery.toLowerCase();
-      filtered = filtered.filter((j) =>
-        j.title?.toLowerCase().includes(query) ||
-        j.description?.toLowerCase().includes(query) ||
-        j.destinations?.toLowerCase().includes(query) ||
-        j.startCity?.toLowerCase().includes(query)
-      );
-    }
-
-    // Duration filter
-    if (selectedDuration !== "all") {
-      filtered = filtered.filter((j) => {
-        const days = j.durationDays || 0;
-        if (selectedDuration === "short") return days >= 1 && days <= 5;
-        if (selectedDuration === "medium") return days >= 6 && days <= 10;
-        if (selectedDuration === "long") return days >= 11;
-        return true;
-      });
-    }
-
-    // Focus filter
-    if (selectedFocus !== "all") {
-      filtered = filtered.filter((j) =>
-        j.focus?.toLowerCase().includes(selectedFocus.toLowerCase())
-      );
-    }
-
-    setFilteredJourneys(filtered);
-  }, [journeys, searchQuery, selectedDuration, selectedFocus]);
-
-  const clearFilters = () => {
-    setSearchQuery("");
-    setSelectedDuration("all");
-    setSelectedFocus("all");
-  };
-
-  const hasActiveFilters = searchQuery || selectedDuration !== "all" || selectedFocus !== "all";
+  const filteredJourneys =
+    activeFilter === "all"
+      ? journeys
+      : journeys.filter((j) =>
+          j.focus?.toLowerCase().includes(activeFilter.toLowerCase())
+        );
 
   return (
-    <div className="bg-[#0a0a0a] text-white min-h-screen">
+    <div className="bg-background min-h-screen">
       {/* Hero Header */}
-      <section className="pt-32 pb-16 md:pt-40 md:pb-20">
-        <div className="container mx-auto px-6 lg:px-16">
-          <div className="max-w-4xl">
-            <p className="text-xs tracking-[0.4em] uppercase text-white/40 mb-6">
-              Slow Morocco
+      <section className="pt-32 pb-16 md:pt-40 md:pb-20 border-b border-border">
+        <div className="container mx-auto px-8 md:px-16 lg:px-20">
+          <div className="max-w-3xl">
+            <p className="text-[10px] tracking-[0.3em] uppercase text-foreground/40 mb-6">
+              Journeys
             </p>
-            <h1 className="text-5xl md:text-6xl lg:text-7xl tracking-[0.15em] font-light mb-6">
-              J O U R N E Y S
+            <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl leading-[1.1] mb-6">
+              Routes worth taking
             </h1>
-            <p className="text-lg md:text-xl text-white/70 max-w-2xl mb-4">
-              All journeys are private and fully customizable. Choose a starting point below, then we'll shape it around what matters to you.
-            </p>
-            <p className="text-lg text-white/50 max-w-2xl mb-4 italic">
-              Itineraries that bend. Routes that breathe. Starting points, not scripts.
-            </p>
-            <p className="text-sm text-white/30">
-              Prices are per person, based on 2 travelers sharing. Final cost depends on dates and accommodation choices.
+            <p className="text-foreground/60 leading-relaxed text-sm max-w-xl">
+              Every journey is private and fully customizable. Choose a starting
+              point, then we'll shape it around what matters to you.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Search & Filters */}
-      <section className="py-8 border-y border-white/10">
-        <div className="container mx-auto px-6 lg:px-16">
-          {/* Search Bar */}
-          <div className="max-w-xl mb-10">
-            <div className="relative">
-              <Search className="absolute left-0 top-1/2 -translate-y-1/2 w-5 h-5 text-white/40" />
-              <input
-                type="text"
-                placeholder="Search journeys, destinations, experiences..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-8 pr-4 py-3 bg-transparent border-b border-white/20 focus:border-white/60 focus:outline-none text-base placeholder:text-white/30 transition-colors text-white"
-              />
-            </div>
-          </div>
-
-          {/* Filters Row */}
-          <div className="flex flex-col md:flex-row md:items-start gap-8 md:gap-16">
-            {/* Duration Filter */}
-            <div>
-              <h2 className="text-xs tracking-[0.2em] uppercase text-white/40 mb-4">
-                Duration
-              </h2>
-              <div className="flex flex-wrap items-center gap-2">
-                {durations.map((duration) => (
-                  <button
-                    key={duration.slug}
-                    onClick={() => setSelectedDuration(duration.slug === selectedDuration ? "all" : duration.slug)}
-                    className={`text-xs tracking-[0.15em] uppercase px-4 py-2 border transition-colors ${
-                      selectedDuration === duration.slug
-                        ? "bg-white text-[#0a0a0a] border-white"
-                        : "bg-transparent text-white/60 border-white/20 hover:border-white/40"
-                    }`}
-                  >
-                    {duration.label}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Focus Filter */}
-            <div>
-              <h2 className="text-xs tracking-[0.2em] uppercase text-white/40 mb-4">
-                Focus
-              </h2>
-              <div className="flex flex-wrap items-center gap-2">
-                {focuses.map((focus) => (
-                  <button
-                    key={focus.slug}
-                    onClick={() => setSelectedFocus(focus.slug === selectedFocus ? "all" : focus.slug)}
-                    className={`text-xs tracking-[0.15em] uppercase px-4 py-2 border transition-colors ${
-                      selectedFocus === focus.slug
-                        ? "bg-white text-[#0a0a0a] border-white"
-                        : "bg-transparent text-white/60 border-white/20 hover:border-white/40"
-                    }`}
-                  >
-                    {focus.label}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Clear filters */}
-            {hasActiveFilters && (
-              <div className="md:ml-auto md:self-end">
-                <button
-                  onClick={clearFilters}
-                  className="text-xs tracking-[0.15em] uppercase text-white/40 hover:text-white transition-colors"
-                >
-                  Clear filters ×
-                </button>
-              </div>
-            )}
+      {/* Filters */}
+      <section className="py-6 border-b border-border sticky top-20 md:top-24 bg-background z-40">
+        <div className="container mx-auto px-8 md:px-16 lg:px-20">
+          <div className="flex items-center gap-6 overflow-x-auto scrollbar-hide">
+            {filters.map((filter) => (
+              <button
+                key={filter.id}
+                onClick={() => setActiveFilter(filter.id)}
+                className={`text-[11px] tracking-[0.15em] uppercase whitespace-nowrap pb-1 transition-colors ${
+                  activeFilter === filter.id
+                    ? "text-foreground border-b border-foreground"
+                    : "text-foreground/40 hover:text-foreground/70"
+                }`}
+              >
+                {filter.label}
+              </button>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Results count */}
-      {!loading && (
-        <div className="container mx-auto px-6 lg:px-16 py-6">
-          <p className="text-sm text-white/40">
-            {filteredJourneys.length} {filteredJourneys.length === 1 ? "journey" : "journeys"}
-          </p>
-        </div>
-      )}
-
-      {/* Journeys Grid */}
-      <section className="py-8 md:py-12">
-        <div className="container mx-auto px-6 lg:px-16">
+      {/* Journeys List - Stacked Layout */}
+      <section className="py-16 md:py-24">
+        <div className="container mx-auto px-8 md:px-16 lg:px-20">
           {loading ? (
             <div className="flex justify-center py-20">
-              <div className="w-8 h-8 border-2 border-white/20 border-t-white rounded-full animate-spin" />
+              <div className="w-6 h-6 border border-foreground/20 border-t-foreground/60 rounded-full animate-spin" />
             </div>
           ) : filteredJourneys.length === 0 ? (
             <div className="text-center py-20">
-              <p className="text-white/50 mb-6">No journeys match your search.</p>
+              <p className="text-foreground/50 mb-4">No journeys match your filter.</p>
               <button
-                onClick={clearFilters}
-                className="text-sm text-white/40 hover:text-white underline transition-colors"
+                onClick={() => setActiveFilter("all")}
+                className="text-sm underline text-foreground/60 hover:text-foreground transition-colors"
               >
-                Clear all filters
+                View all journeys
               </button>
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-12">
-              {filteredJourneys.map((journey: any) => (
+            <div className="space-y-20 md:space-y-32">
+              {filteredJourneys.map((journey: any, index: number) => (
                 <Link
                   key={journey.slug}
                   href={`/journeys/${journey.slug}`}
-                  className="group"
+                  className="group block"
                 >
-                  <div className="relative aspect-[4/5] mb-4 overflow-hidden bg-white/5">
-                    {journey.heroImage && (
-                      <Image
-                        src={journey.heroImage}
-                        alt={journey.title}
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-700"
-                      />
-                    )}
-                    {/* Category Badge */}
-                    {journey.category && (
-                      <div className="absolute top-4 left-4">
-                        <span className="text-[10px] tracking-[0.15em] uppercase bg-[#0a0a0a]/80 text-white/80 px-3 py-1.5">
-                          {journey.category}
-                        </span>
+                  <div
+                    className={`flex flex-col ${
+                      index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
+                    } gap-8 md:gap-16 items-start`}
+                  >
+                    {/* Image */}
+                    <div className="w-full md:w-3/5">
+                      <div className="aspect-[4/3] relative overflow-hidden bg-[#d4cdc4]">
+                        {journey.heroImage && (
+                          <Image
+                            src={journey.heroImage}
+                            alt={journey.title}
+                            fill
+                            className="object-cover group-hover:scale-[1.02] transition-transform duration-700"
+                          />
+                        )}
                       </div>
-                    )}
-                  </div>
-                  <div className="flex items-baseline justify-between mb-1">
-                    <p className="text-xs tracking-[0.15em] uppercase text-white/40">
-                      {journey.durationDays} Days
-                    </p>
-                    {Number(journey.price) > 0 && (
-                      <p className="text-xs text-white/40">
-                        From <span className="text-white/70">€{Number(journey.price).toLocaleString()}</span>
+                    </div>
+
+                    {/* Content */}
+                    <div className="w-full md:w-2/5 md:py-8">
+                      <div className="flex items-center gap-4 mb-4">
+                        <p className="text-[10px] tracking-[0.3em] uppercase text-foreground/40">
+                          {journey.durationDays} Days
+                        </p>
+                        {journey.focus && (
+                          <>
+                            <span className="w-1 h-1 rounded-full bg-foreground/20" />
+                            <p className="text-[10px] tracking-[0.3em] uppercase text-foreground/40">
+                              {journey.focus}
+                            </p>
+                          </>
+                        )}
+                      </div>
+
+                      <h2 className="font-serif text-2xl md:text-3xl lg:text-4xl mb-4 group-hover:text-foreground/70 transition-colors">
+                        {journey.title}
+                      </h2>
+
+                      <p className="text-sm text-foreground/60 leading-relaxed mb-6 line-clamp-3">
+                        {journey.description}
                       </p>
-                    )}
+
+                      {journey.destinations && (
+                        <p className="text-[11px] tracking-[0.1em] text-foreground/40 mb-6">
+                          {journey.destinations}
+                        </p>
+                      )}
+
+                      <div className="flex items-center justify-between">
+                        <span className="inline-flex items-center gap-2 text-xs tracking-[0.15em] uppercase">
+                          <span className="border-b border-foreground/30 pb-0.5 group-hover:border-foreground transition-colors">
+                            View journey
+                          </span>
+                          <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+                        </span>
+
+                        {Number(journey.price) > 0 && (
+                          <p className="text-sm text-foreground/50">
+                            From{" "}
+                            <span className="text-foreground">
+                              {format(Number(journey.price))}
+                            </span>
+                            <span className="text-foreground/40 text-xs ml-1">
+                              /person
+                            </span>
+                          </p>
+                        )}
+                      </div>
+                    </div>
                   </div>
-                  <h3 className="font-serif text-xl text-white/90 mb-2 group-hover:text-white transition-colors">
-                    {journey.title}
-                  </h3>
-                  <p className="text-sm text-white/50 leading-relaxed line-clamp-2">
-                    {journey.description}
-                  </p>
                 </Link>
               ))}
             </div>
@@ -272,22 +187,20 @@ export default function JourneysPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 md:py-32 border-t border-white/10 bg-[#0d0d0d]">
-        <div className="container mx-auto px-6 lg:px-16 max-w-3xl text-center">
-          <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl mb-6 text-white/90">
-            Can I customize my Morocco itinerary?
+      <section className="py-24 md:py-32 bg-[#1a1916] text-white">
+        <div className="container mx-auto px-8 md:px-16 lg:px-20 text-center max-w-2xl">
+          <h2 className="font-serif text-3xl md:text-4xl mb-6">
+            Looking for something different?
           </h2>
-          <p className="text-white/70 leading-relaxed mb-4 text-lg">
-            Yes—every journey bends to your interests. These are starting points, not scripts.
-          </p>
-          <p className="text-white/50 leading-relaxed mb-12 text-lg">
-            Add a day in the desert. Skip the city. Stay longer where something pulls you. Tell us what matters—we'll shape it around you.
+          <p className="text-white/50 leading-relaxed mb-10 text-sm">
+            These are starting points, not scripts. Tell us what matters to
+            you—we'll shape a route around it.
           </p>
           <Link
             href="/plan-your-trip"
-            className="inline-block border border-white/20 px-12 py-4 text-xs tracking-[0.2em] uppercase hover:bg-white hover:text-[#0a0a0a] transition-colors"
+            className="inline-block bg-white text-[#1a1916] px-10 py-4 text-xs tracking-[0.15em] uppercase hover:bg-white/90 transition-colors"
           >
-            Begin The Conversation
+            Start the conversation
           </Link>
         </div>
       </section>

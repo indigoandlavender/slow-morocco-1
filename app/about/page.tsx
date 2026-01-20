@@ -4,11 +4,13 @@ import { Metadata } from "next";
 import { getSheetData, convertDriveUrl } from "@/lib/sheets";
 
 export const metadata: Metadata = {
-  title: "About Us",
-  description: "We don't sell tours. We solve a problem. Twenty years in Morocco taught us what guidebooks can't: which doors open, which people know, and why that matters.",
+  title: "About Us | Slow Morocco",
+  description:
+    "We don't sell tours. We solve a problem. Twenty years in Morocco taught us what guidebooks can't.",
   openGraph: {
     title: "About Slow Morocco",
-    description: "We don't sell tours. We solve a problem. Twenty years in Morocco taught us what guidebooks can't.",
+    description:
+      "We don't sell tours. We solve a problem. Twenty years in Morocco taught us what guidebooks can't.",
     url: "https://slowmorocco.com/about",
   },
   alternates: {
@@ -16,18 +18,8 @@ export const metadata: Metadata = {
   },
 };
 
-// Force dynamic rendering
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 export const revalidate = 0;
-
-interface PageSection {
-  page_id: string;
-  page_title: string;
-  section_order: number;
-  section_title: string;
-  section_content: string;
-  section_type: string;
-}
 
 interface TeamMember {
   id: string;
@@ -38,159 +30,190 @@ interface TeamMember {
   image: string;
 }
 
-interface AboutSettings {
-  hero_title: string;
-  hero_subtitle: string;
-  quote: string;
-  quote_subtext: string;
-  founder_quote: string;
-}
-
 async function getAboutContent() {
   try {
-    const pagesData = await getSheetData("Website_Pages");
-    const aboutSections = pagesData
-      .filter((row: any) => row.page_id === "about")
-      .sort((a: any, b: any) => (parseInt(a.section_order) || 0) - (parseInt(b.section_order) || 0));
-
     const settingsData = await getSheetData("Website_Settings");
     const settings: { [key: string]: string } = {};
     settingsData.forEach((row: any) => {
       if (row.Key) settings[row.Key] = row.Value || "";
     });
 
-    // Fetch team members
     const teamData = await getSheetData("Website_Team");
     const team = teamData
       .filter((t: any) => {
         const pub = String(t.Published || "").toLowerCase().trim();
         return pub === "true" || pub === "yes" || pub === "1";
       })
-      .sort((a: any, b: any) => (parseInt(a.Order) || 99) - (parseInt(b.Order) || 99))
+      .sort(
+        (a: any, b: any) =>
+          (parseInt(a.Order) || 99) - (parseInt(b.Order) || 99)
+      )
       .map((t: any) => ({
         id: t.Team_ID || "",
         name: t.Name || "",
         role: t.Role || "",
         quote: t.Quote || "",
         bio: t.Bio || "",
-        image: t.Image_URL ? (t.Image_URL.startsWith('/') ? t.Image_URL : convertDriveUrl(t.Image_URL)) : "",
+        image: t.Image_URL
+          ? t.Image_URL.startsWith("/")
+            ? t.Image_URL
+            : convertDriveUrl(t.Image_URL)
+          : "",
       }));
 
     return {
-      sections: aboutSections as PageSection[],
+      settings,
       team: team as TeamMember[],
-      settings: {
-        hero_title: settings.about_hero_title || "A B O U T",
-        hero_subtitle: settings.about_hero_subtitle || "Travel doesn't expand your mind. Access does.",
-        quote: settings.about_quote || "We'd rather lose a booking than send you somewhere we wouldn't go ourselves.",
-        quote_subtext: settings.about_quote_subtext || "",
-        founder_quote: settings.founder_quote || "I built this because I was tired of cookie cutter itineraries. Morocco is even more stunning if you know what to look for.",
-      },
     };
   } catch (error) {
     console.error("Error fetching about content:", error);
-    return {
-      sections: [],
-      team: [],
-      settings: {
-        hero_title: "A B O U T",
-        hero_subtitle: "Travel doesn't expand your mind. Access does.",
-        quote: "We'd rather lose a booking than send you somewhere we wouldn't go ourselves.",
-        quote_subtext: "",
-        founder_quote: "I built this because I was tired of cookie cutter itineraries. Morocco is even more stunning if you know what to look for.",
-      },
-    };
+    return { settings: {}, team: [] };
   }
 }
 
 export default async function AboutPage() {
-  const { sections, team, settings } = await getAboutContent();
-
-  const introSection = sections.find(s => s.section_type === "intro");
-  const peopleSection = sections.find(s => s.section_type === "people");
-  const accessSection = sections.find(s => s.section_type === "access");
-  const listPositive = sections.find(s => s.section_type === "list_positive");
-  const listNegative = sections.find(s => s.section_type === "list_negative");
-  const ctaSection = sections.find(s => s.section_type === "cta");
+  const { settings, team } = await getAboutContent();
 
   return (
-    <div className="bg-[#0a0a0a] text-white min-h-screen">
-      {/* Hero - Full viewport, centered */}
-      <section className="min-h-screen flex items-center justify-center relative">
-        <div className="absolute inset-0 bg-[url('/images/texture-grain.png')] opacity-[0.03] pointer-events-none" />
-        <div className="container mx-auto px-6 lg:px-16 text-center max-w-4xl relative z-10">
-          <p className="text-xs tracking-[0.4em] uppercase text-white/40 mb-8">
-            Slow Morocco
-          </p>
-          <h1 className="text-5xl md:text-7xl lg:text-8xl tracking-[0.2em] font-light mb-8">
-            {settings.hero_title}
-          </h1>
-          <p className="text-xl md:text-2xl text-white/60 font-serif italic max-w-2xl mx-auto">
-            {settings.hero_subtitle}
-          </p>
+    <div className="bg-background min-h-screen">
+      {/* Hero - Split screen */}
+      <section className="min-h-[80vh] flex flex-col lg:flex-row">
+        {/* Left: Text */}
+        <div className="lg:w-1/2 flex items-center justify-center px-8 md:px-16 lg:px-20 py-32 lg:py-0 order-2 lg:order-1">
+          <div className="max-w-md">
+            <p className="text-[10px] tracking-[0.3em] uppercase text-foreground/40 mb-6">
+              About Us
+            </p>
+            <h1 className="font-serif text-4xl md:text-5xl leading-[1.1] mb-8">
+              We don't sell tours.
+              <br />
+              We solve a problem.
+            </h1>
+            <p className="text-foreground/60 leading-relaxed text-sm">
+              Twenty years in Morocco taught us what guidebooks can't: which
+              doors open, which people know, and why that matters. We're not
+              trying to scale. We're trying to do this well.
+            </p>
+          </div>
         </div>
-        
-        {/* Scroll indicator */}
-        <div className="absolute bottom-12 left-1/2 -translate-x-1/2">
-          <div className="w-[1px] h-16 bg-gradient-to-b from-white/0 via-white/20 to-white/0" />
+
+        {/* Right: Image */}
+        <div className="lg:w-1/2 h-[50vh] lg:h-auto relative order-1 lg:order-2">
+          {settings.about_hero_image ? (
+            <Image
+              src={settings.about_hero_image}
+              alt="Morocco"
+              fill
+              className="object-cover"
+              priority
+            />
+          ) : (
+            <div className="absolute inset-0 bg-[#d4cdc4]" />
+          )}
         </div>
       </section>
 
-      {/* The Problem - Magazine two-column */}
-      {introSection && (
-        <section className="py-24 md:py-32 border-t border-white/10">
-          <div className="container mx-auto px-6 lg:px-16">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 max-w-6xl mx-auto">
-              <div className="lg:col-span-4">
-                <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-4">
-                  The Problem
+      {/* Philosophy Section */}
+      <section className="py-24 md:py-32 border-t border-border">
+        <div className="container mx-auto px-8 md:px-16 lg:px-20">
+          <div className="max-w-3xl mx-auto text-center">
+            <p className="text-[10px] tracking-[0.3em] uppercase text-foreground/40 mb-8">
+              Our Philosophy
+            </p>
+            <blockquote className="font-serif text-2xl md:text-3xl lg:text-4xl leading-[1.3] text-foreground/80 mb-8">
+              "Morocco rewards slowness. The longer you stay in one place, the
+              more layers reveal themselves—the hidden courtyards, the
+              conversations, the rhythms that tourists never see."
+            </blockquote>
+            <p className="text-foreground/40 text-sm">
+              — The Slow Morocco Philosophy
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* What We Do */}
+      <section className="py-20 md:py-28 bg-[#f5f2ed]">
+        <div className="container mx-auto px-8 md:px-16 lg:px-20">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+            <div>
+              <p className="text-[10px] tracking-[0.3em] uppercase text-foreground/40 mb-6">
+                What We Do
+              </p>
+              <h2 className="font-serif text-3xl md:text-4xl mb-6">
+                Private journeys, built around you
+              </h2>
+              <div className="space-y-4 text-sm text-foreground/60 leading-relaxed">
+                <p>
+                  Every journey we create is private and fully customizable. You
+                  travel only with your group, on routes shaped around what
+                  matters to you.
                 </p>
-                <h2 className="font-serif text-3xl md:text-4xl leading-tight text-white/90">
-                  How does slow travel differ from standard tours?
-                </h2>
-                <p className="text-white/60 mt-4 leading-relaxed">
-                  Standard tours extract. Slow travel connects. We believe the difference lies in access—not to places, but to people.
+                <p>
+                  We don't run group tours. We don't have fixed departures. We
+                  build each route from scratch, drawing on twenty years of
+                  relationships with guides, hosts, and craftspeople across
+                  Morocco.
                 </p>
-              </div>
-              <div className="lg:col-span-8 space-y-6 text-white/60 leading-relaxed text-lg">
-                {introSection.section_content.split('\n\n').map((para, i) => (
-                  <p key={i}>{para}</p>
-                ))}
+                <p>
+                  The result: access to places and people that most travelers
+                  never find.
+                </p>
               </div>
             </div>
+            <div className="aspect-[4/3] relative bg-[#d4cdc4]">
+              {settings.about_image_2 ? (
+                <Image
+                  src={settings.about_image_2}
+                  alt="Morocco journey"
+                  fill
+                  className="object-cover"
+                />
+              ) : (
+                <div className="absolute inset-0 bg-[#c4bdb4]" />
+              )}
+            </div>
           </div>
-        </section>
-      )}
-
-      {/* Pull Quote - Full width dark */}
-      <section className="py-20 md:py-28 bg-[#0d0d0d]">
-        <div className="container mx-auto px-6 lg:px-16 max-w-4xl text-center">
-          <p className="font-serif text-3xl md:text-4xl lg:text-5xl leading-tight text-white/80 italic">
-            "The wisest people we've met never left their villages."
-          </p>
         </div>
       </section>
 
-      {/* The People Who Stayed - Staggered layout */}
-      {peopleSection && (
-        <section className="py-24 md:py-32 border-t border-white/10">
-          <div className="container mx-auto px-6 lg:px-16 max-w-5xl">
-            <h2 className="font-serif text-3xl md:text-4xl leading-tight text-white/90 text-center mb-4">
-              Who are your local guides and partners?
-            </h2>
-            <p className="text-white/60 leading-relaxed text-center max-w-2xl mx-auto mb-16">
-              Twenty years of networks. The people we introduce you to don't advertise—they don't need to.
-            </p>
-            
-            <div className="space-y-16">
-              {peopleSection.section_content.split('\n\n').map((para, i) => (
-                <div 
-                  key={i} 
-                  className={`max-w-2xl ${i % 2 === 0 ? 'mr-auto' : 'ml-auto text-right'}`}
-                >
-                  <p className={`text-lg md:text-xl leading-relaxed ${i === 0 ? 'font-serif text-2xl md:text-3xl text-white/90' : 'text-white/60'}`}>
-                    {para}
+      {/* Team Section */}
+      {team.length > 0 && (
+        <section className="py-20 md:py-28">
+          <div className="container mx-auto px-8 md:px-16 lg:px-20">
+            <div className="text-center mb-16">
+              <p className="text-[10px] tracking-[0.3em] uppercase text-foreground/40 mb-4">
+                The Team
+              </p>
+              <h2 className="font-serif text-3xl md:text-4xl">
+                The people behind the journeys
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+              {team.map((member) => (
+                <div key={member.id} className="text-center">
+                  <div className="aspect-square relative mb-6 bg-[#d4cdc4] overflow-hidden">
+                    {member.image ? (
+                      <Image
+                        src={member.image}
+                        alt={member.name}
+                        fill
+                        className="object-cover"
+                      />
+                    ) : (
+                      <div className="absolute inset-0 bg-[#c4bdb4]" />
+                    )}
+                  </div>
+                  <h3 className="font-serif text-xl mb-1">{member.name}</h3>
+                  <p className="text-[11px] tracking-[0.15em] uppercase text-foreground/40 mb-4">
+                    {member.role}
                   </p>
+                  {member.quote && (
+                    <p className="text-sm text-foreground/60 italic leading-relaxed">
+                      "{member.quote}"
+                    </p>
+                  )}
                 </div>
               ))}
             </div>
@@ -198,172 +221,61 @@ export default async function AboutPage() {
         </section>
       )}
 
-      {/* The Access - Dark inset */}
-      {accessSection && (
-        <section className="py-24 md:py-32 bg-[#0d0d0d]">
-          <div className="container mx-auto px-6 lg:px-16">
-            <div className="max-w-4xl mx-auto">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16">
-                <div>
-                  <h2 className="font-serif text-3xl md:text-4xl leading-tight text-white/90 mb-4">
-                    What access do you provide that others don't?
-                  </h2>
-                  <p className="text-white/60 leading-relaxed">
-                    Some doors don't open for tourists. Our network unlocks experiences that aren't for sale elsewhere.
-                  </p>
-                </div>
-                <div className="space-y-6 text-white/60 leading-relaxed">
-                  {accessSection.section_content.split('\n\n').slice(1).map((para, i) => (
-                    <p key={i}>{para}</p>
-                  ))}
-                </div>
-              </div>
+      {/* Values */}
+      <section className="py-20 md:py-28 bg-[#1a1916] text-white">
+        <div className="container mx-auto px-8 md:px-16 lg:px-20">
+          <div className="text-center mb-16">
+            <p className="text-[10px] tracking-[0.3em] uppercase text-white/40 mb-4">
+              Our Values
+            </p>
+            <h2 className="font-serif text-3xl md:text-4xl">
+              What we believe
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-5xl mx-auto">
+            <div className="text-center">
+              <h3 className="font-serif text-xl mb-4">Depth over breadth</h3>
+              <p className="text-sm text-white/50 leading-relaxed">
+                Better to know one place well than to check boxes across ten.
+                We'd rather you leave Morocco understanding something than just
+                having seen it.
+              </p>
+            </div>
+            <div className="text-center">
+              <h3 className="font-serif text-xl mb-4">People over places</h3>
+              <p className="text-sm text-white/50 leading-relaxed">
+                The most memorable moments come from connections—with guides who
+                share their knowledge, artisans who share their craft, hosts who
+                share their homes.
+              </p>
+            </div>
+            <div className="text-center">
+              <h3 className="font-serif text-xl mb-4">Slowness over speed</h3>
+              <p className="text-sm text-white/50 leading-relaxed">
+                Morocco rewards patience. The longer you stay in one place, the
+                more it reveals. We build routes that give you time to discover.
+              </p>
             </div>
           </div>
-        </section>
-      )}
-
-      {/* Quote Banner */}
-      {settings.quote && (
-        <section className="py-16 md:py-20 border-y border-white/10 bg-[#0a0a0a]">
-          <div className="container mx-auto px-6 lg:px-16 max-w-4xl">
-            <div className="flex items-start gap-6">
-              <span className="font-serif text-6xl md:text-8xl text-white/20 leading-none">"</span>
-              <div>
-                <p className="font-serif text-xl md:text-2xl leading-relaxed text-white/80">
-                  {settings.quote}
-                </p>
-                {settings.quote_subtext && (
-                  <p className="text-white/40 text-sm mt-4">
-                    {settings.quote_subtext}
-                  </p>
-                )}
-              </div>
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* Who This Is For - Two columns with contrast */}
-      {(listPositive || listNegative) && (
-        <section className="border-b border-white/10">
-          <div className="container mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-2">
-              {/* Positive - Dark */}
-              {listPositive && (
-                <div className="py-20 md:py-28 px-6 lg:px-16 bg-[#0a0a0a]">
-                  <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-8">
-                    {listPositive.section_title}
-                  </p>
-                  <ul className="space-y-4">
-                    {listPositive.section_content.split('|').map((item, i) => (
-                      <li key={i} className="text-white/70 text-lg flex items-start gap-3">
-                        <span className="text-white/30 mt-1">→</span>
-                        <span>{item.trim()}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-              
-              {/* Negative - Darker */}
-              {listNegative && (
-                <div className="py-20 md:py-28 px-6 lg:px-16 bg-[#050505]">
-                  <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-8">
-                    {listNegative.section_title}
-                  </p>
-                  <ul className="space-y-4">
-                    {listNegative.section_content.split('|').map((item, i) => (
-                      <li key={i} className="text-white/40 text-lg flex items-start gap-3">
-                        <span className="text-white/20 mt-1">×</span>
-                        <span>{item.trim()}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* Founder Quote */}
-      <section className="py-24 md:py-32 bg-[#f5f0e8]">
-        <div className="container mx-auto px-6 lg:px-16 max-w-3xl text-center">
-          <p className="text-xs tracking-[0.3em] uppercase text-[#1a1a1a]/40 mb-8">
-            From the Founder
-          </p>
-          <blockquote className="text-2xl md:text-3xl lg:text-4xl font-serif italic text-[#1a1a1a]/80 leading-relaxed mb-8">
-            "{settings.founder_quote}"
-          </blockquote>
-          <p className="font-serif text-lg text-[#1a1a1a]/60">
-            — Jacqueline
-          </p>
-          <p className="text-sm text-[#1a1a1a]/40">
-            Founder, Slow Morocco
-          </p>
         </div>
       </section>
 
-      {/* Your Guides */}
-      {team.length > 0 && (
-        <section className="py-24 md:py-32 bg-[#f5f0e8]">
-          <div className="container mx-auto px-6 lg:px-16">
-            <div className="max-w-4xl mx-auto">
-              <div className="text-center mb-16">
-                <p className="text-xs tracking-[0.3em] uppercase text-[#1a1a1a]/40 mb-4">
-                  Your Guides
-                </p>
-                <h2 className="font-serif text-3xl md:text-4xl text-[#1a1a1a]/90">
-                  The people who'll be with you
-                </h2>
-              </div>
-
-              <div className="grid md:grid-cols-3 gap-12">
-                {team.map((member) => (
-                  <div key={member.id} className="text-center">
-                    <div className="w-32 h-32 mx-auto mb-6 rounded-full bg-[#1a1a1a]/5 flex items-center justify-center overflow-hidden">
-                      {member.image ? (
-                        <Image
-                          src={member.image}
-                          alt={member.name}
-                          width={128}
-                          height={128}
-                          className="object-cover w-full h-full"
-                        />
-                      ) : (
-                        <span className="text-3xl text-[#1a1a1a]/20 font-serif">{member.name[0]}</span>
-                      )}
-                    </div>
-                    <h3 className="font-serif text-xl text-[#1a1a1a]/90 mb-1">{member.name}</h3>
-                    <p className="text-xs tracking-[0.15em] uppercase text-[#1a1a1a]/40 mb-4">{member.role}</p>
-                    <p className="text-sm text-[#1a1a1a]/50 italic">"{member.quote}"</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* CTA Section */}
-      <section className="py-24 md:py-32 bg-[#0a0a0a]">
-        <div className="container mx-auto px-6 lg:px-16 max-w-3xl text-center">
-          {ctaSection && (
-            <>
-              <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl mb-8 text-white/90">
-                {ctaSection.section_content.split('\n\n')[0]}
-              </h2>
-              <p className="text-white/50 leading-relaxed mb-12 text-lg">
-                {ctaSection.section_content.split('\n\n')[1]}
-              </p>
-            </>
-          )}
+      {/* CTA */}
+      <section className="py-24 md:py-32 border-t border-border">
+        <div className="container mx-auto px-8 md:px-16 lg:px-20 text-center">
+          <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl mb-6">
+            Ready to start the conversation?
+          </h2>
+          <p className="text-foreground/60 max-w-lg mx-auto mb-10 text-sm leading-relaxed">
+            Tell us what you're hoping to find in Morocco. We'll build a route
+            around it.
+          </p>
           <Link
             href="/plan-your-trip"
-            className="inline-block border border-white/20 px-12 py-4 text-xs tracking-[0.2em] uppercase hover:bg-white hover:text-[#0a0a0a] transition-colors"
+            className="inline-block border border-foreground px-10 py-4 text-xs tracking-[0.15em] uppercase hover:bg-foreground hover:text-background transition-colors"
           >
-            Begin The Conversation
+            Plan your trip
           </Link>
         </div>
       </section>
