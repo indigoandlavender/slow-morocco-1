@@ -225,7 +225,7 @@ export default async function AboutPage() {
       <section className="py-20 md:py-28 bg-[#1a1916] text-white">
         <div className="container mx-auto px-8 md:px-16 lg:px-20">
           <div className="text-center mb-16">
-            <p className="text-[10px] tracking-[0.3em] uppercase text-white/40 mb-4">
+            <p className="text-[10px] tracking-[0.3em] uppercase text-foreground/40 mb-4">
               Our Values
             </p>
             <h2 className="font-serif text-3xl md:text-4xl">
@@ -236,7 +236,7 @@ export default async function AboutPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-5xl mx-auto">
             <div className="text-center">
               <h3 className="font-serif text-xl mb-4">Depth over breadth</h3>
-              <p className="text-sm text-white/50 leading-relaxed">
+              <p className="text-sm text-foreground/50 leading-relaxed">
                 Better to know one place well than to check boxes across ten.
                 We'd rather you leave Morocco understanding something than just
                 having seen it.
@@ -244,7 +244,7 @@ export default async function AboutPage() {
             </div>
             <div className="text-center">
               <h3 className="font-serif text-xl mb-4">People over places</h3>
-              <p className="text-sm text-white/50 leading-relaxed">
+              <p className="text-sm text-foreground/50 leading-relaxed">
                 The most memorable moments come from connections—with guides who
                 share their knowledge, artisans who share their craft, hosts who
                 share their homes.
@@ -252,7 +252,7 @@ export default async function AboutPage() {
             </div>
             <div className="text-center">
               <h3 className="font-serif text-xl mb-4">Slowness over speed</h3>
-              <p className="text-sm text-white/50 leading-relaxed">
+              <p className="text-sm text-foreground/50 leading-relaxed">
                 Morocco rewards patience. The longer you stay in one place, the
                 more it reveals. We build routes that give you time to discover.
               </p>

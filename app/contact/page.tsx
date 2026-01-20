@@ -23,7 +23,7 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="bg-[#0a0a0a] text-white min-h-screen">
+    <div className="bg-background text-foreground min-h-screen">
       {/* Contact Form Section */}
       <section className="pt-32 pb-24 md:pt-40 md:pb-32">
         <div className="container mx-auto px-6 lg:px-16 max-w-6xl">
@@ -31,10 +31,10 @@ export default function ContactPage() {
             
             {/* Left - Title */}
             <div>
-              <p className="text-xs tracking-[0.4em] uppercase text-white/40 mb-6">
+              <p className="text-xs tracking-[0.4em] uppercase text-foreground/40 mb-6">
                 Get in Touch
               </p>
-              <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl text-white/90 leading-[1.1]">
+              <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl text-foreground/90 leading-[1.1]">
                 Send us
                 <br />
                 a note.
@@ -45,8 +45,8 @@ export default function ContactPage() {
             <div>
               {submitted ? (
                 <div className="py-12">
-                  <h3 className="font-serif text-2xl text-white/90 mb-4">Thank you.</h3>
-                  <p className="text-white/50 leading-relaxed">
+                  <h3 className="font-serif text-2xl text-foreground/90 mb-4">Thank you.</h3>
+                  <p className="text-foreground/50 leading-relaxed">
                     We've received your message and will respond within 24 hours.
                   </p>
                 </div>
@@ -55,7 +55,7 @@ export default function ContactPage() {
                   {/* Name Row */}
                   <div className="grid grid-cols-2 gap-6">
                     <div>
-                      <label className="block text-xs tracking-[0.2em] uppercase text-white/40 mb-4">
+                      <label className="block text-xs tracking-[0.2em] uppercase text-foreground/40 mb-4">
                         First Name
                       </label>
                       <input
@@ -63,11 +63,11 @@ export default function ContactPage() {
                         value={firstName}
                         onChange={(e) => setFirstName(e.target.value)}
                         required
-                        className="w-full border-b border-white/20 bg-transparent py-3 text-lg text-white focus:outline-none focus:border-white/60 transition-colors"
+                        className="w-full border-b border-foreground/20 bg-transparent py-3 text-lg text-foreground focus:outline-none focus:border-foreground/60 transition-colors"
                       />
                     </div>
                     <div>
-                      <label className="block text-xs tracking-[0.2em] uppercase text-white/40 mb-4">
+                      <label className="block text-xs tracking-[0.2em] uppercase text-foreground/40 mb-4">
                         Last Name
                       </label>
                       <input
@@ -75,27 +75,27 @@ export default function ContactPage() {
                         value={lastName}
                         onChange={(e) => setLastName(e.target.value)}
                         required
-                        className="w-full border-b border-white/20 bg-transparent py-3 text-lg text-white focus:outline-none focus:border-white/60 transition-colors"
+                        className="w-full border-b border-foreground/20 bg-transparent py-3 text-lg text-foreground focus:outline-none focus:border-foreground/60 transition-colors"
                       />
                     </div>
                   </div>
 
                   {/* Phone */}
                   <div>
-                    <label className="block text-xs tracking-[0.2em] uppercase text-white/40 mb-4">
+                    <label className="block text-xs tracking-[0.2em] uppercase text-foreground/40 mb-4">
                       Phone Number
                     </label>
                     <input
                       type="tel"
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
-                      className="w-full border-b border-white/20 bg-transparent py-3 text-lg text-white focus:outline-none focus:border-white/60 transition-colors"
+                      className="w-full border-b border-foreground/20 bg-transparent py-3 text-lg text-foreground focus:outline-none focus:border-foreground/60 transition-colors"
                     />
                   </div>
 
                   {/* Email */}
                   <div>
-                    <label className="block text-xs tracking-[0.2em] uppercase text-white/40 mb-4">
+                    <label className="block text-xs tracking-[0.2em] uppercase text-foreground/40 mb-4">
                       Email Address
                     </label>
                     <input
@@ -103,20 +103,20 @@ export default function ContactPage() {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       required
-                      className="w-full border-b border-white/20 bg-transparent py-3 text-lg text-white focus:outline-none focus:border-white/60 transition-colors"
+                      className="w-full border-b border-foreground/20 bg-transparent py-3 text-lg text-foreground focus:outline-none focus:border-foreground/60 transition-colors"
                     />
                   </div>
 
                   {/* Message */}
                   <div>
-                    <label className="block text-xs tracking-[0.2em] uppercase text-white/40 mb-4">
+                    <label className="block text-xs tracking-[0.2em] uppercase text-foreground/40 mb-4">
                       Message (Optional)
                     </label>
                     <textarea
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
                       rows={4}
-                      className="w-full border-b border-white/20 bg-transparent py-3 text-lg text-white focus:outline-none focus:border-white/60 transition-colors resize-none"
+                      className="w-full border-b border-foreground/20 bg-transparent py-3 text-lg text-foreground focus:outline-none focus:border-foreground/60 transition-colors resize-none"
                     />
                   </div>
 
@@ -125,7 +125,7 @@ export default function ContactPage() {
                     <button
                       type="submit"
                       disabled={submitting}
-                      className="inline-block border border-white/20 px-10 py-4 text-xs tracking-[0.2em] uppercase hover:bg-white hover:text-[#0a0a0a] transition-colors disabled:opacity-50"
+                      className="inline-block border border-foreground/20 px-10 py-4 text-xs tracking-[0.2em] uppercase hover:bg-white hover:text-[#0a0a0a] transition-colors disabled:opacity-50"
                     >
                       {submitting ? "Sending..." : "Submit"}
                     </button>

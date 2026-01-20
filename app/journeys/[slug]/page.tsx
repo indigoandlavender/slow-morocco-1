@@ -254,7 +254,7 @@ export default function JourneyDetailPage() {
           {/* Title Overlay */}
           <div className="absolute bottom-0 left-0 right-0 p-8 md:p-16">
             <div className="container mx-auto max-w-4xl">
-              <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-4">
+              <p className="text-xs tracking-[0.3em] uppercase text-foreground/40 mb-4">
                 Epic Journey
               </p>
               <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl leading-tight mb-4">
@@ -270,7 +270,7 @@ export default function JourneyDetailPage() {
             {/* Back Link */}
             <Link
               href="/journeys"
-              className="inline-flex items-center gap-2 text-xs tracking-[0.15em] uppercase text-white/40 hover:text-white transition-colors mb-16"
+              className="inline-flex items-center gap-2 text-xs tracking-[0.15em] uppercase text-foreground/40 hover:text-foreground transition-colors mb-16"
             >
               <ArrowLeft className="w-4 h-4" />
               Back to All Journeys
@@ -278,7 +278,7 @@ export default function JourneyDetailPage() {
 
             {/* The Promise */}
             <div className="mb-20">
-              <p className="text-xl md:text-2xl text-white/80 leading-relaxed font-display italic">
+              <p className="text-xl md:text-2xl text-foreground/80 leading-relaxed font-display italic">
                 {journey.description}
               </p>
             </div>
@@ -286,23 +286,23 @@ export default function JourneyDetailPage() {
             {/* The Story */}
             {journey.arcDescription && (
               <div className="mb-20">
-                <p className="text-white/60 leading-relaxed text-lg whitespace-pre-line">
+                <p className="text-foreground/60 leading-relaxed text-lg whitespace-pre-line">
                   {journey.arcDescription}
                 </p>
               </div>
             )}
 
             {/* The Mystery */}
-            <div className="border-t border-white/10 pt-16 mb-16">
+            <div className="border-t border-foreground/10 pt-16 mb-16">
               <h2 className="text-xs tracking-[0.3em] uppercase text-[#8B2635] mb-8">
                 Sacred Knowledge
               </h2>
-              <p className="text-white/60 leading-relaxed">
+              <p className="text-foreground/60 leading-relaxed">
                 This is not a tour. This is transmission — access to knowledge held by 
                 a handful of people alive today. Knowledge that took lifetimes to acquire 
                 and cannot be found in any book, on any website, or through any other operator.
               </p>
-              <p className="text-white/60 leading-relaxed mt-4">
+              <p className="text-foreground/60 leading-relaxed mt-4">
                 We spent fifteen years earning the trust that makes these journeys possible — 
                 not as visitors, but as people who stayed. We do not share itineraries publicly. 
                 We do not reveal our sources. We protect what is rare because that is how it stays rare.
@@ -310,26 +310,26 @@ export default function JourneyDetailPage() {
             </div>
 
             {/* Price */}
-            <div className="border-t border-white/10 pt-16 mb-16">
+            <div className="border-t border-foreground/10 pt-16 mb-16">
               <div className="flex flex-col md:flex-row md:items-baseline gap-4 md:gap-8 mb-6">
                 <span className="font-serif text-4xl md:text-5xl text-white">
                   {journey.epicPrice ? `€${journey.epicPrice.toLocaleString()}` : 'Price on request'}
                 </span>
-                <span className="text-sm text-white/40">
+                <span className="text-sm text-foreground/40">
                   Private journey for two guests
                 </span>
               </div>
-              <p className="text-white/40 text-sm">
+              <p className="text-foreground/40 text-sm">
                 Additional guests considered on a case-by-case basis.
               </p>
             </div>
 
             {/* The Process */}
-            <div className="border-t border-white/10 pt-16 mb-20">
-              <h2 className="text-xs tracking-[0.3em] uppercase text-white/40 mb-8">
+            <div className="border-t border-foreground/10 pt-16 mb-20">
+              <h2 className="text-xs tracking-[0.3em] uppercase text-foreground/40 mb-8">
                 How This Works
               </h2>
-              <div className="space-y-6 text-white/60 leading-relaxed">
+              <div className="space-y-6 text-foreground/60 leading-relaxed">
                 <p>
                   <strong className="text-white">1. You inquire.</strong> Tell us who you are, 
                   why this journey calls to you, and when you'd like to travel.
@@ -348,14 +348,14 @@ export default function JourneyDetailPage() {
                   specifically for your dates, interests, and pace.
                 </p>
               </div>
-              <p className="text-white/40 text-sm mt-8 italic">
+              <p className="text-foreground/40 text-sm mt-8 italic">
                 The deposit is applied to your final balance. It is non-refundable because 
                 the itinerary itself is the value — once shared, it cannot be unshared.
               </p>
             </div>
 
             {/* Request Form */}
-            <div className="bg-white/5 p-8 md:p-12">
+            <div className="bg-foreground/5 p-8 md:p-12">
               <h2 className="font-serif text-2xl md:text-3xl mb-8">
                 Request This Journey
               </h2>
@@ -370,43 +370,43 @@ export default function JourneyDetailPage() {
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-xs tracking-[0.15em] uppercase text-white/40 mb-2">
+                    <label className="block text-xs tracking-[0.15em] uppercase text-foreground/40 mb-2">
                       Name
                     </label>
                     <input
                       type="text"
                       name="name"
                       required
-                      className="w-full bg-transparent border-b border-white/20 py-3 text-white focus:border-white focus:outline-none transition-colors"
+                      className="w-full bg-transparent border-b border-foreground/20 py-3 text-white focus:border-white focus:outline-none transition-colors"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs tracking-[0.15em] uppercase text-white/40 mb-2">
+                    <label className="block text-xs tracking-[0.15em] uppercase text-foreground/40 mb-2">
                       Email
                     </label>
                     <input
                       type="email"
                       name="email"
                       required
-                      className="w-full bg-transparent border-b border-white/20 py-3 text-white focus:border-white focus:outline-none transition-colors"
+                      className="w-full bg-transparent border-b border-foreground/20 py-3 text-white focus:border-white focus:outline-none transition-colors"
                     />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-xs tracking-[0.15em] uppercase text-white/40 mb-2">
+                    <label className="block text-xs tracking-[0.15em] uppercase text-foreground/40 mb-2">
                       Preferred Dates
                     </label>
                     <input
                       type="text"
                       name="dates"
                       placeholder="e.g., March 2025"
-                      className="w-full bg-transparent border-b border-white/20 py-3 text-white placeholder:text-white/30 focus:border-white focus:outline-none transition-colors"
+                      className="w-full bg-transparent border-b border-foreground/20 py-3 text-white placeholder:text-foreground/30 focus:border-white focus:outline-none transition-colors"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs tracking-[0.15em] uppercase text-white/40 mb-2">
+                    <label className="block text-xs tracking-[0.15em] uppercase text-foreground/40 mb-2">
                       Number of Guests
                     </label>
                     <input
@@ -415,20 +415,20 @@ export default function JourneyDetailPage() {
                       min="1"
                       max="8"
                       placeholder="2"
-                      className="w-full bg-transparent border-b border-white/20 py-3 text-white placeholder:text-white/30 focus:border-white focus:outline-none transition-colors"
+                      className="w-full bg-transparent border-b border-foreground/20 py-3 text-white placeholder:text-foreground/30 focus:border-white focus:outline-none transition-colors"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-xs tracking-[0.15em] uppercase text-white/40 mb-2">
+                  <label className="block text-xs tracking-[0.15em] uppercase text-foreground/40 mb-2">
                     Tell us about yourself
                   </label>
                   <textarea
                     name="message"
                     rows={4}
                     placeholder="What draws you to this journey? Any relevant experience?"
-                    className="w-full bg-transparent border-b border-white/20 py-3 text-white placeholder:text-white/30 focus:border-white focus:outline-none transition-colors resize-none"
+                    className="w-full bg-transparent border-b border-foreground/20 py-3 text-white placeholder:text-foreground/30 focus:border-white focus:outline-none transition-colors resize-none"
                   />
                 </div>
 

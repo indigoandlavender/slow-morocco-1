@@ -10,11 +10,11 @@ export const metadata: Metadata = {
 
 export default function IntellectualPropertyPage() {
   return (
-    <main className="min-h-screen bg-[#0a0a0a] text-white pt-32 pb-24">
+    <main className="min-h-screen bg-background text-foreground pt-32 pb-24">
       <div className="container mx-auto px-6 lg:px-16 max-w-3xl">
         <h1 className="font-serif text-4xl md:text-5xl mb-8">Intellectual Property</h1>
         
-        <div className="prose prose-lg max-w-none text-white/50 space-y-8">
+        <div className="prose prose-lg max-w-none text-foreground/50 space-y-8">
           <p className="text-lg leading-relaxed">
             Last updated: December 2025
           </p>
@@ -122,7 +122,7 @@ export default function IntellectualPropertyPage() {
             </p>
           </section>
 
-          <section className="space-y-4 pt-8 border-t border-white/10">
+          <section className="space-y-4 pt-8 border-t border-foreground/10">
             <p className="text-sm">
               For any questions regarding intellectual property or to request permission to use 
               our content, please contact us at{" "}

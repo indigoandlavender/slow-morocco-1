@@ -7,10 +7,10 @@ export const metadata: Metadata = {
 
 export default function HealthSafetyPage() {
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white pt-32 pb-24">
+    <div className="min-h-screen bg-background text-foreground pt-32 pb-24">
       <div className="container mx-auto px-6 lg:px-16 max-w-3xl">
         <h1 className="font-serif text-4xl md:text-5xl text-white/90 mb-8">Health & Safety</h1>
-        <p className="text-white/50 mb-12 text-lg">
+        <p className="text-foreground/50 mb-12 text-lg">
           Morocco is a safe destination for travelers. Here's what you need to know 
           to stay healthy and safe during your journey.
         </p>
@@ -18,7 +18,7 @@ export default function HealthSafetyPage() {
         <div className="space-y-12">
           <section>
             <h2 className="font-serif text-2xl text-white/90 mb-4">Before You Travel</h2>
-            <ul className="space-y-3 text-white/50">
+            <ul className="space-y-3 text-foreground/50">
               <li>• Consult your doctor 4-6 weeks before travel for health advice</li>
               <li>• Ensure routine vaccinations are up to date</li>
               <li>• Consider Hepatitis A and Typhoid vaccinations</li>
@@ -29,11 +29,11 @@ export default function HealthSafetyPage() {
 
           <section>
             <h2 className="font-serif text-2xl text-white/90 mb-4">Food & Water</h2>
-            <p className="text-white/50 leading-relaxed mb-4">
+            <p className="text-foreground/50 leading-relaxed mb-4">
               Moroccan cuisine is delicious and generally safe when eaten at reputable 
               establishments. Our recommendations:
             </p>
-            <ul className="space-y-3 text-white/50">
+            <ul className="space-y-3 text-foreground/50">
               <li>• Drink bottled water (widely available)</li>
               <li>• Avoid ice in drinks unless at high-end establishments</li>
               <li>• Eat freshly prepared, hot food</li>
@@ -44,7 +44,7 @@ export default function HealthSafetyPage() {
 
           <section>
             <h2 className="font-serif text-2xl text-white/90 mb-4">Sun & Heat</h2>
-            <p className="text-white/50 leading-relaxed">
+            <p className="text-foreground/50 leading-relaxed">
               Morocco can be hot, especially in summer and in desert regions. Stay 
               hydrated, use sunscreen (SPF 30+), wear a hat, and take breaks in the 
               shade. Our itineraries are designed to avoid the hottest parts of the 
@@ -54,10 +54,10 @@ export default function HealthSafetyPage() {
 
           <section>
             <h2 className="font-serif text-2xl text-white/90 mb-4">Personal Safety</h2>
-            <p className="text-white/50 leading-relaxed mb-4">
+            <p className="text-foreground/50 leading-relaxed mb-4">
               Morocco is welcoming to tourists. Common sense precautions apply:
             </p>
-            <ul className="space-y-3 text-white/50">
+            <ul className="space-y-3 text-foreground/50">
               <li>• Keep valuables secure and out of sight</li>
               <li>• Use hotel safes for passports and extra cash</li>
               <li>• Be aware of your surroundings in crowded areas</li>
@@ -67,7 +67,7 @@ export default function HealthSafetyPage() {
 
           <section>
             <h2 className="font-serif text-2xl text-white/90 mb-4">For Women Travelers</h2>
-            <p className="text-white/50 leading-relaxed">
+            <p className="text-foreground/50 leading-relaxed">
               Women travel safely throughout Morocco. Modest dress is appreciated, 
               especially in traditional areas and religious sites—covering shoulders 
               and knees is recommended. Our female guests consistently report feeling 
@@ -77,7 +77,7 @@ export default function HealthSafetyPage() {
 
           <section>
             <h2 className="font-serif text-2xl text-white/90 mb-4">Medical Facilities</h2>
-            <p className="text-white/50 leading-relaxed">
+            <p className="text-foreground/50 leading-relaxed">
               Major cities like Marrakech, Fes, and Casablanca have good private 
               hospitals and clinics. Pharmacies are plentiful and pharmacists are 
               often multilingual. Our 24/7 support means you'll always have help 
@@ -90,19 +90,19 @@ export default function HealthSafetyPage() {
             <div className="bg-sand p-6">
               <div className="grid grid-cols-2 gap-4 text-sm">
                 <div>
-                  <p className="text-white/50">Police</p>
+                  <p className="text-foreground/50">Police</p>
                   <p className="font-medium">19</p>
                 </div>
                 <div>
-                  <p className="text-white/50">Ambulance</p>
+                  <p className="text-foreground/50">Ambulance</p>
                   <p className="font-medium">15</p>
                 </div>
                 <div>
-                  <p className="text-white/50">Fire</p>
+                  <p className="text-foreground/50">Fire</p>
                   <p className="font-medium">15</p>
                 </div>
                 <div>
-                  <p className="text-white/50">Tourist Police (Marrakech)</p>
+                  <p className="text-foreground/50">Tourist Police (Marrakech)</p>
                   <p className="font-medium">+212 524 38 46 01</p>
                 </div>
               </div>
@@ -111,7 +111,7 @@ export default function HealthSafetyPage() {
 
           <section>
             <h2 className="font-serif text-2xl text-white/90 mb-4">Our Commitment</h2>
-            <p className="text-white/50 leading-relaxed">
+            <p className="text-foreground/50 leading-relaxed">
               Your safety is our priority. Our vehicles are well-maintained, our drivers 
               are experienced professionals, and our guides are trained in first aid. 
               We monitor conditions throughout Morocco and will adjust itineraries if 

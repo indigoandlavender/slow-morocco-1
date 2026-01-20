@@ -266,30 +266,30 @@ export default function GentleLandingPage() {
             <h2 className="text-3xl md:text-4xl font-serif mb-6">
               The difference is in the design
             </h2>
-            <p className="text-white/60 text-lg leading-relaxed">
+            <p className="text-foreground/60 text-lg leading-relaxed">
               Anyone can say "we'll accommodate your needs." We did something different: we sat down and asked, "What would travel look like if we designed it for comfort from the very beginning?"
             </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            <div className="text-center p-8 border border-white/10">
+            <div className="text-center p-8 border border-foreground/10">
               <div className="text-4xl font-serif text-white/20 mb-4">01</div>
               <h3 className="text-lg mb-3">Pace, not speed</h3>
-              <p className="text-white/50 text-sm leading-relaxed">
+              <p className="text-foreground/50 text-sm leading-relaxed">
                 Afternoons are free. Mornings are gentle. The itinerary serves you — you don't serve it.
               </p>
             </div>
-            <div className="text-center p-8 border border-white/10">
+            <div className="text-center p-8 border border-foreground/10">
               <div className="text-4xl font-serif text-white/20 mb-4">02</div>
               <h3 className="text-lg mb-3">Comfort, not compromise</h3>
-              <p className="text-white/50 text-sm leading-relaxed">
+              <p className="text-foreground/50 text-sm leading-relaxed">
                 Ground floors. Lifts. Walk-in showers. We know which places actually work — because we've tested them.
               </p>
             </div>
-            <div className="text-center p-8 border border-white/10">
+            <div className="text-center p-8 border border-foreground/10">
               <div className="text-4xl font-serif text-white/20 mb-4">03</div>
               <h3 className="text-lg mb-3">Care, not checkbox</h3>
-              <p className="text-white/50 text-sm leading-relaxed">
+              <p className="text-foreground/50 text-sm leading-relaxed">
                 A driver who understands. A helper if you want one. Medical care always within reach. Real support, not a call center.
               </p>
             </div>
@@ -333,13 +333,13 @@ export default function GentleLandingPage() {
           </div>
 
           <div className="mt-20 py-20 bg-[#1a1a1a] -mx-6 px-6 text-center">
-            <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-4">
+            <p className="text-xs tracking-[0.3em] uppercase text-foreground/40 mb-4">
               Not seeing what you want?
             </p>
             <h3 className="text-3xl md:text-4xl lg:text-5xl font-serif italic text-white mb-6">
               Every journey bends.
             </h3>
-            <p className="text-white/50 max-w-xl mx-auto mb-10 leading-relaxed">
+            <p className="text-foreground/50 max-w-xl mx-auto mb-10 leading-relaxed">
               These itineraries are starting points, not scripts. Add a day here, skip a city there. Tell us what matters — we'll shape it around you.
             </p>
             <a
@@ -418,7 +418,7 @@ export default function GentleLandingPage() {
       <section className="py-24 bg-[#1a1a1a] text-white">
         <div className="container mx-auto px-6">
           <div className="max-w-2xl mx-auto text-center mb-16">
-            <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-4">
+            <p className="text-xs tracking-[0.3em] uppercase text-foreground/40 mb-4">
               Getting Started
             </p>
             <h2 className="text-3xl md:text-4xl font-serif mb-6">
@@ -430,28 +430,28 @@ export default function GentleLandingPage() {
             <div className="text-center">
               <div className="text-5xl font-serif text-white/10 mb-4">1</div>
               <h3 className="text-lg mb-2">We talk</h3>
-              <p className="text-white/50 text-sm">
+              <p className="text-foreground/50 text-sm">
                 WhatsApp, email, or phone. Tell us about you, who you're travelling with, what matters.
               </p>
             </div>
             <div className="text-center">
               <div className="text-5xl font-serif text-white/10 mb-4">2</div>
               <h3 className="text-lg mb-2">We design</h3>
-              <p className="text-white/50 text-sm">
+              <p className="text-foreground/50 text-sm">
                 A journey shaped around your pace, your interests, your needs. Not a template.
               </p>
             </div>
             <div className="text-center">
               <div className="text-5xl font-serif text-white/10 mb-4">3</div>
               <h3 className="text-lg mb-2">You decide</h3>
-              <p className="text-white/50 text-sm">
+              <p className="text-foreground/50 text-sm">
                 No deposit until you're ready. Take your time. Ask every question.
               </p>
             </div>
             <div className="text-center">
               <div className="text-5xl font-serif text-white/10 mb-4">4</div>
               <h3 className="text-lg mb-2">We're there</h3>
-              <p className="text-white/50 text-sm">
+              <p className="text-foreground/50 text-sm">
                 From airport to airport, you're never alone. We handle everything.
               </p>
             </div>
@@ -495,13 +495,13 @@ export default function GentleLandingPage() {
       <section className="py-24 bg-[#1a1a1a]">
         <div className="container mx-auto px-6">
           <div className="max-w-2xl mx-auto text-center">
-            <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-4">
+            <p className="text-xs tracking-[0.3em] uppercase text-foreground/40 mb-4">
               Ready when you are
             </p>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif italic text-white mb-6">
               Let's talk about your trip.
             </h2>
-            <p className="text-white/50 mb-10 leading-relaxed">
+            <p className="text-foreground/50 mb-10 leading-relaxed">
               No forms. No automated responses. Just a conversation with someone who can actually help you.
             </p>
             <a
@@ -512,36 +512,36 @@ export default function GentleLandingPage() {
             >
               Begin the Conversation
             </a>
-            <p className="mt-8 text-sm text-white/30">
-              Or email <a href={`mailto:${settings.contactEmail}`} className="underline hover:text-white/50">{settings.contactEmail}</a> if you prefer
+            <p className="mt-8 text-sm text-foreground/30">
+              Or email <a href={`mailto:${settings.contactEmail}`} className="underline hover:text-foreground/50">{settings.contactEmail}</a> if you prefer
             </p>
           </div>
         </div>
       </section>
 
       {/* Minimal Footer */}
-      <footer className="py-8 bg-[#1a1a1a] border-t border-white/10">
+      <footer className="py-8 bg-[#1a1a1a] border-t border-foreground/10">
         <div className="container mx-auto px-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="flex items-center gap-6">
-              <Link href="/" className="font-serif text-sm tracking-[0.12em] text-white/60 hover:text-white transition-colors">
+              <Link href="/" className="font-serif text-sm tracking-[0.12em] text-foreground/60 hover:text-foreground transition-colors">
                 S L O W &nbsp; M O R O C C O
               </Link>
               <span className="text-white/20">|</span>
-              <span className="text-sm text-white/40">Marrakech</span>
+              <span className="text-sm text-foreground/40">Marrakech</span>
             </div>
             
             <div className="flex items-center gap-6">
               <a
                 href={`https://wa.me/${settings.whatsappNumber.replace(/\D/g, "")}`}
-                className="flex items-center gap-2 text-sm text-white/50 hover:text-white transition-colors"
+                className="flex items-center gap-2 text-sm text-foreground/50 hover:text-foreground transition-colors"
               >
                 <Phone className="w-4 h-4" />
                 {formatPhoneNumber(settings.whatsappNumber)}
               </a>
               <a
                 href={`mailto:${settings.contactEmail}`}
-                className="flex items-center gap-2 text-sm text-white/50 hover:text-white transition-colors"
+                className="flex items-center gap-2 text-sm text-foreground/50 hover:text-foreground transition-colors"
               >
                 <Mail className="w-4 h-4" />
                 Email
@@ -549,15 +549,15 @@ export default function GentleLandingPage() {
             </div>
           </div>
           
-          <div className="mt-6 pt-6 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-xs text-white/30">
+          <div className="mt-6 pt-6 border-t border-foreground/10 flex flex-col md:flex-row items-center justify-between gap-4">
+            <p className="text-xs text-foreground/30">
               © {new Date().getFullYear()} Slow Morocco. All rights reserved.
             </p>
-            <div className="flex items-center gap-4 text-xs text-white/30">
-              <Link href="/privacy" className="hover:text-white/50 transition-colors">
+            <div className="flex items-center gap-4 text-xs text-foreground/30">
+              <Link href="/privacy" className="hover:text-foreground/50 transition-colors">
                 Privacy
               </Link>
-              <Link href="/terms" className="hover:text-white/50 transition-colors">
+              <Link href="/terms" className="hover:text-foreground/50 transition-colors">
                 Terms
               </Link>
             </div>

@@ -192,7 +192,7 @@ export default function JourneysPage() {
           <h2 className="font-serif text-3xl md:text-4xl mb-6">
             Looking for something different?
           </h2>
-          <p className="text-white/50 leading-relaxed mb-10 text-sm">
+          <p className="text-foreground/50 leading-relaxed mb-10 text-sm">
             These are starting points, not scripts. Tell us what matters to
             you—we'll shape a route around it.
           </p>

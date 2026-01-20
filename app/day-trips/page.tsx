@@ -37,7 +37,7 @@ export default function DayTripsPage() {
   }, []);
 
   return (
-    <div className="bg-[#0a0a0a] text-white min-h-screen">
+    <div className="bg-background text-foreground min-h-screen">
       {/* Hero - Full viewport */}
       <section className="min-h-screen flex items-center justify-center relative">
         {heroImage && (
@@ -57,13 +57,13 @@ export default function DayTripsPage() {
         <div className="absolute inset-0 bg-[url('/images/texture-grain.png')] opacity-[0.03] pointer-events-none" />
         
         <div className="container mx-auto px-6 lg:px-16 text-center max-w-4xl relative z-10">
-          <p className="text-xs tracking-[0.4em] uppercase text-white/40 mb-8">
+          <p className="text-xs tracking-[0.4em] uppercase text-foreground/40 mb-8">
             From Marrakech
           </p>
           <h1 className="text-4xl md:text-6xl lg:text-7xl tracking-[0.15em] font-light mb-8">
             D A Y  T O U R S
           </h1>
-          <p className="text-xl md:text-2xl text-white/60 font-serif italic max-w-2xl mx-auto">
+          <p className="text-xl md:text-2xl text-foreground/60 font-serif italic max-w-2xl mx-auto">
             Leave in the morning, return by evening. Private car, the freedom to stop wherever something catches your eye.
           </p>
         </div>
@@ -76,9 +76,9 @@ export default function DayTripsPage() {
 
       {/* Map Section */}
       {dayTrips.length > 0 && (
-        <section className="py-16 border-t border-white/10">
+        <section className="py-16 border-t border-foreground/10">
           <div className="container mx-auto px-6 lg:px-16">
-            <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-6">
+            <p className="text-xs tracking-[0.3em] uppercase text-foreground/40 mb-6">
               Explore Destinations
             </p>
             <MoroccoMapWrapper 
@@ -95,15 +95,15 @@ export default function DayTripsPage() {
       )}
 
       {/* Day Trips Grid */}
-      <section className="py-24 md:py-32 border-t border-white/10">
+      <section className="py-24 md:py-32 border-t border-foreground/10">
         <div className="container mx-auto px-6 lg:px-16">
           {loading ? (
             <div className="flex justify-center py-20">
-              <div className="w-8 h-8 border border-white/20 border-t-white/60 rounded-full animate-spin" />
+              <div className="w-8 h-8 border border-foreground/20 border-t-white/60 rounded-full animate-spin" />
             </div>
           ) : dayTrips.length === 0 ? (
             <div className="text-center py-20">
-              <p className="text-white/40">No day trips available.</p>
+              <p className="text-foreground/40">No day trips available.</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
@@ -113,7 +113,7 @@ export default function DayTripsPage() {
                   href={`/day-trips/${trip.slug}`}
                   className="group"
                 >
-                  <div className="relative aspect-[4/5] mb-6 overflow-hidden bg-white/5">
+                  <div className="relative aspect-[4/5] mb-6 overflow-hidden bg-foreground/5">
                     {trip.heroImage && (
                       <Image
                         src={trip.heroImage}
@@ -124,23 +124,23 @@ export default function DayTripsPage() {
                     )}
                     {/* Category badge */}
                     <div className="absolute top-4 left-4">
-                      <span className="text-[10px] tracking-[0.15em] uppercase bg-black/60 backdrop-blur-sm px-3 py-1.5 text-white/80">
+                      <span className="text-[10px] tracking-[0.15em] uppercase bg-black/60 backdrop-blur-sm px-3 py-1.5 text-foreground/80">
                         {trip.category}
                       </span>
                     </div>
                   </div>
                   
-                  <h2 className="font-serif text-xl md:text-2xl mb-3 text-white/90 group-hover:text-white/70 transition-colors">
+                  <h2 className="font-serif text-xl md:text-2xl mb-3 text-white/90 group-hover:text-foreground/70 transition-colors">
                     {trip.title}
                   </h2>
                   
-                  <div className="flex items-center gap-3 text-sm text-white/40 mb-4">
+                  <div className="flex items-center gap-3 text-sm text-foreground/40 mb-4">
                     <span>{trip.durationHours} hours</span>
                     <span className="text-white/20">·</span>
                     <span>From €{trip.priceEUR}</span>
                   </div>
                   
-                  <p className="text-white/50 text-sm leading-relaxed">
+                  <p className="text-foreground/50 text-sm leading-relaxed">
                     {trip.shortDescription}
                   </p>
                 </Link>
@@ -151,33 +151,33 @@ export default function DayTripsPage() {
       </section>
 
       {/* What's Included - Two columns */}
-      <section className="border-t border-white/10">
+      <section className="border-t border-foreground/10">
         <div className="container mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2">
             {/* Included - Dark */}
-            <div className="py-20 md:py-28 px-6 lg:px-16 bg-[#0a0a0a]">
-              <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-8">
+            <div className="py-20 md:py-28 px-6 lg:px-16 bg-background">
+              <p className="text-xs tracking-[0.3em] uppercase text-foreground/40 mb-8">
                 Every Day Tour Includes
               </p>
               <ul className="space-y-4">
-                <li className="text-white/70 text-lg flex items-start gap-3">
-                  <span className="text-white/30 mt-1">→</span>
+                <li className="text-foreground/70 text-lg flex items-start gap-3">
+                  <span className="text-foreground/30 mt-1">→</span>
                   <span>Private car (up to 3 guests)</span>
                 </li>
-                <li className="text-white/70 text-lg flex items-start gap-3">
-                  <span className="text-white/30 mt-1">→</span>
+                <li className="text-foreground/70 text-lg flex items-start gap-3">
+                  <span className="text-foreground/30 mt-1">→</span>
                   <span>English-speaking driver</span>
                 </li>
-                <li className="text-white/70 text-lg flex items-start gap-3">
-                  <span className="text-white/30 mt-1">→</span>
+                <li className="text-foreground/70 text-lg flex items-start gap-3">
+                  <span className="text-foreground/30 mt-1">→</span>
                   <span>Hotel pickup & drop-off in Marrakech</span>
                 </li>
-                <li className="text-white/70 text-lg flex items-start gap-3">
-                  <span className="text-white/30 mt-1">→</span>
+                <li className="text-foreground/70 text-lg flex items-start gap-3">
+                  <span className="text-foreground/30 mt-1">→</span>
                   <span>All road fees and fuel</span>
                 </li>
-                <li className="text-white/70 text-lg flex items-start gap-3">
-                  <span className="text-white/30 mt-1">→</span>
+                <li className="text-foreground/70 text-lg flex items-start gap-3">
+                  <span className="text-foreground/30 mt-1">→</span>
                   <span>Flexible stops for photos</span>
                 </li>
               </ul>
@@ -185,19 +185,19 @@ export default function DayTripsPage() {
             
             {/* Not Included - Darker */}
             <div className="py-20 md:py-28 px-6 lg:px-16 bg-[#050505]">
-              <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-8">
+              <p className="text-xs tracking-[0.3em] uppercase text-foreground/40 mb-8">
                 Not Included
               </p>
               <ul className="space-y-4">
-                <li className="text-white/40 text-lg flex items-start gap-3">
+                <li className="text-foreground/40 text-lg flex items-start gap-3">
                   <span className="text-white/20 mt-1">×</span>
                   <span>Lunch (can be added)</span>
                 </li>
-                <li className="text-white/40 text-lg flex items-start gap-3">
+                <li className="text-foreground/40 text-lg flex items-start gap-3">
                   <span className="text-white/20 mt-1">×</span>
                   <span>Entrance fees to sites</span>
                 </li>
-                <li className="text-white/40 text-lg flex items-start gap-3">
+                <li className="text-foreground/40 text-lg flex items-start gap-3">
                   <span className="text-white/20 mt-1">×</span>
                   <span>Tips for driver</span>
                 </li>
@@ -208,17 +208,17 @@ export default function DayTripsPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 md:py-32 bg-[#0a0a0a] border-t border-white/10">
+      <section className="py-24 md:py-32 bg-background border-t border-foreground/10">
         <div className="container mx-auto px-6 lg:px-16 max-w-3xl text-center">
           <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl mb-8 text-white/90">
             Not sure which tour?
           </h2>
-          <p className="text-white/50 leading-relaxed mb-12 text-lg">
+          <p className="text-foreground/50 leading-relaxed mb-12 text-lg">
             Tell us what you're drawn to — mountains, villages, coast, craft — and we'll point you in the right direction.
           </p>
           <Link
             href="/contact"
-            className="inline-block border border-white/20 px-12 py-4 text-xs tracking-[0.2em] uppercase hover:bg-white hover:text-[#0a0a0a] transition-colors"
+            className="inline-block border border-foreground/20 px-12 py-4 text-xs tracking-[0.2em] uppercase hover:bg-white hover:text-[#0a0a0a] transition-colors"
           >
             Get In Touch
           </Link>

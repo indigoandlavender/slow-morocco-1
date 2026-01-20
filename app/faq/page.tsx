@@ -72,7 +72,7 @@ export default function FAQPage() {
   };
 
   return (
-    <div className="bg-[#0a0a0a] text-white min-h-screen">
+    <div className="bg-background text-foreground min-h-screen">
       {/* FAQ Schema */}
       <script
         type="application/ld+json"
@@ -81,13 +81,13 @@ export default function FAQPage() {
       {/* Hero */}
       <section className="pt-32 pb-16 md:pt-40 md:pb-20">
         <div className="container mx-auto px-6 lg:px-16 max-w-3xl text-center">
-          <p className="text-xs tracking-[0.4em] uppercase text-white/40 mb-6">
+          <p className="text-xs tracking-[0.4em] uppercase text-foreground/40 mb-6">
             Support
           </p>
           <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl mb-6">
             Frequently Asked Questions
           </h1>
-          <p className="text-white/50 text-lg">
+          <p className="text-foreground/50 text-lg">
             Quick answers to common questions
           </p>
         </div>
@@ -98,9 +98,9 @@ export default function FAQPage() {
         <div className="container mx-auto px-6 lg:px-16 max-w-3xl">
           <div className="space-y-8">
             {faqs.map((faq, index) => (
-              <div key={index} className="border-b border-white/10 pb-8">
+              <div key={index} className="border-b border-foreground/10 pb-8">
                 <h3 className="font-serif text-xl text-white/90 mb-3">{faq.question}</h3>
-                <p className="text-white/50 leading-relaxed">
+                <p className="text-foreground/50 leading-relaxed">
                   {faq.answer}
                 </p>
               </div>
@@ -108,16 +108,16 @@ export default function FAQPage() {
           </div>
 
           {/* CTA */}
-          <div className="mt-16 text-center border border-white/10 p-8 md:p-12">
+          <div className="mt-16 text-center border border-foreground/10 p-8 md:p-12">
             <h2 className="font-serif text-2xl text-white/90 mb-4">
               Don't See Your Question?
             </h2>
-            <p className="text-white/50 mb-8">
+            <p className="text-foreground/50 mb-8">
               We're happy to answer any questions you have.
             </p>
             <a 
               href="/contact" 
-              className="inline-block border border-white/20 px-10 py-4 text-xs tracking-[0.2em] uppercase hover:bg-white hover:text-[#0a0a0a] transition-colors"
+              className="inline-block border border-foreground/20 px-10 py-4 text-xs tracking-[0.2em] uppercase hover:bg-white hover:text-[#0a0a0a] transition-colors"
             >
               Get in Touch
             </a>
