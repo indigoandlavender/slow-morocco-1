@@ -61,47 +61,50 @@ export default function HomePage() {
   return (
     <div className="bg-background min-h-screen">
       {/* ═══════════════════════════════════════════════════════════════
-          HERO: Split-screen with text left, image right
+          HERO: Full-bleed immersive with text overlay
           ═══════════════════════════════════════════════════════════════ */}
-      <section className="min-h-screen flex flex-col lg:flex-row">
-        {/* Left: Text content */}
-        <div className="lg:w-1/2 flex items-center justify-center px-8 md:px-16 lg:px-20 py-32 lg:py-0 order-2 lg:order-1">
-          <div className="max-w-md">
-            <p className="text-[10px] tracking-[0.3em] uppercase text-foreground/40 mb-6">
-              Cultural Journeys
-            </p>
-            <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl leading-[1.1] mb-8">
-              Morocco moves<br />at its own pace
-            </h1>
-            <p className="text-foreground/60 leading-relaxed mb-10 text-sm">
-              Private routes through ancient medinas, across high atlas passes, 
-              into desert silence. Every journey shaped around what matters to you.
-            </p>
-            <Link
-              href="/plan-your-trip"
-              className="inline-flex items-center gap-3 text-xs tracking-[0.15em] uppercase group"
-            >
-              <span className="border-b border-foreground pb-1 group-hover:border-foreground/50 transition-colors">
-                Begin your journey
-              </span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
+      <section className="relative h-screen">
+        {/* Background Image */}
+        {heroImage ? (
+          <Image
+            src={heroImage}
+            alt="Morocco"
+            fill
+            className="object-cover"
+            priority
+          />
+        ) : (
+          <div className="absolute inset-0 bg-[#8B7355]" />
+        )}
+        
+        {/* Gradient overlays */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/50" />
+        
+        {/* Content */}
+        <div className="absolute inset-0 flex items-end">
+          <div className="container mx-auto px-8 md:px-16 lg:px-20 pb-20 md:pb-28">
+            <div className="max-w-2xl">
+              <p className="text-[10px] tracking-[0.3em] uppercase text-white/60 mb-4">
+                Cultural Journeys
+              </p>
+              <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl text-white leading-[1.1] mb-6">
+                Morocco moves<br />at its own pace
+              </h1>
+              <p className="text-white/70 leading-relaxed mb-8 text-sm md:text-base max-w-lg">
+                Private routes through ancient medinas, across high atlas passes, 
+                into desert silence. Every journey shaped around what matters to you.
+              </p>
+              <Link
+                href="/plan-your-trip"
+                className="inline-flex items-center gap-3 text-xs tracking-[0.15em] uppercase text-white group"
+              >
+                <span className="border-b border-white/50 pb-1 group-hover:border-white transition-colors">
+                  Begin your journey
+                </span>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </div>
           </div>
-        </div>
-
-        {/* Right: Full-bleed image */}
-        <div className="lg:w-1/2 h-[60vh] lg:h-screen relative order-1 lg:order-2">
-          {heroImage ? (
-            <Image
-              src={heroImage}
-              alt="Morocco"
-              fill
-              className="object-cover"
-              priority
-            />
-          ) : (
-            <div className="absolute inset-0 bg-[#d4cdc4]" />
-          )}
         </div>
       </section>
 
