@@ -84,14 +84,16 @@ export default function Header() {
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
           ? "bg-background/95 backdrop-blur-sm border-b border-border"
-          : "bg-background/90 backdrop-blur-sm"
+          : "bg-gradient-to-b from-black/40 to-transparent"
       }`}
     >
       <div className="container mx-auto px-8 md:px-16 lg:px-20">
         <div className="flex items-center justify-between h-20 md:h-24">
           {/* Logo */}
           <Link href="/" className="flex items-center">
-            <span className="font-serif text-sm tracking-[0.2em] text-foreground">
+            <span className={`font-serif text-sm tracking-[0.2em] transition-colors duration-300 ${
+              scrolled ? "text-foreground" : "text-white"
+            }`}>
               SLOW MOROCCO
             </span>
           </Link>
@@ -100,31 +102,39 @@ export default function Header() {
           <nav className="hidden md:flex items-center gap-8">
             <Link
               href="/journeys"
-              className="text-[11px] tracking-[0.15em] uppercase text-foreground/70 hover:text-foreground transition-colors"
+              className={`text-[11px] tracking-[0.15em] uppercase transition-colors ${
+                scrolled ? "text-foreground/70 hover:text-foreground" : "text-white/80 hover:text-white"
+              }`}
             >
               Journeys
             </Link>
             <Link
               href="/stories"
-              className="text-[11px] tracking-[0.15em] uppercase text-foreground/70 hover:text-foreground transition-colors"
+              className={`text-[11px] tracking-[0.15em] uppercase transition-colors ${
+                scrolled ? "text-foreground/70 hover:text-foreground" : "text-white/80 hover:text-white"
+              }`}
             >
               Stories
             </Link>
             <Link
               href="/places"
-              className="text-[11px] tracking-[0.15em] uppercase text-foreground/70 hover:text-foreground transition-colors"
+              className={`text-[11px] tracking-[0.15em] uppercase transition-colors ${
+                scrolled ? "text-foreground/70 hover:text-foreground" : "text-white/80 hover:text-white"
+              }`}
             >
               Places
             </Link>
             <Link
               href="/about"
-              className="text-[11px] tracking-[0.15em] uppercase text-foreground/70 hover:text-foreground transition-colors"
+              className={`text-[11px] tracking-[0.15em] uppercase transition-colors ${
+                scrolled ? "text-foreground/70 hover:text-foreground" : "text-white/80 hover:text-white"
+              }`}
             >
               About
             </Link>
 
             {/* Divider */}
-            <div className="w-px h-4 bg-foreground/20" />
+            <div className={`w-px h-4 transition-colors ${scrolled ? "bg-foreground/20" : "bg-white/30"}`} />
 
             {/* Language Selector */}
             <div className="relative" ref={langRef}>
@@ -133,7 +143,9 @@ export default function Header() {
                   setLangOpen(!langOpen);
                   setCurrencyOpen(false);
                 }}
-                className="flex items-center gap-1 text-[11px] tracking-[0.1em] uppercase text-foreground/60 hover:text-foreground transition-colors"
+                className={`flex items-center gap-1 text-[11px] tracking-[0.1em] uppercase transition-colors ${
+                  scrolled ? "text-foreground/60 hover:text-foreground" : "text-white/70 hover:text-white"
+                }`}
               >
                 {languages.find((l) => l.code === currentLang)?.label || "EN"}
                 <ChevronDown className="w-3 h-3" />
@@ -164,7 +176,9 @@ export default function Header() {
                   setCurrencyOpen(!currencyOpen);
                   setLangOpen(false);
                 }}
-                className="flex items-center gap-1 text-[11px] tracking-[0.1em] uppercase text-foreground/60 hover:text-foreground transition-colors"
+                className={`flex items-center gap-1 text-[11px] tracking-[0.1em] uppercase transition-colors ${
+                  scrolled ? "text-foreground/60 hover:text-foreground" : "text-white/70 hover:text-white"
+                }`}
               >
                 {currentCurrencyData.symbol} {currentCurrency}
                 <ChevronDown className="w-3 h-3" />
@@ -191,7 +205,11 @@ export default function Header() {
             {/* Plan Your Trip button */}
             <Link
               href="/plan-your-trip"
-              className="text-[11px] tracking-[0.15em] uppercase border border-foreground px-6 py-3 hover:bg-foreground hover:text-background transition-colors"
+              className={`text-[11px] tracking-[0.15em] uppercase border px-6 py-3 transition-colors ${
+                scrolled 
+                  ? "border-foreground hover:bg-foreground hover:text-background" 
+                  : "border-white text-white hover:bg-white hover:text-foreground"
+              }`}
             >
               Plan Your Trip
             </Link>
@@ -200,7 +218,9 @@ export default function Header() {
           {/* Mobile: Currency/Lang + Menu */}
           <div className="md:hidden flex items-center gap-4">
             {/* Mobile Currency/Lang compact */}
-            <div className="flex items-center gap-2 text-[10px] tracking-[0.1em] uppercase text-foreground/60">
+            <div className={`flex items-center gap-2 text-[10px] tracking-[0.1em] uppercase ${
+              scrolled ? "text-foreground/60" : "text-white/70"
+            }`}>
               <button
                 onClick={() => {
                   const idx = languages.findIndex((l) => l.code === currentLang);
@@ -210,7 +230,7 @@ export default function Header() {
               >
                 {languages.find((l) => l.code === currentLang)?.label}
               </button>
-              <span className="text-foreground/30">|</span>
+              <span className={scrolled ? "text-foreground/30" : "text-white/40"}>|</span>
               <button
                 onClick={() => {
                   const idx = currencies.findIndex((c) => c.code === currentCurrency);
@@ -228,9 +248,9 @@ export default function Header() {
               aria-label="Toggle menu"
             >
               {mobileMenuOpen ? (
-                <X className="w-5 h-5" />
+                <X className={`w-5 h-5 ${scrolled ? "text-foreground" : "text-white"}`} />
               ) : (
-                <Menu className="w-5 h-5" />
+                <Menu className={`w-5 h-5 ${scrolled ? "text-foreground" : "text-white"}`} />
               )}
             </button>
           </div>
