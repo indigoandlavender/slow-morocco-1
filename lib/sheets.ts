@@ -49,8 +49,8 @@ const getGoogleSheetsClient = () => {
   return google.sheets({ version: "v4", auth });
 };
 
-const SHEET_ID = process.env.GOOGLE_SHEET_ID;
-const NEXUS_SHEET_ID = process.env.NEXUS_SHEET_ID;
+const SHEET_ID = process.env.GOOGLE_SHEET_ID || "1pXP4zRis6vqPFNPEAj0jLe3JU9QpN_isImwY6-wtt04";
+const NEXUS_SHEET_ID = process.env.NEXUS_SHEET_ID || "1OIw-cgup17vdimqveVNOmSBSrRbykuTVM39Umm-PJtQ";
 
 export async function getSheetData(tabName: string) {
   const sheets = getGoogleSheetsClient();
