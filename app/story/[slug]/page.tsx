@@ -94,18 +94,18 @@ export default function StoryPage() {
 
   if (loading) {
     return (
-      <div className="bg-[#0a0a0a] min-h-screen flex items-center justify-center">
-        <div className="w-8 h-8 border-2 border-white/20 border-t-white rounded-full animate-spin" />
+      <div className="bg-background min-h-screen flex items-center justify-center">
+        <div className="w-8 h-8 border-2 border-foreground/20 border-t-white rounded-full animate-spin" />
       </div>
     );
   }
 
   if (error || !story) {
     return (
-      <div className="bg-[#0a0a0a] text-white min-h-screen flex items-center justify-center">
+      <div className="bg-background text-foreground min-h-screen flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl mb-4">Story not found</h1>
-          <Link href="/stories" className="text-white/60 hover:text-white underline">
+          <Link href="/stories" className="text-foreground/60 hover:text-foreground underline">
             Back to Stories
           </Link>
         </div>
@@ -266,7 +266,7 @@ export default function StoryPage() {
   };
 
   return (
-    <div className="bg-[#0a0a0a] text-white min-h-screen">
+    <div className="bg-background text-foreground min-h-screen">
       {/* Article JSON-LD Schema for AI indexing */}
       <script
         type="application/ld+json"
@@ -283,10 +283,10 @@ export default function StoryPage() {
             className="object-cover"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-[#0a0a0a]/30" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/30" />
           {story.heroCaption && (
             <div className="absolute bottom-0 left-0 right-0 p-6">
-              <p className="text-white/60 text-sm max-w-4xl mx-auto text-center">
+              <p className="text-foreground/60 text-sm max-w-4xl mx-auto text-center">
                 {story.heroCaption}
               </p>
             </div>
@@ -297,20 +297,20 @@ export default function StoryPage() {
       {/* Article */}
       <article className="max-w-3xl mx-auto px-6 py-16">
         {/* Breadcrumb */}
-        <nav className="text-sm text-white/40 mb-8">
-          <Link href="/" className="hover:text-white transition-colors">
+        <nav className="text-sm text-foreground/40 mb-8">
+          <Link href="/" className="hover:text-foreground transition-colors">
             Home
           </Link>
           <span className="mx-2">/</span>
-          <Link href="/stories" className="hover:text-white transition-colors">
+          <Link href="/stories" className="hover:text-foreground transition-colors">
             Stories
           </Link>
           <span className="mx-2">/</span>
-          <span className="text-white/60">{story.title}</span>
+          <span className="text-foreground/60">{story.title}</span>
         </nav>
 
         {/* Meta */}
-        <div className="flex items-center gap-3 text-sm text-white/40 mb-6">
+        <div className="flex items-center gap-3 text-sm text-foreground/40 mb-6">
           {story.category && (
             <>
               <span className="uppercase tracking-wide">{story.category}</span>
@@ -323,7 +323,7 @@ export default function StoryPage() {
         {/* Source Type Badge */}
         {story.sourceType && (
           <div className="mb-6">
-            <span className="inline-block text-xs uppercase tracking-widest text-white/40 border border-white/20 px-3 py-1">
+            <span className="inline-block text-xs uppercase tracking-widest text-foreground/40 border border-foreground/20 px-3 py-1">
               {story.sourceType}
             </span>
           </div>
@@ -336,7 +336,7 @@ export default function StoryPage() {
               <Link
                 key={index}
                 href={`/stories?q=${encodeURIComponent(tag)}`}
-                className="text-xs text-white/50 hover:text-white border border-white/10 hover:border-white/30 px-3 py-1 transition-colors"
+                className="text-xs text-foreground/50 hover:text-foreground border border-foreground/10 hover:border-foreground/30 px-3 py-1 transition-colors"
               >
                 {tag}
               </Link>
@@ -345,13 +345,13 @@ export default function StoryPage() {
         )}
 
         {/* Title */}
-        <h1 className="font-serif text-3xl md:text-4xl lg:text-5xl text-white mb-4 leading-tight">
+        <h1 className="font-serif text-3xl md:text-4xl lg:text-5xl text-foreground mb-4 leading-tight">
           {story.title}
         </h1>
 
         {/* Subtitle */}
         {story.subtitle && (
-          <p className="text-xl text-white/60 italic mb-8 font-serif">
+          <p className="text-xl text-foreground/60 italic mb-8 font-serif">
             {story.subtitle}
           </p>
         )}
@@ -359,33 +359,33 @@ export default function StoryPage() {
         {/* In This Story - Semantic metadata block for AI indexing */}
         {(storyMetadata.length > 0 || culturalEntities.length > 0) && (
           <aside
-            className="bg-white/5 border border-white/10 p-6 mb-12"
+            className="bg-foreground/5 border border-foreground/10 p-6 mb-12"
             aria-label="Story metadata"
           >
             <header className="mb-4">
-              <h2 className="text-xs uppercase tracking-[0.2em] text-white/40 font-medium">
+              <h2 className="text-xs uppercase tracking-[0.2em] text-foreground/40 font-medium">
                 In This Story
               </h2>
             </header>
             <dl className="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm">
               {storyMetadata.map((item, index) => (
                 <div key={index}>
-                  <dt className="text-white/40 text-xs uppercase tracking-wide mb-1">
+                  <dt className="text-foreground/40 text-xs uppercase tracking-wide mb-1">
                     {item.label}
                   </dt>
-                  <dd className="text-white/80">{item.value}</dd>
+                  <dd className="text-foreground/80">{item.value}</dd>
                 </div>
               ))}
               {culturalEntities.length > 0 && (
                 <div className="col-span-2 md:col-span-3">
-                  <dt className="text-white/40 text-xs uppercase tracking-wide mb-2">
+                  <dt className="text-foreground/40 text-xs uppercase tracking-wide mb-2">
                     Cultural Entities
                   </dt>
                   <dd className="flex flex-wrap gap-2">
                     {culturalEntities.map((entity, index) => (
                       <span
                         key={index}
-                        className="inline-block bg-white/10 text-white/70 px-3 py-1 text-xs"
+                        className="inline-block bg-foreground/10 text-foreground/70 px-3 py-1 text-xs"
                       >
                         {entity}
                       </span>
@@ -393,19 +393,11 @@ export default function StoryPage() {
                   </dd>
                 </div>
               )}
-              {story.textBy && (
-                <div>
-                  <dt className="text-white/40 text-xs uppercase tracking-wide mb-1">
-                    Author
-                  </dt>
-                  <dd className="text-white/80">{story.textBy}</dd>
-                </div>
-              )}
             </dl>
           </aside>
         )}
 
-        <hr className="border-white/10 mb-12" />
+        <hr className="border-foreground/10 mb-12" />
 
         {/* Body */}
         {story.body && <StoryBody content={story.body} />}
@@ -413,15 +405,15 @@ export default function StoryPage() {
         {/* The Facts */}
         {facts.length > 0 && (
           <>
-            <hr className="border-white/10 my-12" />
-            <div className="bg-white/5 p-8">
-              <h3 className="uppercase tracking-wide text-xs font-medium mb-6 text-white/60">
+            <hr className="border-foreground/10 my-12" />
+            <div className="bg-foreground/5 p-8">
+              <h3 className="uppercase tracking-wide text-xs font-medium mb-6 text-foreground/60">
                 The Facts
               </h3>
-              <ul className="space-y-3 text-white/70 text-sm">
+              <ul className="space-y-3 text-foreground/70 text-sm">
                 {facts.map((fact, index) => (
                   <li key={index} className="flex items-start gap-3">
-                    <span className="text-white/30 mt-1">•</span>
+                    <span className="text-foreground/30 mt-1">•</span>
                     <span>{fact}</span>
                   </li>
                 ))}
@@ -433,7 +425,7 @@ export default function StoryPage() {
         {/* Gallery */}
         {images.length > 0 && (
           <>
-            <hr className="border-white/10 my-12" />
+            <hr className="border-foreground/10 my-12" />
             <div className="space-y-8">
               {images.map((img, index) => (
                 <figure key={index}>
@@ -446,7 +438,7 @@ export default function StoryPage() {
                     />
                   </div>
                   {img.caption && (
-                    <figcaption className="text-sm text-white/40 mt-3 text-center">
+                    <figcaption className="text-sm text-foreground/40 mt-3 text-center">
                       {img.caption}
                     </figcaption>
                   )}
@@ -459,9 +451,9 @@ export default function StoryPage() {
         {/* Sources */}
         {sources.length > 0 && (
           <>
-            <hr className="border-white/10 my-12" />
-            <div className="text-sm text-white/50">
-              <h3 className="uppercase tracking-wide text-xs font-medium mb-4 text-white/40">
+            <hr className="border-foreground/10 my-12" />
+            <div className="text-sm text-foreground/50">
+              <h3 className="uppercase tracking-wide text-xs font-medium mb-4 text-foreground/40">
                 Sources
               </h3>
               <ul className="space-y-2">
@@ -474,8 +466,8 @@ export default function StoryPage() {
         )}
 
         {/* Footer */}
-        <hr className="border-white/10 my-12" />
-        <footer className="text-sm text-white/40 flex flex-wrap gap-x-4 gap-y-1">
+        <hr className="border-foreground/10 my-12" />
+        <footer className="text-sm text-foreground/40 flex flex-wrap gap-x-4 gap-y-1">
           {story.textBy && <span>Text — {story.textBy}</span>}
           {story.imagesBy && <span>Images — {story.imagesBy}</span>}
           {story.year && <span>{story.year}</span>}
@@ -484,9 +476,9 @@ export default function StoryPage() {
         {/* Related Stories */}
         {relatedStories.length > 0 && (
           <>
-            <hr className="border-white/10 my-12" />
+            <hr className="border-foreground/10 my-12" />
             <div>
-              <h3 className="uppercase tracking-wide text-xs font-medium mb-8 text-white/40">
+              <h3 className="uppercase tracking-wide text-xs font-medium mb-8 text-foreground/40">
                 Related Stories
               </h3>
               <div className="grid md:grid-cols-3 gap-6">
@@ -496,7 +488,7 @@ export default function StoryPage() {
                     href={`/story/${related.slug}`}
                     className="group"
                   >
-                    <div className="relative aspect-[4/3] mb-4 overflow-hidden bg-white/5">
+                    <div className="relative aspect-[4/3] mb-4 overflow-hidden bg-foreground/5">
                       {related.heroImage ? (
                         <Image
                           src={related.heroImage}
@@ -505,13 +497,13 @@ export default function StoryPage() {
                           className="object-cover transition-transform duration-500 group-hover:scale-105"
                         />
                       ) : (
-                        <div className="w-full h-full bg-white/5" />
+                        <div className="w-full h-full bg-foreground/5" />
                       )}
                     </div>
-                    <p className="text-xs text-white/40 uppercase tracking-wide mb-2">
+                    <p className="text-xs text-foreground/40 uppercase tracking-wide mb-2">
                       {related.category}
                     </p>
-                    <h4 className="text-white group-hover:text-white/80 transition-colors font-serif">
+                    <h4 className="text-foreground group-hover:text-foreground/80 transition-colors font-serif">
                       {related.title}
                     </h4>
                   </Link>
@@ -525,7 +517,7 @@ export default function StoryPage() {
         <div className="mt-12">
           <Link
             href="/stories"
-            className="inline-flex items-center gap-2 text-sm text-white/50 hover:text-white transition-colors"
+            className="inline-flex items-center gap-2 text-sm text-foreground/50 hover:text-foreground transition-colors"
           >
             <svg
               width="16"

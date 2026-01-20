@@ -538,7 +538,7 @@ Slow Morocco Team`);
 
       {/* Bottom Action Bar - Admin only */}
       {isAdmin && (
-        <div className="fixed bottom-0 left-0 right-0 z-50 bg-green-700 text-white border-t border-white/10 print:hidden">
+        <div className="fixed bottom-0 left-0 right-0 z-50 bg-green-700 text-white border-t border-foreground/10 print:hidden">
           <div className="container mx-auto px-6 lg:px-16">
             <div className="flex items-center justify-center gap-8 py-4">
               <button
@@ -582,7 +582,7 @@ Slow Morocco Team`);
 
       {/* Client Action Bar - Client only */}
       {!isAdmin && (
-        <div className="fixed bottom-0 left-0 right-0 z-50 bg-green-700 text-white border-t border-white/10 print:hidden">
+        <div className="fixed bottom-0 left-0 right-0 z-50 bg-green-700 text-white border-t border-foreground/10 print:hidden">
           <div className="container mx-auto px-6 lg:px-16">
             <div className="flex items-center justify-center gap-8 py-4">
               <button

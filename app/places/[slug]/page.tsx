@@ -123,7 +123,7 @@ export default function PlaceDetailPage() {
         <div className="absolute top-24 left-6 lg:left-16">
           <Link
             href="/places"
-            className="inline-flex items-center gap-2 text-white/80 hover:text-white transition-colors"
+            className="inline-flex items-center gap-2 text-foreground/80 hover:text-foreground transition-colors"
           >
             <ChevronLeft className="w-4 h-4" />
             <span className="text-sm">All Places</span>
@@ -133,14 +133,14 @@ export default function PlaceDetailPage() {
         {/* Title overlay */}
         <div className="absolute bottom-0 left-0 right-0 p-6 lg:p-16">
           <div className="container mx-auto">
-            <p className="text-xs tracking-[0.2em] uppercase text-white/70 mb-2 capitalize">
+            <p className="text-xs tracking-[0.2em] uppercase text-foreground/70 mb-2 capitalize">
               {place.destination}
             </p>
             <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl text-white mb-4">
               {place.title}
             </h1>
             {place.heroCaption && (
-              <p className="text-white/70 text-sm max-w-xl">
+              <p className="text-foreground/70 text-sm max-w-xl">
                 {place.heroCaption}
               </p>
             )}

@@ -94,18 +94,18 @@ export default function PlacesContent() {
   };
 
   return (
-    <div className="bg-[#0a0a0a] text-white min-h-screen">
+    <div className="bg-background text-foreground min-h-screen">
       {/* Hero */}
       <section className="pt-32 pb-16 md:pt-40 md:pb-20">
         <div className="container mx-auto px-6 lg:px-16">
           <div className="max-w-4xl">
-            <p className="text-xs tracking-[0.4em] uppercase text-white/40 mb-6">
+            <p className="text-xs tracking-[0.4em] uppercase text-foreground/40 mb-6">
               Slow Morocco
             </p>
             <h1 className="text-5xl md:text-6xl lg:text-7xl tracking-[0.15em] font-light mb-6">
               P L A C E S
             </h1>
-            <p className="text-lg md:text-xl text-white/50 max-w-2xl">
+            <p className="text-lg md:text-xl text-foreground/50 max-w-2xl">
               The villages, valleys, and hidden corners that make Morocco worth slowing down for.
             </p>
           </div>
@@ -116,7 +116,7 @@ export default function PlacesContent() {
       {places.length > 0 && (
         <section className="pb-12">
           <div className="container mx-auto px-6 lg:px-16">
-            <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-6">
+            <p className="text-xs tracking-[0.3em] uppercase text-foreground/40 mb-6">
               Discover Morocco
             </p>
             <MoroccoMapWrapper 
@@ -133,9 +133,9 @@ export default function PlacesContent() {
       )}
 
       {/* Region Cards */}
-      <section className="py-12 border-y border-white/10">
+      <section className="py-12 border-y border-foreground/10">
         <div className="container mx-auto px-6 lg:px-16">
-          <h2 className="text-xs tracking-[0.2em] uppercase text-white/40 mb-6 text-center">
+          <h2 className="text-xs tracking-[0.2em] uppercase text-foreground/40 mb-6 text-center">
             Explore by Region
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -155,12 +155,12 @@ export default function PlacesContent() {
                     className="object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                 ) : (
-                  <div className="absolute inset-0 bg-white/5" />
+                  <div className="absolute inset-0 bg-foreground/5" />
                 )}
                 <div className="absolute inset-0 bg-black/50 group-hover:bg-black/60 transition-colors" />
                 <div className="absolute inset-0 flex flex-col items-center justify-center text-white">
                   <span className="font-serif text-lg md:text-xl">{region.title}</span>
-                  <span className="text-xs text-white/60 mt-1 hidden md:block">{region.subtitle}</span>
+                  <span className="text-xs text-foreground/60 mt-1 hidden md:block">{region.subtitle}</span>
                 </div>
                 {selectedRegion === region.slug && (
                   <div className="absolute top-2 right-2 w-6 h-6 bg-white rounded-full flex items-center justify-center">
@@ -177,9 +177,9 @@ export default function PlacesContent() {
 
       {/* Destination Filter */}
       {filteredDestinations.length > 0 && (
-        <section className="py-8 border-b border-white/10">
+        <section className="py-8 border-b border-foreground/10">
           <div className="container mx-auto px-6 lg:px-16">
-            <h2 className="text-xs tracking-[0.2em] uppercase text-white/40 mb-4 text-center">
+            <h2 className="text-xs tracking-[0.2em] uppercase text-foreground/40 mb-4 text-center">
               {selectedRegion === "all" ? "All Destinations" : `Destinations in ${regions.find(r => r.slug === selectedRegion)?.title || selectedRegion}`}
             </h2>
             <div className="flex flex-wrap items-center justify-center gap-3">
@@ -187,8 +187,8 @@ export default function PlacesContent() {
                 onClick={() => setSelectedDestination("all")}
                 className={`text-xs tracking-[0.15em] uppercase px-4 py-2 border transition-colors ${
                   selectedDestination === "all"
-                    ? "bg-white text-[#0a0a0a] border-white"
-                    : "bg-transparent text-white/60 border-white/20 hover:border-white/40"
+                    ? "bg-white text-[#0a0a0a] border-foreground"
+                    : "bg-transparent text-foreground/60 border-foreground/20 hover:border-foreground/40"
                 }`}
               >
                 All
@@ -199,8 +199,8 @@ export default function PlacesContent() {
                   onClick={() => setSelectedDestination(dest.slug === selectedDestination ? "all" : dest.slug)}
                   className={`text-xs tracking-[0.15em] uppercase px-4 py-2 border transition-colors ${
                     selectedDestination === dest.slug
-                      ? "bg-white text-[#0a0a0a] border-white"
-                      : "bg-transparent text-white/60 border-white/20 hover:border-white/40"
+                      ? "bg-white text-[#0a0a0a] border-foreground"
+                      : "bg-transparent text-foreground/60 border-foreground/20 hover:border-foreground/40"
                   }`}
                 >
                   {dest.title}
@@ -216,11 +216,11 @@ export default function PlacesContent() {
         <div className="container mx-auto px-6 lg:px-16">
           {loading ? (
             <div className="flex justify-center py-20">
-              <div className="w-8 h-8 border-2 border-white/20 border-t-white rounded-full animate-spin" />
+              <div className="w-8 h-8 border-2 border-foreground/20 border-t-white rounded-full animate-spin" />
             </div>
           ) : filteredPlaces.length > 0 ? (
             <>
-              <p className="text-sm text-white/40 mb-8">
+              <p className="text-sm text-foreground/40 mb-8">
                 {filteredPlaces.length} {filteredPlaces.length === 1 ? "place" : "places"}
               </p>
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
@@ -232,7 +232,7 @@ export default function PlacesContent() {
                       href={`/places/${place.slug}`}
                       className="group"
                     >
-                      <div className="relative aspect-[3/4] mb-3 overflow-hidden bg-white/5">
+                      <div className="relative aspect-[3/4] mb-3 overflow-hidden bg-foreground/5">
                         {place.heroImage && (
                           <Image
                             src={place.heroImage}
@@ -242,10 +242,10 @@ export default function PlacesContent() {
                           />
                         )}
                       </div>
-                      <p className="text-[10px] tracking-[0.15em] uppercase text-white/40 mb-1">
+                      <p className="text-[10px] tracking-[0.15em] uppercase text-foreground/40 mb-1">
                         {dest?.title || place.destination}
                       </p>
-                      <h2 className="font-serif text-base md:text-lg text-white/90 group-hover:text-white transition-colors">
+                      <h2 className="font-serif text-base md:text-lg text-white/90 group-hover:text-foreground transition-colors">
                         {place.title}
                       </h2>
                     </Link>
@@ -255,13 +255,13 @@ export default function PlacesContent() {
             </>
           ) : (
             <div className="text-center py-20">
-              <p className="text-white/50">No places found for this selection.</p>
+              <p className="text-foreground/50">No places found for this selection.</p>
               <button
                 onClick={() => {
                   setSelectedRegion("all");
                   setSelectedDestination("all");
                 }}
-                className="mt-4 text-sm text-white/40 hover:text-white underline transition-colors"
+                className="mt-4 text-sm text-foreground/40 hover:text-foreground underline transition-colors"
               >
                 Clear filters
               </button>

@@ -17,12 +17,12 @@ export const metadata: Metadata = {
 
 export default function ManifestoPage() {
   return (
-    <div className="bg-[#0a0a0a] text-white min-h-screen">
+    <div className="bg-background text-foreground min-h-screen">
       {/* Hero */}
       <section className="min-h-screen flex items-center justify-center relative">
         <div className="absolute inset-0 bg-[url('/images/texture-grain.png')] opacity-[0.03] pointer-events-none" />
         <div className="container mx-auto px-6 lg:px-16 max-w-4xl relative z-10">
-          <p className="text-xs tracking-[0.4em] uppercase text-white/40 mb-8 text-center">
+          <p className="text-xs tracking-[0.4em] uppercase text-foreground/40 mb-8 text-center">
             Slow Morocco
           </p>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif text-center leading-tight mb-6">
@@ -37,9 +37,9 @@ export default function ManifestoPage() {
       </section>
 
       {/* The Problem */}
-      <section className="py-24 md:py-32 border-t border-white/10">
+      <section className="py-24 md:py-32 border-t border-foreground/10">
         <div className="container mx-auto px-6 lg:px-16 max-w-3xl">
-          <p className="text-xl md:text-2xl lg:text-3xl leading-relaxed text-white/70 font-serif">
+          <p className="text-xl md:text-2xl lg:text-3xl leading-relaxed text-foreground/70 font-serif">
             The carpet merchant will tell you it's antique. It isn't. The guide
             will take you to his cousin's shop. The hotel will call the rooftop
             'authentic Marrakech' while serving the same tagine as every other
@@ -58,13 +58,13 @@ export default function ManifestoPage() {
       </section>
 
       {/* The Network */}
-      <section className="py-24 md:py-32 border-t border-white/10">
+      <section className="py-24 md:py-32 border-t border-foreground/10">
         <div className="container mx-auto px-6 lg:px-16 max-w-3xl">
           <div className="space-y-12">
-            <p className="text-xl md:text-2xl leading-relaxed text-white/70">
+            <p className="text-xl md:text-2xl leading-relaxed text-foreground/70">
               Twenty years of networks.
             </p>
-            <div className="space-y-8 text-lg md:text-xl text-white/50 leading-relaxed">
+            <div className="space-y-8 text-lg md:text-xl text-foreground/50 leading-relaxed">
               <p>The zellige cutter who learned from his father.</p>
               <p>The Gnawa maalem who doesn't play for tour groups.</p>
               <p>
@@ -72,7 +72,7 @@ export default function ManifestoPage() {
                 all.
               </p>
             </div>
-            <p className="text-xl md:text-2xl leading-relaxed text-white/70">
+            <p className="text-xl md:text-2xl leading-relaxed text-foreground/70">
               These people don't advertise. They don't need to.
             </p>
           </div>
