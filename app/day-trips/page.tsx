@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import MoroccoMapWrapper from "@/components/MoroccoMapWrapper";
+import PageBanner from "@/components/PageBanner";
 
 interface DayTrip {
   slug: string;
@@ -19,7 +20,6 @@ interface DayTrip {
 
 export default function DayTripsPage() {
   const [dayTrips, setDayTrips] = useState<DayTrip[]>([]);
-  const [heroImage, setHeroImage] = useState<string>("");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -27,7 +27,6 @@ export default function DayTripsPage() {
       .then((r) => r.json())
       .then((data) => {
         setDayTrips(data.dayTrips || []);
-        setHeroImage(data.heroImage || "");
         setLoading(false);
       })
       .catch((err) => {
@@ -38,41 +37,15 @@ export default function DayTripsPage() {
 
   return (
     <div className="bg-background text-foreground min-h-screen">
-      {/* Hero - Full viewport */}
-      <section className="min-h-screen flex items-center justify-center relative">
-        {heroImage && (
-          <>
-            <div className="absolute inset-0">
-              <Image
-                src={heroImage}
-                alt="Day tours from Marrakech"
-                fill
-                className="object-cover"
-                priority
-              />
-            </div>
-            <div className="absolute inset-0 bg-black/50" />
-          </>
-        )}
-        <div className="absolute inset-0 bg-[url('/images/texture-grain.png')] opacity-[0.03] pointer-events-none" />
-        
-        <div className="container mx-auto px-6 lg:px-16 text-center max-w-4xl relative z-10">
-          <p className="text-xs tracking-[0.4em] uppercase text-foreground/40 mb-8">
-            From Marrakech
-          </p>
-          <h1 className="text-4xl md:text-6xl lg:text-7xl tracking-[0.15em] font-light mb-8">
-            D A Y  T O U R S
-          </h1>
-          <p className="text-xl md:text-2xl text-foreground/60 font-serif italic max-w-2xl mx-auto">
-            Leave in the morning, return by evening. Private car, the freedom to stop wherever something catches your eye.
-          </p>
-        </div>
-        
-        {/* Scroll indicator */}
-        <div className="absolute bottom-12 left-1/2 -translate-x-1/2">
-          <div className="w-[1px] h-16 bg-gradient-to-b from-white/0 via-white/20 to-white/0" />
-        </div>
-      </section>
+      {/* Immersive Hero Banner */}
+      <PageBanner
+        slug="day-trips"
+        fallback={{
+          title: "Day trips from Marrakech",
+          subtitle: "Private excursions into the Atlas Mountains, Berber villages, and desert edges. No tour buses. No crowds.",
+          label: "Day Experiences",
+        }}
+      />
 
       {/* Map Section */}
       {dayTrips.length > 0 && (

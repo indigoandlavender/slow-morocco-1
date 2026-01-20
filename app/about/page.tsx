@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Metadata } from "next";
 import { getSheetData, convertDriveUrl } from "@/lib/sheets";
+import PageBanner from "@/components/PageBanner";
 
 export const metadata: Metadata = {
   title: "About Us | Slow Morocco",
@@ -76,42 +77,15 @@ export default async function AboutPage() {
 
   return (
     <div className="bg-background min-h-screen">
-      {/* Hero - Split screen */}
-      <section className="min-h-[80vh] flex flex-col lg:flex-row">
-        {/* Left: Text */}
-        <div className="lg:w-1/2 flex items-center justify-center px-8 md:px-16 lg:px-20 py-32 lg:py-0 order-2 lg:order-1">
-          <div className="max-w-md">
-            <p className="text-[10px] tracking-[0.3em] uppercase text-foreground/40 mb-6">
-              About Us
-            </p>
-            <h1 className="font-serif text-4xl md:text-5xl leading-[1.1] mb-8">
-              We don't sell tours.
-              <br />
-              We solve a problem.
-            </h1>
-            <p className="text-foreground/60 leading-relaxed text-sm">
-              Twenty years in Morocco taught us what guidebooks can't: which
-              doors open, which people know, and why that matters. We're not
-              trying to scale. We're trying to do this well.
-            </p>
-          </div>
-        </div>
-
-        {/* Right: Image */}
-        <div className="lg:w-1/2 h-[50vh] lg:h-auto relative order-1 lg:order-2">
-          {settings.about_hero_image ? (
-            <Image
-              src={settings.about_hero_image}
-              alt="Morocco"
-              fill
-              className="object-cover"
-              priority
-            />
-          ) : (
-            <div className="absolute inset-0 bg-[#d4cdc4]" />
-          )}
-        </div>
-      </section>
+      {/* Immersive Hero Banner */}
+      <PageBanner
+        slug="about"
+        fallback={{
+          title: "We don't sell tours. We solve a problem.",
+          subtitle: "Twenty years in Morocco taught us what guidebooks can't: which doors open, which people know, and why that matters.",
+          label: "About Us",
+        }}
+      />
 
       {/* Philosophy Section */}
       <section className="py-24 md:py-32 border-t border-border">

@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import PageBanner from "@/components/PageBanner";
 
 export const metadata: Metadata = {
   title: "Frequently Asked Questions",
@@ -78,23 +79,19 @@ export default function FAQPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
-      {/* Hero */}
-      <section className="pt-32 pb-16 md:pt-40 md:pb-20">
-        <div className="container mx-auto px-6 lg:px-16 max-w-3xl text-center">
-          <p className="text-xs tracking-[0.4em] uppercase text-foreground/40 mb-6">
-            Support
-          </p>
-          <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl mb-6">
-            Frequently Asked Questions
-          </h1>
-          <p className="text-foreground/50 text-lg">
-            Quick answers to common questions
-          </p>
-        </div>
-      </section>
+      
+      {/* Immersive Hero Banner */}
+      <PageBanner
+        slug="faq"
+        fallback={{
+          title: "Frequently Asked Questions",
+          subtitle: "Quick answers to common questions about traveling with us.",
+          label: "Support",
+        }}
+      />
 
       {/* FAQs */}
-      <section className="pb-24 md:pb-32">
+      <section className="py-16 md:py-24">
         <div className="container mx-auto px-6 lg:px-16 max-w-3xl">
           <div className="space-y-8">
             {faqs.map((faq, index) => (

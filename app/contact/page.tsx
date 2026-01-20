@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import PageBanner from "@/components/PageBanner";
 
 export default function ContactPage() {
   const [firstName, setFirstName] = useState("");
@@ -24,40 +25,34 @@ export default function ContactPage() {
 
   return (
     <div className="bg-background text-foreground min-h-screen">
-      {/* Contact Form Section */}
-      <section className="pt-32 pb-24 md:pt-40 md:pb-32">
-        <div className="container mx-auto px-6 lg:px-16 max-w-6xl">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
-            
-            {/* Left - Title */}
-            <div>
-              <p className="text-xs tracking-[0.4em] uppercase text-foreground/40 mb-6">
-                Get in Touch
-              </p>
-              <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl text-foreground/90 leading-[1.1]">
-                Send us
-                <br />
-                a note.
-              </h1>
-            </div>
+      {/* Immersive Hero Banner */}
+      <PageBanner
+        slug="contact"
+        fallback={{
+          title: "Send us a note",
+          subtitle: "We respond to every inquiry within 24 hours.",
+          label: "Get in Touch",
+        }}
+      />
 
-            {/* Right - Form */}
-            <div>
-              {submitted ? (
-                <div className="py-12">
-                  <h3 className="font-serif text-2xl text-foreground/90 mb-4">Thank you.</h3>
-                  <p className="text-foreground/50 leading-relaxed">
-                    We've received your message and will respond within 24 hours.
-                  </p>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-8">
-                  {/* Name Row */}
-                  <div className="grid grid-cols-2 gap-6">
-                    <div>
-                      <label className="block text-xs tracking-[0.2em] uppercase text-foreground/40 mb-4">
-                        First Name
-                      </label>
+      {/* Contact Form Section */}
+      <section className="py-16 md:py-24">
+        <div className="container mx-auto px-6 lg:px-16 max-w-3xl">
+          {submitted ? (
+            <div className="py-12 text-center">
+              <h3 className="font-serif text-2xl text-foreground/90 mb-4">Thank you.</h3>
+              <p className="text-foreground/50 leading-relaxed">
+                We've received your message and will respond within 24 hours.
+              </p>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="space-y-8">
+              {/* Name Row */}
+              <div className="grid grid-cols-2 gap-6">
+                <div>
+                  <label className="block text-xs tracking-[0.2em] uppercase text-foreground/40 mb-4">
+                    First Name
+                  </label>
                       <input
                         type="text"
                         value={firstName}
@@ -125,15 +120,13 @@ export default function ContactPage() {
                     <button
                       type="submit"
                       disabled={submitting}
-                      className="inline-block border border-foreground/20 px-10 py-4 text-xs tracking-[0.2em] uppercase hover:bg-white hover:text-[#0a0a0a] transition-colors disabled:opacity-50"
+                      className="inline-block border border-foreground px-10 py-4 text-xs tracking-[0.2em] uppercase hover:bg-foreground hover:text-background transition-colors disabled:opacity-50"
                     >
                       {submitting ? "Sending..." : "Submit"}
                     </button>
                   </div>
                 </form>
               )}
-            </div>
-          </div>
         </div>
       </section>
     </div>
