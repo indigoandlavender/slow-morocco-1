@@ -3,6 +3,21 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 
+// Currency options
+const currencies = [
+  { code: "EUR", symbol: "€" },
+  { code: "USD", symbol: "$" },
+  { code: "GBP", symbol: "£" },
+  { code: "MAD", symbol: "DH" },
+];
+
+// Language options
+const languages = [
+  { code: "en", label: "English" },
+  { code: "fr", label: "Français" },
+  { code: "es", label: "Español" },
+];
+
 interface FooterLink {
   label: string;
   href: string | null;
@@ -19,7 +34,6 @@ interface FooterData {
   brandId: string;
   newsletter: {
     show: boolean;
-    backgroundImage: string;
     title: string;
     description: string;
     brandName: string;
@@ -37,6 +51,10 @@ export default function Footer() {
   const [subscribed, setSubscribed] = useState(false);
   const [isSubscribing, setIsSubscribing] = useState(false);
   const [footerData, setFooterData] = useState<FooterData | null>(null);
+  
+  // Language & Currency state
+  const [currentLang, setCurrentLang] = useState("en");
+  const [currentCurrency, setCurrentCurrency] = useState("EUR");
 
   useEffect(() => {
     fetch("/api/footer")
@@ -48,6 +66,25 @@ export default function Footer() {
       })
       .catch((err) => console.error("Footer fetch error:", err));
   }, []);
+
+  // Load saved preferences
+  useEffect(() => {
+    const savedLang = localStorage.getItem("slowmorocco_lang");
+    const savedCurrency = localStorage.getItem("slowmorocco_currency");
+    if (savedLang) setCurrentLang(savedLang);
+    if (savedCurrency) setCurrentCurrency(savedCurrency);
+  }, []);
+
+  const handleLangChange = (code: string) => {
+    setCurrentLang(code);
+    localStorage.setItem("slowmorocco_lang", code);
+  };
+
+  const handleCurrencyChange = (code: string) => {
+    setCurrentCurrency(code);
+    localStorage.setItem("slowmorocco_currency", code);
+    window.dispatchEvent(new CustomEvent("currencyChange", { detail: code }));
+  };
 
   const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -139,12 +176,12 @@ export default function Footer() {
           ═══════════════════════════════════════════════════════════════ */}
       <section className="py-16 bg-[#161616]">
         <div className="container mx-auto px-8 md:px-16 lg:px-20">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-10 md:gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-10 md:gap-8">
             {/* Brand Column */}
             <div className="col-span-2 md:col-span-1">
               <Link href="/" className="inline-block mb-6">
                 <span className="font-serif text-sm tracking-[0.2em] text-white">
-                  {newsletter.brandName.toUpperCase().replace(" ", " ")}
+                  {newsletter.brandName.toUpperCase()}
                 </span>
               </Link>
               <p className="text-sm text-white/40 leading-relaxed max-w-xs">
@@ -186,6 +223,7 @@ export default function Footer() {
                   </h4>
                   <ul className="space-y-3">
                     <li><Link href="/journeys" className="text-sm text-white/60 hover:text-white transition-colors">Journeys</Link></li>
+                    <li><Link href="/epic" className="text-sm text-white/60 hover:text-white transition-colors">Epic</Link></li>
                     <li><Link href="/stories" className="text-sm text-white/60 hover:text-white transition-colors">Stories</Link></li>
                     <li><Link href="/places" className="text-sm text-white/60 hover:text-white transition-colors">Places</Link></li>
                   </ul>
@@ -212,6 +250,45 @@ export default function Footer() {
                 </div>
               </>
             )}
+
+            {/* Language & Currency Column */}
+            <div>
+              <h4 className="text-[10px] tracking-[0.2em] uppercase text-white/30 mb-5">
+                Settings
+              </h4>
+              
+              {/* Language */}
+              <div className="mb-6">
+                <p className="text-[10px] tracking-[0.15em] uppercase text-white/20 mb-2">Language</p>
+                <select
+                  value={currentLang}
+                  onChange={(e) => handleLangChange(e.target.value)}
+                  className="w-full bg-white/5 border border-white/10 text-white/70 text-sm px-3 py-2 focus:outline-none focus:border-white/30 transition-colors appearance-none cursor-pointer"
+                >
+                  {languages.map((lang) => (
+                    <option key={lang.code} value={lang.code} className="bg-[#161616]">
+                      {lang.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              
+              {/* Currency */}
+              <div>
+                <p className="text-[10px] tracking-[0.15em] uppercase text-white/20 mb-2">Currency</p>
+                <select
+                  value={currentCurrency}
+                  onChange={(e) => handleCurrencyChange(e.target.value)}
+                  className="w-full bg-white/5 border border-white/10 text-white/70 text-sm px-3 py-2 focus:outline-none focus:border-white/30 transition-colors appearance-none cursor-pointer"
+                >
+                  {currencies.map((currency) => (
+                    <option key={currency.code} value={currency.code} className="bg-[#161616]">
+                      {currency.symbol} {currency.code}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
           </div>
         </div>
       </section>
