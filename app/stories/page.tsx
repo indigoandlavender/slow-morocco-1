@@ -2,55 +2,30 @@
 
 import { useEffect, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
-import StoryCard from "@/components/StoryCard";
-import MoroccoMapWrapper from "@/components/MoroccoMapWrapper";
-import { Search } from "lucide-react";
+import Link from "next/link";
+import Image from "next/image";
 
 interface Story {
   slug: string;
   title: string;
   subtitle?: string;
-  category?: string;
-  sourceType?: string;
+  mood?: string;
   heroImage?: string;
   excerpt?: string;
-  readTime?: string;
-  featured?: string;
-  tags?: string;
-  region?: string;
 }
 
-// Inner component that uses useSearchParams
 function StoriesContent() {
   const searchParams = useSearchParams();
   const [stories, setStories] = useState<Story[]>([]);
-  const [filteredStories, setFilteredStories] = useState<Story[]>([]);
   const [loading, setLoading] = useState(true);
+  const [activeFilter, setActiveFilter] = useState("all");
 
-  // Search and filter states - initialize from URL query param
-  const [searchQuery, setSearchQuery] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("all");
-
-  // Set search query from URL on mount
-  useEffect(() => {
-    const q = searchParams.get("q");
-    if (q) {
-      setSearchQuery(q);
-    }
-  }, [searchParams]);
-
-  // Categories - The Edit's 9 filters (alphabetically sorted)
-  const categories = [
-    { slug: "all", label: "All" },
-    { slug: "Architecture", label: "Architecture" },
-    { slug: "Art", label: "Art" },
-    { slug: "Design", label: "Design" },
-    { slug: "Food", label: "Food" },
-    { slug: "History", label: "History" },
-    { slug: "Movies", label: "Movies" },
-    { slug: "Music", label: "Music" },
-    { slug: "People", label: "People" },
-    { slug: "Systems", label: "Systems" },
+  const filters = [
+    { id: "all", label: "All" },
+    { id: "fierce", label: "Fierce" },
+    { id: "tender", label: "Tender" },
+    { id: "sacred", label: "Sacred" },
+    { id: "golden", label: "Golden" },
   ];
 
   useEffect(() => {
@@ -58,232 +33,206 @@ function StoriesContent() {
       .then((res) => res.json())
       .then((data) => {
         setStories(data.stories || []);
-        setFilteredStories(data.stories || []);
         setLoading(false);
       })
       .catch(() => setLoading(false));
   }, []);
 
-  // Apply search and filters
-  useEffect(() => {
-    let filtered = [...stories];
+  const filteredStories =
+    activeFilter === "all"
+      ? stories
+      : stories.filter((s) =>
+          s.mood?.toLowerCase() === activeFilter.toLowerCase()
+        );
 
-    // Search filter
-    if (searchQuery.trim()) {
-      const query = searchQuery.toLowerCase();
-      filtered = filtered.filter(
-        (s) =>
-          s.title?.toLowerCase().includes(query) ||
-          s.subtitle?.toLowerCase().includes(query) ||
-          s.excerpt?.toLowerCase().includes(query) ||
-          s.tags?.toLowerCase().includes(query) ||
-          s.region?.toLowerCase().includes(query) ||
-          s.category?.toLowerCase().includes(query)
-      );
-    }
-
-    // Category filter
-    if (selectedCategory !== "all") {
-      filtered = filtered.filter(
-        (s) => s.category?.toLowerCase() === selectedCategory.toLowerCase()
-      );
-    }
-
-    setFilteredStories(filtered);
-  }, [stories, searchQuery, selectedCategory]);
-
-  const clearFilters = () => {
-    setSearchQuery("");
-    setSelectedCategory("all");
-  };
-
-  const hasActiveFilters = searchQuery || selectedCategory !== "all";
-
-  const featuredStories = filteredStories.filter(
-    (s) => s.featured?.toLowerCase() === "true"
-  );
-  const otherStories = filteredStories.filter(
-    (s) => s.featured?.toLowerCase() !== "true"
-  );
+  const featuredStory = filteredStories[0];
+  const remainingStories = filteredStories.slice(1);
 
   return (
-    <div className="bg-[#0a0a0a] text-white min-h-screen">
-      {/* Hero */}
-      <section className="pt-32 pb-16 md:pt-40 md:pb-20">
-        <div className="container mx-auto px-6 lg:px-16">
-          <div className="max-w-4xl">
-            <p className="text-xs tracking-[0.4em] uppercase text-white/40 mb-6">
+    <div className="bg-background min-h-screen">
+      {/* Hero Header */}
+      <section className="pt-32 pb-16 md:pt-40 md:pb-20 border-b border-border">
+        <div className="container mx-auto px-8 md:px-16 lg:px-20">
+          <div className="max-w-3xl">
+            <p className="text-[10px] tracking-[0.3em] uppercase text-foreground/40 mb-6">
               The Edit
             </p>
-            <h1 className="text-5xl md:text-6xl lg:text-7xl tracking-[0.15em] font-light mb-6">
-              S T O R I E S
+            <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl leading-[1.1] mb-6">
+              Stories worth knowing
             </h1>
-            <p className="text-lg md:text-xl text-white/50 max-w-2xl font-serif italic">
-              The history, craft, and culture that make Morocco make sense
+            <p className="text-foreground/60 leading-relaxed text-sm max-w-xl">
+              The history, craft, and culture that make Morocco make sense.
+              Understanding its layers transforms a trip into a revelation.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Map Section */}
-      {stories.length > 0 && (
-        <section className="pb-16">
-          <div className="container mx-auto px-6 lg:px-16">
-            <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-6">
-              Explore by Location
-            </p>
-            <MoroccoMapWrapper stories={stories} />
-          </div>
-        </section>
-      )}
-
-      {/* Search & Filters */}
-      <section className="py-8 border-y border-white/10">
-        <div className="container mx-auto px-6 lg:px-16">
-          {/* Search Bar */}
-          <div className="max-w-xl mb-10">
-            <div className="relative">
-              <Search className="absolute left-0 top-1/2 -translate-y-1/2 w-5 h-5 text-white/40" />
-              <input
-                type="text"
-                placeholder="Search stories, topics, regions..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-8 pr-4 py-3 bg-transparent border-b border-white/20 focus:border-white/60 focus:outline-none text-base placeholder:text-white/30 transition-colors text-white"
-              />
-            </div>
-          </div>
-
-          {/* Category Filter */}
-          <div className="flex flex-col md:flex-row md:items-start gap-8">
-            <div>
-              <h2 className="text-xs tracking-[0.2em] uppercase text-white/40 mb-4">
-                Category
-              </h2>
-              <div className="flex flex-wrap items-center gap-2">
-                {categories.map((cat) => (
-                  <button
-                    key={cat.slug}
-                    onClick={() =>
-                      setSelectedCategory(
-                        cat.slug === selectedCategory ? "all" : cat.slug
-                      )
-                    }
-                    className={`text-xs tracking-[0.15em] uppercase px-4 py-3 border transition-colors ${
-                      selectedCategory === cat.slug
-                        ? "bg-white text-[#0a0a0a] border-white"
-                        : "bg-transparent text-white/60 border-white/20 hover:border-white/40"
-                    }`}
-                  >
-                    {cat.label}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Clear filters */}
-            {hasActiveFilters && (
-              <div className="md:ml-auto md:self-end">
-                <button
-                  onClick={clearFilters}
-                  className="text-xs tracking-[0.15em] uppercase text-white/40 hover:text-white transition-colors underline underline-offset-4 py-3 px-2 -mx-2"
-                >
-                  Clear filters
-                </button>
-              </div>
-            )}
-          </div>
-
-          {/* Results count */}
-          <div className="mt-8 text-sm text-white/40">
-            {filteredStories.length} {filteredStories.length === 1 ? "story" : "stories"}
-            {hasActiveFilters && " found"}
+      {/* Filters */}
+      <section className="py-6 border-b border-border sticky top-20 md:top-24 bg-background z-40">
+        <div className="container mx-auto px-8 md:px-16 lg:px-20">
+          <div className="flex items-center gap-6 overflow-x-auto scrollbar-hide">
+            {filters.map((filter) => (
+              <button
+                key={filter.id}
+                onClick={() => setActiveFilter(filter.id)}
+                className={`text-[11px] tracking-[0.15em] uppercase whitespace-nowrap pb-1 transition-colors ${
+                  activeFilter === filter.id
+                    ? "text-foreground border-b border-foreground"
+                    : "text-foreground/40 hover:text-foreground/70"
+                }`}
+              >
+                {filter.label}
+              </button>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Stories Grid */}
-      <section className="py-24">
-        <div className="container mx-auto px-6 lg:px-16">
+      {/* Stories */}
+      <section className="py-16 md:py-24">
+        <div className="container mx-auto px-8 md:px-16 lg:px-20">
           {loading ? (
-            <div className="flex justify-center py-12">
-              <div className="w-8 h-8 border-2 border-white/20 border-t-white rounded-full animate-spin" />
+            <div className="flex justify-center py-20">
+              <div className="w-6 h-6 border border-foreground/20 border-t-foreground/60 rounded-full animate-spin" />
             </div>
-          ) : filteredStories.length > 0 ? (
+          ) : filteredStories.length === 0 ? (
+            <div className="text-center py-20">
+              <p className="text-foreground/50 mb-4">No stories match this filter.</p>
+              <button
+                onClick={() => setActiveFilter("all")}
+                className="text-sm underline text-foreground/60 hover:text-foreground transition-colors"
+              >
+                View all stories
+              </button>
+            </div>
+          ) : (
             <>
-              {/* Featured Stories */}
-              {featuredStories.length > 0 && !hasActiveFilters && (
-                <div className="mb-20">
-                  <p className="text-xs tracking-[0.3em] text-white/40 mb-8">
-                    FEATURED
-                  </p>
-                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {featuredStories.map((story) => (
-                      <StoryCard key={story.slug} story={story} />
-                    ))}
+              {/* Featured Story - Large */}
+              {featuredStory && (
+                <Link
+                  href={`/story/${featuredStory.slug}`}
+                  className="group block mb-20 md:mb-28"
+                >
+                  <div className="flex flex-col md:flex-row gap-8 md:gap-16">
+                    <div className="w-full md:w-2/3">
+                      <div className="aspect-[16/10] relative overflow-hidden bg-[#d4cdc4]">
+                        {featuredStory.heroImage && (
+                          <Image
+                            src={featuredStory.heroImage}
+                            alt={featuredStory.title}
+                            fill
+                            className="object-cover group-hover:scale-[1.02] transition-transform duration-700"
+                          />
+                        )}
+                      </div>
+                    </div>
+                    <div className="w-full md:w-1/3 flex flex-col justify-center">
+                      {featuredStory.mood && (
+                        <p className="text-[10px] tracking-[0.3em] uppercase text-foreground/40 mb-4">
+                          {featuredStory.mood}
+                        </p>
+                      )}
+                      <h2 className="font-serif text-2xl md:text-3xl lg:text-4xl mb-4 group-hover:text-foreground/70 transition-colors">
+                        {featuredStory.title}
+                      </h2>
+                      {featuredStory.excerpt && (
+                        <p className="text-sm text-foreground/60 leading-relaxed line-clamp-3">
+                          {featuredStory.excerpt}
+                        </p>
+                      )}
+                    </div>
                   </div>
-                </div>
+                </Link>
               )}
 
-              {/* All/Filtered Stories */}
-              {(hasActiveFilters ? filteredStories : otherStories).length > 0 && (
-                <div>
-                  {featuredStories.length > 0 && !hasActiveFilters && (
-                    <p className="text-xs tracking-[0.3em] text-white/40 mb-8">
-                      ALL STORIES
-                    </p>
-                  )}
-                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {(hasActiveFilters ? filteredStories : otherStories).map(
-                      (story) => (
-                        <StoryCard key={story.slug} story={story} />
-                      )
-                    )}
-                  </div>
+              {/* Grid of remaining stories */}
+              {remainingStories.length > 0 && (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
+                  {remainingStories.map((story) => (
+                    <Link
+                      key={story.slug}
+                      href={`/story/${story.slug}`}
+                      className="group"
+                    >
+                      <div className="aspect-[3/4] relative overflow-hidden bg-[#d4cdc4] mb-5">
+                        {story.heroImage && (
+                          <Image
+                            src={story.heroImage}
+                            alt={story.title}
+                            fill
+                            className="object-cover group-hover:scale-[1.02] transition-transform duration-700"
+                          />
+                        )}
+                      </div>
+                      {story.mood && (
+                        <p className="text-[10px] tracking-[0.3em] uppercase text-foreground/40 mb-2">
+                          {story.mood}
+                        </p>
+                      )}
+                      <h3 className="font-serif text-xl mb-2 group-hover:text-foreground/70 transition-colors">
+                        {story.title}
+                      </h3>
+                      {story.excerpt && (
+                        <p className="text-sm text-foreground/60 leading-relaxed line-clamp-2">
+                          {story.excerpt}
+                        </p>
+                      )}
+                    </Link>
+                  ))}
                 </div>
               )}
             </>
-          ) : (
-            <div className="text-center py-16">
-              <p className="text-white/50 mb-4">No stories match your search.</p>
-              <button
-                onClick={clearFilters}
-                className="text-white/70 hover:text-white underline underline-offset-4"
-              >
-                Clear filters
-              </button>
-            </div>
           )}
+        </div>
+      </section>
+
+      {/* Newsletter CTA */}
+      <section className="py-20 md:py-28 bg-[#f5f2ed]">
+        <div className="container mx-auto px-8 md:px-16 lg:px-20 text-center max-w-2xl">
+          <p className="text-[10px] tracking-[0.3em] uppercase text-foreground/40 mb-4">
+            Stay Curious
+          </p>
+          <h2 className="font-serif text-3xl md:text-4xl mb-6">
+            Get stories in your inbox
+          </h2>
+          <p className="text-foreground/60 mb-10 text-sm">
+            New stories, cultural insights, and journey inspiration. No spam, just depth.
+          </p>
+          <Link
+            href="/contact"
+            className="inline-block border border-foreground px-10 py-4 text-xs tracking-[0.15em] uppercase hover:bg-foreground hover:text-background transition-colors"
+          >
+            Subscribe
+          </Link>
         </div>
       </section>
     </div>
   );
 }
 
-// Loading fallback
 function StoriesLoading() {
   return (
-    <div className="bg-[#0a0a0a] text-white min-h-screen">
+    <div className="bg-background min-h-screen">
       <section className="pt-32 pb-16 md:pt-40 md:pb-20">
-        <div className="container mx-auto px-6 lg:px-16">
-          <div className="max-w-4xl">
-            <p className="text-xs tracking-[0.4em] uppercase text-white/40 mb-6">
+        <div className="container mx-auto px-8 md:px-16 lg:px-20">
+          <div className="max-w-3xl">
+            <p className="text-[10px] tracking-[0.3em] uppercase text-foreground/40 mb-6">
               The Edit
             </p>
-            <h1 className="text-5xl md:text-6xl lg:text-7xl tracking-[0.15em] font-light mb-6">
-              S T O R I E S
+            <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl leading-[1.1] mb-6">
+              Stories worth knowing
             </h1>
           </div>
         </div>
       </section>
       <div className="flex justify-center py-24">
-        <div className="w-8 h-8 border-2 border-white/20 border-t-white rounded-full animate-spin" />
+        <div className="w-6 h-6 border border-foreground/20 border-t-foreground/60 rounded-full animate-spin" />
       </div>
     </div>
   );
 }
 
-// Main export with Suspense boundary
 export default function StoriesPage() {
   return (
     <Suspense fallback={<StoriesLoading />}>
