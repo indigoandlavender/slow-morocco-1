@@ -228,28 +228,6 @@ export default function HomePage() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════
-          FULL-BLEED IMAGE BREAK
-          ═══════════════════════════════════════════════════════════════ */}
-      <section className="relative h-[50vh] md:h-[70vh]">
-        {settings.featured_image_1 ? (
-          <Image
-            src={settings.featured_image_1}
-            alt="Morocco landscape"
-            fill
-            className="object-cover"
-          />
-        ) : (
-          <div className="absolute inset-0 bg-[#8B7355]" />
-        )}
-        <div className="absolute inset-0 bg-black/20" />
-        <div className="absolute inset-0 flex items-center justify-center">
-          <p className="font-serif text-2xl md:text-3xl lg:text-4xl text-white text-center px-8 max-w-3xl leading-relaxed italic">
-            "Travel is the only thing you buy that makes you richer"
-          </p>
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════════════════════════════
           EPIC JOURNEYS: Showcase 5 epic journeys
           ═══════════════════════════════════════════════════════════════ */}
       {epicJourneys.length > 0 && (
@@ -257,13 +235,13 @@ export default function HomePage() {
           <div className="container mx-auto px-8 md:px-16 lg:px-20">
             <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-16">
               <div>
-                <p className="text-[10px] tracking-[0.3em] uppercase text-foreground/40 mb-4">
+                <p className="text-[10px] tracking-[0.3em] uppercase text-white/40 mb-4">
                   Epic Journeys
                 </p>
                 <h2 className="font-serif text-3xl md:text-4xl">
                   For those who want it all
                 </h2>
-                <p className="text-foreground/50 mt-4 max-w-lg text-sm leading-relaxed">
+                <p className="text-white/60 mt-4 max-w-lg text-sm leading-relaxed">
                   Extended itineraries spanning 10-21 days. These are the journeys that 
                   let Morocco truly unfold—across mountain passes, through hidden valleys, 
                   into the deep Sahara.
@@ -271,7 +249,7 @@ export default function HomePage() {
               </div>
               <Link
                 href="/epic"
-                className="mt-6 md:mt-0 text-xs tracking-[0.15em] uppercase text-foreground/60 hover:text-foreground transition-colors"
+                className="mt-6 md:mt-0 text-xs tracking-[0.15em] uppercase text-white/60 hover:text-white transition-colors"
               >
                 View all epic journeys →
               </Link>
@@ -294,14 +272,14 @@ export default function HomePage() {
                         className="object-cover group-hover:scale-[1.02] transition-transform duration-700"
                       />
                     ) : (
-                      <div className="absolute inset-0 bg-foreground/10" />
+                      <div className="absolute inset-0 bg-white/10" />
                     )}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                     <div className="absolute bottom-0 left-0 right-0 p-6">
-                      <p className="text-[10px] tracking-[0.3em] uppercase text-foreground/60 mb-2">
+                      <p className="text-[10px] tracking-[0.3em] uppercase text-white/60 mb-2">
                         {journey.duration}
                       </p>
-                      <h3 className="font-serif text-xl text-white group-hover:text-foreground/80 transition-colors">
+                      <h3 className="font-serif text-xl text-white group-hover:text-white/80 transition-colors">
                         {journey.title}
                       </h3>
                     </div>
@@ -328,18 +306,18 @@ export default function HomePage() {
                           className="object-cover group-hover:scale-[1.02] transition-transform duration-700"
                         />
                       ) : (
-                        <div className="absolute inset-0 bg-foreground/10" />
+                        <div className="absolute inset-0 bg-white/10" />
                       )}
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                       <div className="absolute bottom-0 left-0 right-0 p-6">
-                        <p className="text-[10px] tracking-[0.3em] uppercase text-foreground/60 mb-2">
+                        <p className="text-[10px] tracking-[0.3em] uppercase text-white/60 mb-2">
                           {journey.duration}
                         </p>
-                        <h3 className="font-serif text-2xl text-white group-hover:text-foreground/80 transition-colors">
+                        <h3 className="font-serif text-2xl text-white group-hover:text-white/80 transition-colors">
                           {journey.title}
                         </h3>
                         {journey.description && (
-                          <p className="text-sm text-foreground/60 mt-2 line-clamp-2">
+                          <p className="text-sm text-white/60 mt-2 line-clamp-2">
                             {journey.description}
                           </p>
                         )}
@@ -486,7 +464,7 @@ export default function HomePage() {
       <section className="py-20 md:py-28 bg-[#1a1916] text-white">
         <div className="container mx-auto px-8 md:px-16 lg:px-20">
           <div className="text-center mb-16 md:mb-20">
-            <p className="text-[10px] tracking-[0.3em] uppercase text-foreground/40 mb-4">
+            <p className="text-[10px] tracking-[0.3em] uppercase text-white/40 mb-4">
               The Process
             </p>
             <h2 className="font-serif text-3xl md:text-4xl">
@@ -498,13 +476,13 @@ export default function HomePage() {
             {/* Step 1 */}
             <div className="text-center md:text-left">
               <div className="flex items-center justify-center md:justify-start mb-6">
-                <span className="w-10 h-10 rounded-full border border-foreground/20 flex items-center justify-center font-serif text-lg">
+                <span className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center font-serif text-lg">
                   1
                 </span>
-                <div className="hidden md:block flex-1 h-px bg-foreground/10 ml-4" />
+                <div className="hidden md:block flex-1 h-px bg-white/10 ml-4" />
               </div>
               <h3 className="font-serif text-xl mb-3">You reach out</h3>
-              <p className="text-sm text-foreground/50 leading-relaxed">
+              <p className="text-sm text-white/60 leading-relaxed">
                 Tell us what's calling you. A journey that caught your eye. A question. 
                 A sense that something here is yours.
               </p>
@@ -513,13 +491,13 @@ export default function HomePage() {
             {/* Step 2 */}
             <div className="text-center md:text-left">
               <div className="flex items-center justify-center md:justify-start mb-6">
-                <span className="w-10 h-10 rounded-full border border-foreground/20 flex items-center justify-center font-serif text-lg">
+                <span className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center font-serif text-lg">
                   2
                 </span>
-                <div className="hidden md:block flex-1 h-px bg-foreground/10 ml-4" />
+                <div className="hidden md:block flex-1 h-px bg-white/10 ml-4" />
               </div>
               <h3 className="font-serif text-xl mb-3">We shape it</h3>
-              <p className="text-sm text-foreground/50 leading-relaxed">
+              <p className="text-sm text-white/60 leading-relaxed">
                 We build the route around what matters to you. Add days. Remove cities. 
                 Stay longer where something pulls you.
               </p>
@@ -528,12 +506,12 @@ export default function HomePage() {
             {/* Step 3 */}
             <div className="text-center md:text-left">
               <div className="flex items-center justify-center md:justify-start mb-6">
-                <span className="w-10 h-10 rounded-full border border-foreground/20 flex items-center justify-center font-serif text-lg">
+                <span className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center font-serif text-lg">
                   3
                 </span>
               </div>
               <h3 className="font-serif text-xl mb-3">You go</h3>
-              <p className="text-sm text-foreground/50 leading-relaxed">
+              <p className="text-sm text-white/60 leading-relaxed">
                 Deposit secures your dates. Balance due 60 days before. 
                 Then you pack light and show up.
               </p>
