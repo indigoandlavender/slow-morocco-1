@@ -263,7 +263,7 @@ export default function HomePage() {
                   href={`/journeys/${journey.slug}`}
                   className="group"
                 >
-                  <div className="aspect-[4/5] relative overflow-hidden mb-5">
+                  <div className="aspect-[4/5] relative overflow-hidden mb-4">
                     {journey.heroImage ? (
                       <Image
                         src={journey.heroImage}
@@ -274,16 +274,21 @@ export default function HomePage() {
                     ) : (
                       <div className="absolute inset-0 bg-white/10" />
                     )}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
                     <div className="absolute bottom-0 left-0 right-0 p-6">
-                      <p className="text-[10px] tracking-[0.3em] uppercase text-white/60 mb-2">
+                      <p className="text-[10px] tracking-[0.3em] uppercase text-white/70 mb-2">
                         {journey.duration}
                       </p>
-                      <h3 className="font-serif text-xl text-white group-hover:text-white/80 transition-colors">
+                      <h3 className="font-serif text-xl text-white">
                         {journey.title}
                       </h3>
                     </div>
                   </div>
+                  {journey.description && (
+                    <p className="text-sm text-white/70 leading-relaxed line-clamp-2">
+                      {journey.description}
+                    </p>
+                  )}
                 </Link>
               ))}
             </div>
@@ -297,7 +302,7 @@ export default function HomePage() {
                     href={`/journeys/${journey.slug}`}
                     className="group"
                   >
-                    <div className="aspect-[16/9] relative overflow-hidden">
+                    <div className="aspect-[16/9] relative overflow-hidden mb-4">
                       {journey.heroImage ? (
                         <Image
                           src={journey.heroImage}
@@ -308,21 +313,21 @@ export default function HomePage() {
                       ) : (
                         <div className="absolute inset-0 bg-white/10" />
                       )}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
                       <div className="absolute bottom-0 left-0 right-0 p-6">
-                        <p className="text-[10px] tracking-[0.3em] uppercase text-white/60 mb-2">
+                        <p className="text-[10px] tracking-[0.3em] uppercase text-white/70 mb-2">
                           {journey.duration}
                         </p>
-                        <h3 className="font-serif text-2xl text-white group-hover:text-white/80 transition-colors">
+                        <h3 className="font-serif text-2xl text-white">
                           {journey.title}
                         </h3>
-                        {journey.description && (
-                          <p className="text-sm text-white/60 mt-2 line-clamp-2">
-                            {journey.description}
-                          </p>
-                        )}
                       </div>
                     </div>
+                    {journey.description && (
+                      <p className="text-sm text-white/70 leading-relaxed line-clamp-2">
+                        {journey.description}
+                      </p>
+                    )}
                   </Link>
                 ))}
               </div>
