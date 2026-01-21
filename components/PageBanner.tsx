@@ -81,7 +81,7 @@ export default function PageBanner({ slug, fallback }: PageBannerProps) {
 
             {/* Subtitle */}
             {subtitle && (
-              <p className="text-white/70 text-lg md:text-xl leading-relaxed max-w-2xl">
+              <p className="text-white/90 text-lg md:text-xl leading-relaxed max-w-2xl">
                 {subtitle}
               </p>
             )}
