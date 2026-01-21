@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 
 interface Settings {
   hero_image_url?: string;
@@ -34,10 +34,19 @@ interface Story {
   mood?: string;
 }
 
+interface Testimonial {
+  id: string;
+  quote: string;
+  author: string;
+  journeyTitle?: string;
+}
+
 export default function HomePage() {
   const [journeys, setJourneys] = useState<Journey[]>([]);
   const [epicJourneys, setEpicJourneys] = useState<Journey[]>([]);
   const [stories, setStories] = useState<Story[]>([]);
+  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
+  const [testimonialIndex, setTestimonialIndex] = useState(0);
   const [settings, setSettings] = useState<Settings>({});
   const [loading, setLoading] = useState(true);
 
@@ -46,8 +55,9 @@ export default function HomePage() {
       fetch("/api/journeys").then((r) => r.json()),
       fetch("/api/settings").then((r) => r.json()),
       fetch("/api/stories").then((r) => r.json()),
+      fetch("/api/testimonials").then((r) => r.json()),
     ])
-      .then(([journeysData, settingsData, storiesData]) => {
+      .then(([journeysData, settingsData, storiesData, testimonialsData]) => {
         const allJourneys = journeysData.journeys || [];
         // Separate regular and epic journeys
         setJourneys(allJourneys.filter((j: any) => j.journeyType !== "epic").slice(0, 4));
@@ -55,6 +65,7 @@ export default function HomePage() {
         setSettings(settingsData.settings || {});
         const allStories = storiesData.stories || [];
         setStories(allStories.filter((s: Story) => s.heroImage).slice(0, 3));
+        setTestimonials(testimonialsData.testimonials || []);
         setLoading(false);
       })
       .catch((err) => {
@@ -62,6 +73,14 @@ export default function HomePage() {
         setLoading(false);
       });
   }, []);
+
+  const nextTestimonial = () => {
+    setTestimonialIndex((prev) => (prev + 1) % testimonials.length);
+  };
+
+  const prevTestimonial = () => {
+    setTestimonialIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+  };
 
   const heroImage = settings.hero_image_url;
 
@@ -91,13 +110,13 @@ export default function HomePage() {
         <div className="absolute inset-0 flex items-end">
           <div className="container mx-auto px-8 md:px-16 lg:px-20 pb-20 md:pb-28">
             <div className="max-w-2xl">
-              <p className="text-[10px] tracking-[0.3em] uppercase text-foreground/60 mb-4">
+              <p className="text-[10px] tracking-[0.3em] uppercase text-white/60 mb-4">
                 Cultural Journeys
               </p>
               <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl text-white leading-[1.1] mb-6">
                 Morocco moves<br />at its own pace
               </h1>
-              <p className="text-foreground/70 leading-relaxed mb-8 text-sm md:text-base max-w-lg">
+              <p className="text-white/80 leading-relaxed mb-8 text-sm md:text-base max-w-lg">
                 Private routes through ancient medinas, across high atlas passes, 
                 into desert silence. Every journey shaped around what matters to you.
               </p>
@@ -397,6 +416,69 @@ export default function HomePage() {
           )}
         </div>
       </section>
+
+      {/* ═══════════════════════════════════════════════════════════════
+          TESTIMONIALS: What travelers say
+          ═══════════════════════════════════════════════════════════════ */}
+      {testimonials.length > 0 && (
+        <section className="py-20 md:py-28 bg-[#f5f2ed]">
+          <div className="container mx-auto px-8 md:px-16 lg:px-20">
+            <div className="max-w-4xl mx-auto">
+              <div className="text-center mb-12">
+                <p className="text-[10px] tracking-[0.3em] uppercase text-foreground/40 mb-4">
+                  What Travelers Say
+                </p>
+              </div>
+
+              <div className="flex items-center gap-8">
+                <button
+                  onClick={prevTestimonial}
+                  className="p-2 border border-border rounded-full hover:bg-background transition-colors hidden md:flex items-center justify-center flex-shrink-0"
+                  aria-label="Previous testimonial"
+                >
+                  <ChevronLeft className="w-5 h-5" />
+                </button>
+
+                <div className="text-center flex-grow">
+                  <blockquote className="font-serif text-xl md:text-2xl lg:text-3xl leading-relaxed text-foreground/80 mb-6">
+                    "{testimonials[testimonialIndex]?.quote}"
+                  </blockquote>
+                  <p className="text-xs tracking-[0.2em] uppercase text-foreground/50">
+                    — {testimonials[testimonialIndex]?.author}
+                    {testimonials[testimonialIndex]?.journeyTitle && (
+                      <span className="text-foreground/30">
+                        {" "}· {testimonials[testimonialIndex]?.journeyTitle}
+                      </span>
+                    )}
+                  </p>
+                </div>
+
+                <button
+                  onClick={nextTestimonial}
+                  className="p-2 border border-border rounded-full hover:bg-background transition-colors hidden md:flex items-center justify-center flex-shrink-0"
+                  aria-label="Next testimonial"
+                >
+                  <ChevronRight className="w-5 h-5" />
+                </button>
+              </div>
+
+              {/* Dots indicator */}
+              <div className="flex justify-center gap-2 mt-8">
+                {testimonials.map((_, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => setTestimonialIndex(idx)}
+                    className={`w-2 h-2 rounded-full transition-colors ${
+                      idx === testimonialIndex ? "bg-foreground/60" : "bg-foreground/20"
+                    }`}
+                    aria-label={`Go to testimonial ${idx + 1}`}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* ═══════════════════════════════════════════════════════════════
           HOW IT WORKS: Horizontal timeline
