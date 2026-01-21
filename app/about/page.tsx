@@ -2,7 +2,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { Metadata } from "next";
 import { getSheetData, convertDriveUrl } from "@/lib/sheets";
-import PageBanner from "@/components/PageBanner";
 
 export const metadata: Metadata = {
   title: "About Us | Slow Morocco",
@@ -77,15 +76,37 @@ export default async function AboutPage() {
 
   return (
     <div className="bg-background min-h-screen">
-      {/* Immersive Hero */}
-      <PageBanner
-        slug="about"
-        fallback={{
-          title: "Depth requires time. Clarity requires space.",
-          subtitle: "Slow Morocco exists for travelers who understand this.",
-          label: "About Us",
-        }}
-      />
+      {/* Immersive Hero with Founder Quote */}
+      <section className="relative h-[70vh] md:h-[80vh] flex items-center justify-center">
+        {/* Background Image */}
+        {settings.about_hero_image ? (
+          <Image
+            src={settings.about_hero_image}
+            alt="Morocco"
+            fill
+            className="object-cover"
+            priority
+          />
+        ) : (
+          <div className="absolute inset-0 bg-[#8B7355]" />
+        )}
+
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-black/40" />
+
+        {/* Content - Centered Quote */}
+        <div className="relative z-10 container mx-auto px-8 md:px-16 lg:px-20 text-center">
+          <p className="text-[10px] tracking-[0.3em] uppercase text-white/60 mb-8">
+            About Us
+          </p>
+          <blockquote className="font-serif text-2xl md:text-4xl lg:text-5xl text-white leading-[1.2] max-w-4xl mx-auto mb-6">
+            "The most profound journeys happen not when you see more, but when you see clearly."
+          </blockquote>
+          <p className="text-white/60 text-sm tracking-[0.15em] uppercase">
+            — Jacqueline Ng, Founder
+          </p>
+        </div>
+      </section>
 
       {/* Opening */}
       <section className="py-24 md:py-32">
