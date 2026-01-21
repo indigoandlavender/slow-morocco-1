@@ -188,8 +188,8 @@ export default function HomePage() {
                 >
                   <div className={`flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} gap-8 md:gap-16 items-center`}>
                     {/* Image */}
-                    <div className="w-full md:w-3/5 relative">
-                      <div className="aspect-[4/3] relative overflow-hidden bg-[#d4cdc4]">
+                    <div className="w-full md:w-1/2 relative">
+                      <div className="aspect-[3/4] relative overflow-hidden bg-[#d4cdc4]">
                         {journey.heroImage && (
                           <Image
                             src={journey.heroImage}
@@ -202,7 +202,7 @@ export default function HomePage() {
                     </div>
                     
                     {/* Content */}
-                    <div className="w-full md:w-2/5">
+                    <div className="w-full md:w-1/2">
                       <p className="text-[10px] tracking-[0.3em] uppercase text-foreground/40 mb-4">
                         {journey.duration || "Multi-day journey"}
                       </p>
