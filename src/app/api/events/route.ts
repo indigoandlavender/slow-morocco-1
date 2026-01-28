@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { filterEventsAsync, getEventById, getEvents } from '@/lib/events'
+import { filterEvents, getEventById, getEvents } from '@/lib/events'
 import type { MoroccoRegion, EventCategory } from '@/types'
 
 export async function GET(request: NextRequest) {
@@ -7,7 +7,7 @@ export async function GET(request: NextRequest) {
 
   const id = searchParams.get('id')
   if (id) {
-    const event = await getEventById(id)
+    const event = getEventById(id)
     if (!event) {
       return NextResponse.json({ error: 'Event not found' }, { status: 404 })
     }
@@ -20,7 +20,7 @@ export async function GET(request: NextRequest) {
   const startDate = searchParams.get('startDate')
   const endDate = searchParams.get('endDate')
 
-  const events = await filterEventsAsync({
+  const events = filterEvents({
     query,
     region,
     categories,
