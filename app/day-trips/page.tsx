@@ -156,7 +156,7 @@ export default function DayTripsPage() {
               </ul>
             </div>
             
-            {/* Not Included - Dark */}
+            {/* Not Included - Darker */}
             <div className="py-20 md:py-28 px-6 lg:px-16 bg-[#1a1916]">
               <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-8">
                 Not Included
@@ -191,7 +191,7 @@ export default function DayTripsPage() {
           </p>
           <Link
             href="/contact"
-            className="inline-block border border-foreground/20 px-12 py-4 text-xs tracking-[0.2em] uppercase hover:bg-foreground hover:text-background transition-colors"
+            className="inline-block border border-foreground/20 px-12 py-4 text-xs tracking-[0.2em] uppercase hover:bg-white hover:text-[#0a0a0a] transition-colors"
           >
             Get In Touch
           </Link>

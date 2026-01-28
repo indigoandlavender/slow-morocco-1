@@ -14,10 +14,10 @@ export async function OPTIONS() {
 
 export async function GET(
   request: Request,
-  { params }: { params: Promise<{ slug: string }> }
+  { params }: { params: { slug: string } }
 ) {
   try {
-    const { slug } = await params;
+    const slug = params.slug;
     
     // Get all journeys
     const journeys = await getSheetData("Website_Journeys");

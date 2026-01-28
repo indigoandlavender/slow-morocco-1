@@ -6,13 +6,12 @@ export const revalidate = 0;
 
 export async function GET(
   request: Request,
-  { params }: { params: Promise<{ slug: string }> }
+  { params }: { params: { slug: string } }
 ) {
   try {
-    const { slug } = await params;
     const stories = await getSheetData('Stories');
     
-    const story = stories.find((s: any) => s.slug === slug);
+    const story = stories.find((s: any) => s.slug === params.slug);
     
     if (!story) {
       return NextResponse.json({ error: 'Story not found' }, { status: 404 });
@@ -27,7 +26,7 @@ export async function GET(
     // Get story images
     const storyImages = await getSheetData('Story_Images');
     const images = storyImages
-      .filter((img: any) => img.story_slug === slug && img.image_url)
+      .filter((img: any) => img.story_slug === params.slug && img.image_url)
       .sort((a: any, b: any) => (parseInt(a.image_order) || 0) - (parseInt(b.image_order) || 0));
 
     return NextResponse.json({ story: processedStory, images });
