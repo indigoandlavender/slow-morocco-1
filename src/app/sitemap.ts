@@ -1,10 +1,10 @@
 import type { MetadataRoute } from 'next'
 import { getEvents } from '@/lib/events'
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://festivals-morocco.vercel.app'
   const locales = ['en', 'fr', 'es', 'ar']
-  const events = getEvents()
+  const events = await getEvents()
 
   // Static pages
   const staticPages = locales.flatMap((locale) => [
