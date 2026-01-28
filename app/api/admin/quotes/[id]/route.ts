@@ -4,10 +4,10 @@ import { getSheetData, updateSheetRow } from "@/lib/sheets";
 // GET - Fetch single quote by client ID
 export async function GET(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const clientId = params.id;
+    const { id: clientId } = await params;
     const quotes = await getSheetData("Quotes");
     
     // Find quote by Client_ID
@@ -60,10 +60,10 @@ export async function GET(
 // PUT - Update quote
 export async function PUT(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const clientId = params.id;
+    const { id: clientId } = await params;
     const body = await request.json();
     
     const quotes = await getSheetData("Quotes");
@@ -124,10 +124,10 @@ export async function PUT(
 // DELETE - Delete quote (mark as cancelled or actually delete)
 export async function DELETE(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const clientId = params.id;
+    const { id: clientId } = await params;
     const quotes = await getSheetData("Quotes");
     const rowIndex = quotes.findIndex((q: any) => q.Client_ID === clientId);
     
